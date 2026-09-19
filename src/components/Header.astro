@@ -1,17 +1,24 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import Wordmark from './Wordmark.astro';
-import { site, whatsappUrl } from '../data/site';
+import { kategoriler, markalar, site, whatsappUrl, type Kategori, type MarkaSlug, type Tur } from '../data/site';
+import { urunler } from '../data/urunler';
+import kediFoto from '../assets/foto/kedi.jpg';
+import kopekFoto from '../assets/foto/kopek.jpg';
 
 const yol = Astro.url.pathname;
+const say = (f: (u: (typeof urunler)[number]) => boolean) => urunler.filter(f).length;
+const menu: { tur: Tur; ad: string; foto: ImageMetadata; kimin: { ad: string; etiket: string }[] }[] = [
+  { tur: 'kedi', ad: 'Kedi', foto: kediFoto, kimin: [{ ad: 'Yavru', etiket: 'yavru' }, { ad: 'Yetişkin', etiket: 'yetişkin' }, { ad: 'Kısırlaştırılmış', etiket: 'kısırlaştırılmış' }, { ad: 'Hassas sindirim', etiket: 'hassas sindirim' }] },
+  { tur: 'kopek', ad: 'Köpek', foto: kopekFoto, kimin: [{ ad: 'Yavru', etiket: 'yavru' }, { ad: 'Yetişkin', etiket: 'yetişkin' }, { ad: 'Küçük ırk', etiket: 'küçük ırk' }, { ad: 'Orta ırk', etiket: 'orta ırk' }, { ad: 'Büyük ırk', etiket: 'büyük ırk' }] },
+];
 const nav = [
-  { href: '/kedi', ad: 'Kedi' },
-  { href: '/kopek', ad: 'Köpek' },
-  { href: '/kedi/kedi-kumu', ad: 'Kedi Kumu' },
   { href: '/urunler', ad: 'Tüm Ürünler' },
   { href: '/magaza', ad: 'Mağaza' },
 ];
 const aktif = (h: string) => (h === '/urunler' ? yol === h : yol === h || (h !== '/' && yol.startsWith(h + '/')));
+import type { ImageMetadata } from 'astro';
 ---
 <header class="ust">
   <div class="ust__cubuk">
@@ -25,6 +32,33 @@ const aktif = (h: string) => (h === '/urunler' ? yol === h : yol === h || (h !==
       <button type="button" class="ust__menu" data-menu-ac aria-label="Menü"><Icon ad="list" boyut={24} /></button>
       <a href="/" class="ust__logo" aria-label="Pet Shop 6 ana sayfa"><Wordmark /></a>
       <nav class="ust__nav" aria-label="Kategoriler">
+        {menu.map((m) => (
+          <div class="mega-kok">
+            <a href={`/${m.tur}`} aria-current={aktif(`/${m.tur}`) ? 'page' : undefined} aria-haspopup="true">{m.ad} <Icon ad="caret-down" agirlik="bold" boyut={12} /></a>
+            <div class="mega" role="group" aria-label={`${m.ad} menüsü`}>
+              <div class="mega__kol">
+                <strong>Kategoriler</strong>
+                {(Object.keys(kategoriler) as Kategori[]).filter((k) => say((u) => u.tur === m.tur && u.kategori === k) > 0).map((k) => (
+                  <a href={`/${m.tur}/${k}`}>{kategoriler[k].ad} <small>{say((u) => u.tur === m.tur && u.kategori === k)}</small></a>
+                ))}
+                <a href={`/${m.tur}`} class="mega__tum">Tüm {m.ad.toLocaleLowerCase('tr-TR')} ürünleri</a>
+              </div>
+              <div class="mega__kol">
+                <strong>Kimin için</strong>
+                {m.kimin.map((k) => <a href={`/${m.tur}?etiket=${encodeURIComponent(k.etiket)}`}>{k.ad} <small>{say((u) => u.tur === m.tur && u.etiketler.includes(k.etiket))}</small></a>)}
+              </div>
+              <div class="mega__kol">
+                <strong>Markalar</strong>
+                {(Object.keys(markalar) as MarkaSlug[]).filter((mk) => say((u) => u.tur === m.tur && u.markaSlug === mk) > 0).map((mk) => (
+                  <a href={`/${m.tur}?marka=${mk}`}>{markalar[mk].ad} <small>{say((u) => u.tur === m.tur && u.markaSlug === mk)}</small></a>
+                ))}
+              </div>
+              <a class="mega__foto" href={`/${m.tur}`}>
+                <Image src={m.foto} alt="" width={360} height={360} loading="lazy" />
+              </a>
+            </div>
+          </div>
+        ))}
         {nav.map((n) => <a href={n.href} aria-current={aktif(n.href) ? 'page' : undefined}>{n.ad}</a>)}
       </nav>
       <form class="ara" role="search" action="/urunler" method="get" data-ara>
@@ -86,6 +120,21 @@ const aktif = (h: string) => (h === '/urunler' ? yol === h : yol === h || (h !==
   .ust__nav a { padding: 8px 10px; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--gri-900); }
   .ust__nav a:hover { background: var(--gri-100); }
   .ust__nav a[aria-current] { color: var(--kirmizi); }
+  .ust__nav > .mega-kok > a { display: inline-flex; align-items: center; gap: 4px; }
+  .ust__nav > .mega-kok > a .ikon { color: var(--gri-500); transition: transform var(--hiz) var(--ease); }
+  .mega-kok { position: relative; }
+  .mega-kok:hover > a .ikon, .mega-kok:focus-within > a .ikon { transform: rotate(180deg); }
+  .mega { position: absolute; left: -12px; top: calc(100% + 10px); z-index: 45; display: grid; grid-template-columns: 1fr 1fr 1fr 200px; gap: 24px; width: 720px; padding: 22px 22px 22px 26px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); box-shadow: 0 24px 60px -24px rgb(24 24 24 / 0.35), 0 2px 8px rgb(24 24 24 / 0.06); opacity: 0; translate: 0 6px; visibility: hidden; transition: opacity 160ms var(--ease), translate 200ms var(--ease), visibility 0s linear 160ms; }
+  .mega::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+  .mega-kok:hover .mega, .mega-kok:focus-within .mega { opacity: 1; translate: 0 0; visibility: visible; transition-delay: 60ms, 60ms, 0s; }
+  .mega__kol { display: grid; align-content: start; gap: 2px; }
+  .mega__kol strong { font-size: 0.82rem; color: var(--gri-500); font-weight: 600; margin-bottom: 6px; }
+  .mega__kol a { display: flex; justify-content: space-between; gap: 10px; padding: 6px 8px; margin: 0 -8px; border-radius: var(--radius); font-weight: 500; font-size: 0.95rem; }
+  .mega__kol a small { color: var(--gri-400); font-variant-numeric: tabular-nums; }
+  .mega__tum { margin-top: 6px !important; color: var(--kirmizi); font-weight: 600 !important; }
+  .mega__foto { display: block; aspect-ratio: 1; border-radius: var(--radius-lg); overflow: hidden; background: var(--gri-100); padding: 0 !important; }
+  .mega__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
+  .mega__foto:hover img { transform: scale(1.04); }
   .ust__menu { display: inline-grid; place-items: center; width: 40px; height: 40px; border: 0; background: transparent; border-radius: var(--radius); }
   .ust__menu:hover { background: var(--gri-100); }
   .ara { position: relative; display: none; flex: 1; max-width: 380px; margin-left: auto; }

@@ -89,5 +89,5 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
   .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--kirmizi); color: #fff; font-weight: 700; font-size: 1rem; }
   .sepet-cubuk__btn b { background: #fff; color: var(--kirmizi); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
   @media (min-width: 720px) { .sepet-cubuk { display: none; } }
-  @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) { padding-bottom: 72px; } }
+  @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) { padding-bottom: 72px; } body:has([data-urun-cubuk]:not([hidden])) .sepet-cubuk { display: none; } }
 </style>

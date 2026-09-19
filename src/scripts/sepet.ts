@@ -130,24 +130,40 @@ function formlar() {
     }, Math.max(1, Number(fd.get('adet') || 1)));
     const btn = f.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (btn) {
-      const eski = btn.innerHTML;
-      btn.classList.add('eklendi'); btn.innerHTML = '<span>Sepete eklendi</span>';
-      btn.disabled = true;
-      setTimeout(() => { btn.classList.remove('eklendi'); btn.innerHTML = eski; btn.disabled = false; }, 1400);
+      btn.classList.add('eklendi'); btn.disabled = true;
+      setTimeout(() => { btn.classList.remove('eklendi'); btn.disabled = false; }, 900);
     }
     if (f.dataset.sepeteEkle === 'ac') (window as any).__sepetAc?.();
+    else tost(`Sepete eklendi (${boy})`);
   });
 }
 
 /** Size <select> inside a card or the product page updates the price shown next to it. */
 function boySecimi() {
   document.addEventListener('change', (e) => {
-    const sel = e.target as HTMLSelectElement;
-    if (!sel.matches('[data-boy-sec]')) return;
-    const kok = sel.closest('form') || document;
+    const el = e.target as HTMLInputElement | HTMLSelectElement;
+    if (!el.matches('[data-boy-sec]')) return;
+    const kok = el.closest('form') || document;
     const g = kok.querySelector<HTMLElement>('[data-fiyat-goster]');
-    const opt = sel.selectedOptions[0];
-    if (g && opt?.dataset.fiyat) g.textContent = opt.dataset.fiyat;
+    const f = el instanceof HTMLSelectElement ? el.selectedOptions[0]?.dataset.fiyat : el.dataset.fiyat;
+    if (g && f) g.textContent = f;
+  });
+}
+
+/** Bottom toast after "Sepete ekle" + a bump on the header badge. */
+let tostZaman = 0;
+function tost(metin: string) {
+  let el = document.querySelector<HTMLElement>('.tost');
+  if (!el) {
+    el = document.createElement('div'); el.className = 'tost'; el.setAttribute('role', 'status');
+    document.body.appendChild(el);
+  }
+  el.innerHTML = `<svg class="ikon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M232.49 80.49l-128 128a12 12 0 0 1-17 0l-56-56a12 12 0 1 1 17-17L96 183 215.51 63.51a12 12 0 0 1 17 17Z"/></svg><span>${metin}</span><a href="/sepet">Sepete git</a>`;
+  requestAnimationFrame(() => el!.classList.add('acik'));
+  clearTimeout(tostZaman);
+  tostZaman = window.setTimeout(() => el!.classList.remove('acik'), 2600);
+  document.querySelectorAll<HTMLElement>('[data-sepet-sayi]').forEach((r) => {
+    r.classList.remove('rozet-zipla'); void r.offsetWidth; r.classList.add('rozet-zipla');
   });
 }
 

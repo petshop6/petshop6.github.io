@@ -38,6 +38,13 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
       <h1>{baslik}</h1>
       {aciklama && <p class="katalog__aciklama">{aciklama}</p>}
     </div>
+    {sabit.tur && !sabit.kategori && (
+      <nav class="ray katalog__hizli" aria-label="Kategoriler">
+        {(Object.keys(kategoriler) as Kategori[]).filter((k) => katSay.has(k)).map((k) => (
+          <a class="cip cip--baglanti" href={`/${sabit.tur}/${k}`}>{kategoriler[k].ad}</a>
+        ))}
+      </nav>
+    )}
     <div class="katalog__arac">
       <button type="button" class="btn btn--ikinci btn--kucuk katalog__filtre-btn" data-filtre-ac><Icon ad="funnel" boyut={18} /> Filtrele</button>
       <p class="katalog__sayi"><span data-katalog-sayi>{urunler.length}</span> ürün <span class="katalog__arama-notu" data-arama-notu hidden></span></p>
@@ -97,6 +104,7 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
         </form>
       </aside>
       <div class="katalog__liste">
+        <div class="cipler katalog__aktif" data-aktif-filtreler hidden></div>
         <div class="izgara" data-katalog-izgara>
           {urunler.map((u, i) => <ProductCard urun={u} oncelik={i < 4} />)}
         </div>
@@ -119,7 +127,11 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
   .kirinti a:hover { text-decoration: underline; }
   .katalog__bas { display: grid; gap: 8px; margin-bottom: 18px; }
   .katalog__aciklama { max-width: 62ch; color: var(--gri-700); }
+  .katalog__hizli { margin-bottom: 16px; }
   .katalog__arac { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--gri-200); border-bottom: 1px solid var(--gri-200); margin-bottom: 20px; }
+  .katalog__aktif { margin-bottom: 16px; }
+  .katalog__aktif :global(.cip) { background: var(--gri-100); border-color: transparent; }
+  .katalog__aktif :global(.cip:hover) { background: var(--gri-200); }
   .katalog__sayi { color: var(--gri-700); font-size: 0.92rem; margin-right: auto; }
   .katalog__arama-notu { color: var(--murekkep); font-weight: 600; }
   .katalog__sirala { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
@@ -142,6 +154,7 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
   @media (max-width: 899px) {
     .katalog.filtre-acik .filtre { display: block; position: fixed; inset: 0; z-index: 60; background: #fff; padding: 16px var(--kenar) 24px; overflow: auto; }
   }
+  @media (min-width: 900px) and (max-width: 1279px) { .katalog__liste :global(.izgara) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 900px) {
     .katalog__govde { grid-template-columns: 220px 1fr; gap: 36px; }
     .filtre { display: block; position: sticky; top: calc(var(--ust) + 32px + 16px); align-self: start; max-height: calc(100dvh - var(--ust) - 60px); overflow: auto; }

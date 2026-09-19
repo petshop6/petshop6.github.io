@@ -11,6 +11,7 @@ export function baslat() {
   const sirala = kok.querySelector<HTMLSelectElement>('[data-sirala]')!;
   const bos = kok.querySelector<HTMLElement>('[data-katalog-bos]')!;
   const notu = kok.querySelector<HTMLElement>('[data-arama-notu]');
+  const aktif = kok.querySelector<HTMLElement>('[data-aktif-filtreler]');
   const url = new URL(location.href);
   const q = (url.searchParams.get('q') || '').trim();
   const sira0 = kartlar.slice();
@@ -49,6 +50,12 @@ export function baslat() {
     bos.hidden = n > 0;
     izgara.hidden = n === 0;
     if (notu) { notu.hidden = !q; notu.textContent = q ? `· "${q}" için` : ''; }
+    if (aktif) {
+      const secilenler = Array.from(form.querySelectorAll<HTMLInputElement>('input:checked'));
+      aktif.innerHTML = secilenler.map((i) => `<button type="button" class="cip cip--kaldir" data-kaldir="${i.name}|${i.value}">${(i.parentElement?.textContent || '').replace(/\d+\s*$/, '').trim()}</button>`).join('')
+        + (secilenler.length > 1 ? `<button type="button" class="cip cip--baglanti" data-filtre-sifirla-hepsi>Temizle</button>` : '');
+      aktif.hidden = secilenler.length === 0;
+    }
 
     // url
     const u = new URL(location.href);
@@ -70,6 +77,16 @@ export function baslat() {
   }
 
   form.addEventListener('change', uygula);
+  aktif?.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLElement>('[data-kaldir], [data-filtre-sifirla-hepsi]');
+    if (!b) return;
+    if (b.dataset.kaldir) {
+      const [ad, deger] = b.dataset.kaldir.split('|');
+      const i = form.querySelector<HTMLInputElement>(`input[name="${ad}"][value="${CSS.escape(deger)}"]`);
+      if (i) i.checked = false;
+    } else form.querySelectorAll<HTMLInputElement>('input:checked').forEach((i) => { i.checked = false; });
+    uygula();
+  });
   sirala.addEventListener('change', () => { sirayaKoy(); uygula(); });
   kok.querySelectorAll('[data-filtre-sifirla]').forEach((b) => b.addEventListener('click', () => {
     form.querySelectorAll<HTMLInputElement>('input:checked').forEach((i) => { i.checked = false; });

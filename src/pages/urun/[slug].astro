@@ -54,13 +54,15 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
             <input type="hidden" name="gorsel" value={kucuk.src} />
             <fieldset class="boylar">
               <legend>Boy</legend>
-              {u.secenekler.map((s, i) => (
-                <label class="boy">
-                  <input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === 0} data-fiyat={fiyat(s.fiyat)} />
-                  <span class="boy__ad">{s.boy}</span>
-                  <span class="boy__fiyat">{fiyat(s.fiyat)}</span>
-                </label>
-              ))}
+              <div class="boylar__liste">
+                {u.secenekler.map((s, i) => (
+                  <label class="boy">
+                    <input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === 0} data-fiyat={fiyat(s.fiyat)} data-boy-sec />
+                    <span class="boy__ad">{s.boy}</span>
+                    <span class="boy__fiyat">{fiyat(s.fiyat)}</span>
+                  </label>
+                ))}
+              </div>
             </fieldset>
             <div class="urun__satir">
               <div class="adet adet--buyuk" role="group" aria-label="Adet">
@@ -72,6 +74,13 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
             </div>
             <button type="submit" class="btn btn--genis urun__btn"><Icon ad="basket" /> Sepete ekle</button>
           </form>
+          <div class="urun__cubuk" data-urun-cubuk hidden>
+            <div class="urun__cubuk-ic">
+              <span class="urun__cubuk-ad">{u.ad}</span>
+              <strong data-fiyat-goster>{fiyat(u.secenekler[0].fiyat)}</strong>
+              <button type="button" class="btn btn--kucuk" data-cubuk-ekle>Sepete ekle</button>
+            </div>
+          </div>
 
           <ul class="urun__notlar">
             <li><Icon ad="truck" boyut={18} /> {site.teslimat.bolge} teslimat ücretsiz</li>
@@ -110,21 +119,24 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .kirinti a { color: var(--gri-700); text-decoration: none; }
   .kirinti a:hover { text-decoration: underline; }
   .urun__govde { display: grid; gap: 24px; }
-  .urun__gorsel { position: relative; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); aspect-ratio: 1; }
+  .urun__gorsel { position: relative; background: var(--gri-100); border-radius: 16px; aspect-ratio: 1; }
   .urun__gorsel img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; }
   .urun__al { display: grid; gap: 14px; align-content: start; }
   .urun__marka { font-weight: 600; color: var(--gri-700); text-decoration: none; font-size: 0.9rem; }
   .urun__marka:hover { color: var(--kirmizi); }
   .urun__ad { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
   .urun__aciklama { color: var(--gri-700); max-width: 56ch; }
-  .urun__form { display: grid; gap: 14px; padding: 18px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .urun__form { display: grid; gap: 14px; padding: 18px; background: #fff; border: 1px solid var(--gri-200); border-radius: 16px; }
   .boylar { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
-  .boylar legend { font-weight: 700; font-size: 0.92rem; padding: 0 0 8px; }
-  .boy { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--gri-300); border-radius: var(--radius); cursor: pointer; }
-  .boy:has(input:checked) { border-color: var(--murekkep); box-shadow: inset 0 0 0 1px var(--murekkep); }
-  .boy input { accent-color: var(--kirmizi); width: 16px; height: 16px; margin: 0; }
-  .boy__ad { font-weight: 600; }
-  .boy__fiyat { margin-left: auto; font-family: var(--font-baslik); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .boylar legend { float: left; width: 100%; font-weight: 700; font-size: 0.92rem; padding: 0 0 8px; }
+  .boylar__liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+  .boy { position: relative; display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--gri-300); border-radius: var(--radius-lg); cursor: pointer; background: #fff; transition: border-color var(--hiz) var(--ease), background var(--hiz) var(--ease); }
+  .boy:hover { border-color: var(--gri-500); }
+  .boy:has(input:checked) { border-color: var(--murekkep); background: var(--murekkep); color: #fff; }
+  .boy:has(input:focus-visible) { outline: 2px solid var(--murekkep); outline-offset: 2px; }
+  .boy input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .boy__ad { font-weight: 700; font-size: 0.95rem; }
+  .boy__fiyat { font-family: var(--font-baslik); font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums; opacity: 0.85; }
   .urun__satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .adet__giris { width: 48px; height: 44px; border: 0; text-align: center; font-weight: 600; -moz-appearance: textfield; }
   .adet__giris::-webkit-outer-spin-button, .adet__giris::-webkit-inner-spin-button { appearance: none; margin: 0; }
@@ -138,6 +150,11 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .urun__ozellik dt { color: var(--gri-500); }
   .urun__ozellik dd { margin: 0; }
   .urun__sor { justify-self: start; font-size: 0.92rem; }
+  .urun__cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(255 255 255 / 0.94); backdrop-filter: blur(8px); border-top: 1px solid var(--gri-200); }
+  .urun__cubuk-ic { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; }
+  .urun__cubuk-ad { font-size: 0.85rem; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .urun__cubuk strong { font-family: var(--font-baslik); font-size: 1.15rem; white-space: nowrap; }
+  @media (min-width: 720px) { .urun__cubuk { display: none !important; } }
   @media (min-width: 900px) {
     .urun__govde { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
     .urun__gorsel { position: sticky; top: calc(var(--ust) + 32px + 16px); }
@@ -154,7 +171,15 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
     }));
     form.addEventListener('change', (e) => {
       const r = e.target as HTMLInputElement;
-      if (r.name === 'boy' && r.dataset.fiyat) form.querySelector('[data-fiyat-goster]')!.textContent = r.dataset.fiyat;
+      if (r.name === 'boy' && r.dataset.fiyat) document.querySelectorAll('[data-fiyat-goster]').forEach((el) => { el.textContent = r.dataset.fiyat!; });
     });
+    // sticky buy bar on phones once the main button scrolls away; hidden while the cart bar is showing
+    const cubuk = document.querySelector<HTMLElement>('[data-urun-cubuk]');
+    const btn = form.querySelector<HTMLButtonElement>('.urun__btn');
+    if (cubuk && btn && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => { cubuk.hidden = e.isIntersecting; }, { threshold: 0 });
+      io.observe(btn);
+      cubuk.querySelector('[data-cubuk-ekle]')!.addEventListener('click', () => form.requestSubmit());
+    }
   }
 </script>

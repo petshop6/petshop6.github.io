@@ -183,6 +183,7 @@ import { site, whatsappUrl } from '../data/site';
         const fd = new FormData(form);
         localStorage.setItem(ADRES_ANAHTAR, JSON.stringify({ ad: fd.get('ad'), tel: fd.get('tel'), adres: fd.get('adres'), zaman: fd.get('zaman') }));
       } catch {}
+      try { localStorage.setItem('ps6-son-siparis', JSON.stringify({ kalemler: oku(), toplam: toplamTutar(), tarih: new Date().toISOString() })); } catch {}
       const url = `${WA}?text=${encodeURIComponent(mesaj())}`;
       (kok!.querySelector('[data-tekrar-ac]') as HTMLAnchorElement).href = url;
       kok!.querySelector('[data-siparis-no]')!.textContent = no;

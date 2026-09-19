@@ -3,60 +3,75 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
+import MiniUrun from '../components/MiniUrun.astro';
 import { fiyat, site, whatsappUrl } from '../data/site';
 import { oneCikanlar, urunBul, urunler } from '../data/urunler';
 import dukkan from '../assets/dukkan/vitrin.jpg';
+import heroFoto from '../assets/foto/kedi-masa.jpg';
+import kediFoto from '../assets/foto/kedi.jpg';
+import kopekFoto from '../assets/foto/kopek.jpg';
+import yavruKedi from '../assets/foto/yavru-kedi.jpg';
+import yavruKopek from '../assets/foto/yavru-kopek.jpg';
+import kediStudyo from '../assets/foto/kedi-studyo.jpg';
 
-const raf = ['reflex-plus-longevity-kisirlastirilmis', 'pro-plan-sterilised-somonlu', 'advance-adult-tavuklu', 'reflex-aktif-karbonlu-kedi-kumu', 'pro-plan-medium-adult-somonlu', 'reflex-plus-pramy-somonlu-tavuklu'].map((s) => urunBul(s)!);
 const say = (f: (u: typeof urunler[number]) => boolean) => urunler.filter(f).length;
-const tiles = [
-  { href: '/kedi/kuru-mama', ad: 'Kedi kuru mama', n: say((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama'), img: urunBul('reflex-crunchy-bubble-kisirlastirilmis-somonlu')!, buyuk: true },
-  { href: '/kopek/kuru-mama', ad: 'Köpek maması', n: say((u) => u.tur === 'kopek' && u.kategori === 'kuru-mama'), img: urunBul('reflex-plus-longevity-orta-buyuk-yetiskin')! },
-  { href: '/kedi/kedi-kumu', ad: 'Kedi kumu', n: say((u) => u.kategori === 'kedi-kumu'), img: urunBul('reflex-klinik-kedi-kumu')! },
-  { href: '/kedi/yas-mama', ad: 'Yaş mama', n: say((u) => u.kategori === 'yas-mama'), img: urunBul('reflex-plus-pramy-sos-tavuklu-balkabakli')! },
-  { href: '/urunler?kategori=odul', ad: 'Ödül maması', n: say((u) => u.kategori === 'odul'), img: urunBul('reflex-dentastar-mini-kucuk')! },
+const kimin = [
+  { href: '/kedi', ad: 'Kedi', foto: kediFoto, n: say((u) => u.tur === 'kedi') },
+  { href: '/kopek', ad: 'Köpek', foto: kopekFoto, n: say((u) => u.tur === 'kopek') },
+  { href: '/kedi?etiket=yavru', ad: 'Yavru kedi', foto: yavruKedi, n: say((u) => u.tur === 'kedi' && u.etiketler.includes('yavru')) },
+  { href: '/kopek?etiket=yavru', ad: 'Yavru köpek', foto: yavruKopek, n: say((u) => u.tur === 'kopek' && u.etiketler.includes('yavru')) },
+  { href: '/kedi?etiket=k%C4%B1s%C4%B1rla%C5%9Ft%C4%B1r%C4%B1lm%C4%B1%C5%9F', ad: 'Kısırlaştırılmış kedi', foto: kediStudyo, n: say((u) => u.tur === 'kedi' && u.etiketler.includes('kısırlaştırılmış')) },
+];
+const kategoriTile = [
+  { href: '/kedi/kuru-mama', ad: 'Kedi kuru mama', img: urunBul('reflex-crunchy-bubble-kisirlastirilmis-somonlu')!, n: say((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama') },
+  { href: '/kedi/yas-mama', ad: 'Yaş mama', img: urunBul('reflex-plus-pramy-sos-tavuklu-balkabakli')!, n: say((u) => u.kategori === 'yas-mama') },
+  { href: '/kedi/kedi-kumu', ad: 'Kedi kumu', img: urunBul('reflex-klinik-kedi-kumu')!, n: say((u) => u.kategori === 'kedi-kumu') },
+  { href: '/kopek/kuru-mama', ad: 'Köpek maması', img: urunBul('reflex-plus-longevity-orta-buyuk-yetiskin')!, n: say((u) => u.tur === 'kopek' && u.kategori === 'kuru-mama') },
+  { href: '/urunler?kategori=odul', ad: 'Ödül maması', img: urunBul('reflex-dentastar-mini-kucuk')!, n: say((u) => u.kategori === 'odul') },
 ];
 const secme = oneCikanlar.slice(0, 8);
-const ornekMesaj = `Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.
-Sipariş no: PS6-260919-K7M2
-
-1 × ${raf[0].ad} (15 kg) = ${fiyat(raf[0].secenekler[1].fiyat)}
-2 × ${raf[3].ad} (10 L) = ${fiyat(raf[3].secenekler[0].fiyat * 2)}
-
-Toplam: ${fiyat(raf[0].secenekler[1].fiyat + raf[3].secenekler[0].fiyat * 2)} (teslimat ücretsiz)
-
-Ad Soyad: Elif Karaca
-Adres: Emek Mah. 8. Cadde 12/4, Çankaya
-Teslimat zamanı: Akşam (18:00 sonrası)`;
+const kisirlar = ['pro-plan-sterilised-somonlu', 'reflex-plus-longevity-kisirlastirilmis', 'reflex-crunchy-bubble-kisirlastirilmis-tavuklu'].map((s) => urunBul(s)!);
+const buyukIrk = ['reflex-plus-longevity-orta-buyuk-yetiskin', 'pro-plan-large-athletic-somonlu', 'advance-adult-maxi'].map((s) => urunBul(s)!);
+const ornek = [urunBul('reflex-plus-longevity-kisirlastirilmis')!, urunBul('reflex-aktif-karbonlu-kedi-kumu')!];
+const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat * 2;
 ---
 <Base baslik={site.ad}>
-  <section class="giris">
-    <div class="kap giris__ic">
-      <div class="giris__yazi">
+  <section class="hero">
+    <div class="kap hero__ic">
+      <div class="hero__yazi">
         <h1>Kedi ve köpek maması, kapınıza.</h1>
-        <p class="giris__alt">Sepetinizi doldurun, WhatsApp'tan onaylayın. {site.teslimat.bolge} teslimat ücretsiz, ödeme kapıda.</p>
-        <div class="giris__btn">
+        <p class="hero__alt">Sepetinizi doldurun, WhatsApp'tan onaylayın. {site.teslimat.bolge} teslimat ücretsiz, ödeme kapıda.</p>
+        <div class="hero__btn">
           <a class="btn" href="/urunler">Ürünlere bak</a>
           <a class="btn btn--ikinci" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
         </div>
+        <div class="hero__son" data-son-siparis hidden>
+          <span>Geçen sefer: <b data-son-ozet></b></span>
+          <button type="button" class="baglanti" data-son-tekrar>Aynısını sepete ekle</button>
+        </div>
       </div>
-      <div class="raf" aria-label="Raftan seçmeler">
-        {raf.map((u, i) => (
-          <a class="raf__urun" href={`/urun/${u.slug}`} title={u.ad}>
-            <Image src={u.gorsel} alt={u.ad} width={420} height={420} fit="contain" loading={i < 6 ? 'eager' : 'lazy'} widths={[210, 420]} sizes="(min-width: 900px) 14vw, 30vw" />
-          </a>
-        ))}
+      <div class="hero__foto">
+        <Image src={heroFoto} alt="Masanın kenarından bakan kızıl kedi" width={1400} height={938} loading="eager" fetchpriority="high" widths={[700, 1000, 1400]} sizes="(min-width: 900px) 56vw, 100vw" />
       </div>
     </div>
   </section>
 
   <section class="bolum bolum--dar">
     <div class="kap">
-      <div class="raflar">
-        {tiles.map((t) => (
-          <a class:list={['raflar__tile', { 'raflar__tile--buyuk': t.buyuk }]} href={t.href}>
-            <span class="raflar__yazi"><strong>{t.ad}</strong><small>{t.n} ürün</small></span>
-            <Image src={t.img.gorsel} alt="" width={t.buyuk ? 520 : 300} height={t.buyuk ? 520 : 300} fit="contain" loading="lazy" />
+      <h2 class="kimin__baslik">Kime mama alıyorsunuz?</h2>
+      <div class="ray kimin">
+        {kimin.map((k) => (
+          <a class="kimin__tile" href={k.href}>
+            <span class="kimin__foto"><Image src={k.foto} alt="" width={320} height={320} loading="lazy" /></span>
+            <strong>{k.ad}</strong>
+            <small>{k.n} ürün</small>
+          </a>
+        ))}
+        {kategoriTile.map((t) => (
+          <a class="kimin__tile" href={t.href}>
+            <span class="kimin__foto kimin__foto--urun"><Image src={t.img.gorsel} alt="" width={320} height={320} fit="contain" loading="lazy" /></span>
+            <strong>{t.ad}</strong>
+            <small>{t.n} ürün</small>
           </a>
         ))}
       </div>
@@ -69,7 +84,28 @@ Teslimat zamanı: Akşam (18:00 sonrası)`;
         <h2>Seçtiklerimiz</h2>
         <a class="baglanti" href="/urunler">Tüm ürünler</a>
       </div>
-      <div class="izgara">{secme.map((u) => <ProductCard urun={u} />)}</div>
+      <div class="izgara">{secme.map((u, i) => <ProductCard urun={u} oncelik={i < 4} />)}</div>
+    </div>
+  </section>
+
+  <section class="bolum bolum--dar">
+    <div class="kap sik">
+      <div class="sik__tile">
+        <div class="sik__bas">
+          <h2>Kısırlaştırılmış kediler için</h2>
+          <a class="baglanti" href="/kedi?etiket=k%C4%B1s%C4%B1rla%C5%9Ft%C4%B1r%C4%B1lm%C4%B1%C5%9F">Hepsi</a>
+        </div>
+        <p>Raftaki üç seçenek. Tek dokunuşla küçük boyu sepete ekleyin; boyu ürün sayfasından değiştirebilirsiniz.</p>
+        <div class="sik__liste">{kisirlar.map((u) => <MiniUrun urun={u} />)}</div>
+      </div>
+      <div class="sik__tile">
+        <div class="sik__bas">
+          <h2>Büyük ırk köpekler için</h2>
+          <a class="baglanti" href="/kopek?etiket=b%C3%BCy%C3%BCk%20%C4%B1rk">Hepsi</a>
+        </div>
+        <p>14-15 kg'lık büyük paketler. Taşımayın, biz getirelim.</p>
+        <div class="sik__liste">{buyukIrk.map((u) => <MiniUrun urun={u} />)}</div>
+      </div>
     </div>
   </section>
 
@@ -84,9 +120,19 @@ Teslimat zamanı: Akşam (18:00 sonrası)`;
         </ol>
         <p class="nasil__alt">Telefonla sipariş alışkanlığı olanlar için Alo Mama hattı yerinde: <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a></p>
       </div>
-      <div class="sohbet" aria-label="Örnek sipariş mesajı">
+      <div class="sohbet" aria-label="Örnek sipariş mesajı" data-sohbet>
         <div class="sohbet__bas"><Icon ad="whatsapp-logo" boyut={20} /> Pet Shop 6 <span>{site.whatsappGosterim}</span></div>
-        <pre class="sohbet__balon">{ornekMesaj}</pre>
+        <pre class="sohbet__balon">Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.
+Sipariş no: PS6-260919-K7M2
+
+1 × {ornek[0].ad} ({ornek[0].secenekler[1].boy}) = {fiyat(ornek[0].secenekler[1].fiyat)}
+2 × {ornek[1].ad} ({ornek[1].secenekler[0].boy}) = {fiyat(ornek[1].secenekler[0].fiyat * 2)}
+
+Toplam: {fiyat(ornekToplam)} (teslimat ücretsiz)
+
+Ad Soyad: Elif Karaca
+Adres: Emek Mah. 8. Cadde 12/4, Çankaya
+Teslimat zamanı: Akşam (18:00 sonrası)</pre>
         <div class="sohbet__balon sohbet__balon--yanit">Merhaba Elif Hanım, siparişiniz hazır. 19:00-20:00 arası kapıdayız.</div>
       </div>
     </div>
@@ -108,56 +154,52 @@ Teslimat zamanı: Akşam (18:00 sonrası)`;
           <a class="btn btn--ikinci" href={site.adres.harita} target="_blank" rel="noopener"><Icon ad="map-pin" /> Yol tarifi</a>
           <a class="btn btn--ikinci" href="/magaza">Mağaza sayfası</a>
         </div>
+        <p class="dukkan__rafta">Sitede olmayan, rafta olan: kuş yemi ve kafes, akvaryum balığı ve yemi, tasma, mama kabı, taşıma çantası. <a href={whatsappUrl('Merhaba, sitede göremediğim bir ürünü sormak istiyorum: ')} target="_blank" rel="noopener">WhatsApp'tan sorun</a>, aynı teslimatla getirelim.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="bolum bolum--dar">
-    <div class="kap rafta">
-      <div>
-        <h2>Sitede olmayan, rafta olan</h2>
-        <p>Kuş yemi ve kafes, akvaryum balığı ve yemi, tasma, mama kabı, taşıma çantası, kum kabı. Hepsi mağazada. Sitede göremediğinizi WhatsApp'tan sorun, sepetinize ekleyip getirelim.</p>
-      </div>
-      <a class="btn btn--wa" href={whatsappUrl('Merhaba, sitede göremediğim bir ürünü sormak istiyorum: ')} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> WhatsApp'tan sor</a>
     </div>
   </section>
 </Base>
 
 <style>
-  /* Hero: copy + a real shelf of the products */
-  .giris { background: #fff; border-bottom: 1px solid var(--gri-200); }
-  .giris__ic { display: grid; gap: 28px; padding-block: clamp(28px, 5vw, 64px); }
-  .giris__yazi { display: grid; gap: 18px; align-content: center; }
-  .giris__alt { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--gri-700); max-width: 44ch; }
-  .giris__btn { display: flex; flex-wrap: wrap; gap: 10px; }
-  .raf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 6px; padding: 0 6px; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); background: var(--gri-50); }
-  .raf__urun { display: grid; place-items: end center; padding: 14px 4px 8px; border-bottom: 3px solid var(--gri-300); }
-  .raf__urun:nth-child(n + 4) { border-bottom: 0; padding-bottom: 12px; }
-  .raf__urun img { width: 100%; max-height: 190px; object-fit: contain; object-position: bottom; transition: transform 300ms var(--ease); }
-  .raf__urun:hover img { transform: translateY(-4px); }
+  /* Hero: copy + the cat at the table edge */
+  .hero { background: var(--gri-100); }
+  .hero__ic { display: grid; gap: 24px; padding-block: clamp(20px, 3vw, 36px) clamp(28px, 4vw, 48px); }
+  .hero__yazi { display: grid; gap: 18px; align-content: center; }
+  .hero__alt { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--gri-700); max-width: 44ch; }
+  .hero__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 12px 14px; border-radius: var(--radius-lg); background: #fff; font-size: 0.92rem; width: fit-content; }
+  .hero__son .baglanti { border: 0; background: transparent; padding: 0; color: var(--kirmizi); }
+  .hero__foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #e9e9e6; }
+  .hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
   @media (min-width: 900px) {
-    .giris__ic { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
-    .raf__urun img { max-height: 220px; }
+    .hero__ic { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
+    .hero__foto { aspect-ratio: 3 / 2; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__yazi > * { animation: gir-yukari 600ms var(--ease) both; }
+    .hero__yazi > *:nth-child(2) { animation-delay: 70ms; }
+    .hero__yazi > *:nth-child(3) { animation-delay: 140ms; }
+    .hero__foto { animation: gir-buyu 700ms var(--ease) both; animation-delay: 80ms; }
   }
 
-  /* Category tiles: one big, four small */
-  .raflar { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .raflar__tile { position: relative; display: grid; grid-template-rows: auto 1fr; gap: 6px; min-height: 170px; padding: 14px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); text-decoration: none; overflow: hidden; transition: border-color var(--hiz) var(--ease); }
-  .raflar__tile:hover { border-color: var(--gri-400); }
-  .raflar__yazi { display: grid; gap: 2px; z-index: 1; }
-  .raflar__yazi strong { font-family: var(--font-baslik); font-weight: 800; font-stretch: 106%; letter-spacing: -0.01em; font-size: 1.15rem; line-height: 1.1; }
-  .raflar__yazi small { color: var(--gri-500); font-size: 0.82rem; }
-  .raflar__tile img { justify-self: end; align-self: end; width: 62%; max-height: 130px; object-fit: contain; object-position: right bottom; transition: transform 300ms var(--ease); }
-  .raflar__tile:hover img { transform: scale(1.04); }
-  .raflar__tile--buyuk { grid-column: span 2; min-height: 220px; background: var(--kirmizi); border-color: var(--kirmizi); }
-  .raflar__tile--buyuk .raflar__yazi strong { color: #fff; font-size: 1.6rem; }
-  .raflar__tile--buyuk .raflar__yazi small { color: rgb(255 255 255 / 0.8); }
-  .raflar__tile--buyuk img { width: 45%; max-height: 200px; }
-  @media (min-width: 720px) {
-    .raflar { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 200px 200px; }
-    .raflar__tile--buyuk { grid-row: span 2; grid-column: span 2; min-height: 0; }
-    .raflar__tile--buyuk img { max-height: 300px; width: 50%; }
-  }
+  /* Who are you buying for: circular rail */
+  .kimin__baslik { margin-bottom: 18px; }
+  .kimin { gap: clamp(14px, 2.5vw, 28px); }
+  .kimin__tile { display: grid; justify-items: center; gap: 4px; width: clamp(104px, 11vw, 150px); text-decoration: none; text-align: center; }
+  .kimin__foto { display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--gri-100); }
+  .kimin__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
+  .kimin__foto--urun img { object-fit: contain; padding: 16%; }
+  .kimin__tile:hover .kimin__foto img { transform: scale(1.06); }
+  .kimin__tile strong { margin-top: 6px; font-size: 0.95rem; line-height: 1.2; }
+  .kimin__tile small { color: var(--gri-500); font-size: 0.8rem; }
+
+  /* Frequently asked for: two dense tiles */
+  .sik { display: grid; gap: 16px; }
+  .sik__tile { padding: clamp(18px, 2.5vw, 28px); background: #fff; border-radius: 16px; }
+  .sik__bas { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .sik__bas h2 { font-size: 1.35rem; }
+  .sik__tile > p { color: var(--gri-700); font-size: 0.95rem; margin-bottom: 12px; max-width: 48ch; }
+  @media (min-width: 900px) { .sik { grid-template-columns: 1fr 1fr; gap: 24px; } }
 
   /* How it works: steps + the real message the site produces */
   .nasil { background: var(--murekkep); color: #fff; padding-block: clamp(40px, 6vw, 72px); }
@@ -169,17 +211,22 @@ Teslimat zamanı: Akşam (18:00 sonrası)`;
   .adimlar strong { color: #fff; }
   .nasil__alt { color: #b9b9b5; font-size: 0.95rem; }
   .nasil__alt a { color: #fff; font-weight: 600; }
-  .sohbet { background: #e9e3d8; border-radius: var(--radius-lg); padding: 12px; display: grid; gap: 10px; align-content: start; color: var(--murekkep); max-width: 440px; width: 100%; justify-self: center; }
+  .sohbet { background: #e9e3d8; border-radius: 16px; padding: 12px; display: grid; gap: 10px; align-content: start; color: var(--murekkep); max-width: 440px; width: 100%; justify-self: center; }
   .sohbet__bas { display: flex; align-items: center; gap: 8px; font-weight: 700; padding: 4px 6px 8px; border-bottom: 1px solid rgb(24 24 24 / 0.1); }
   .sohbet__bas .ikon { color: var(--wa-koyu); }
   .sohbet__bas span { margin-left: auto; font-weight: 500; font-size: 0.85rem; color: var(--gri-700); }
   .sohbet__balon { margin: 0; align-self: end; justify-self: end; max-width: 92%; padding: 10px 12px; border-radius: 10px 2px 10px 10px; background: #d9fdd3; font: 0.86rem/1.45 var(--font-govde); white-space: pre-wrap; box-shadow: 0 1px 1px rgb(0 0 0 / 0.08); }
   .sohbet__balon--yanit { justify-self: start; background: #fff; border-radius: 2px 10px 10px 10px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .sohbet__balon { opacity: 0; translate: 0 10px; transition: opacity 400ms var(--ease), translate 500ms var(--ease); }
+    .sohbet.goster .sohbet__balon { opacity: 1; translate: 0 0; }
+    .sohbet.goster .sohbet__balon--yanit { transition-delay: 700ms; }
+  }
   @media (min-width: 900px) { .nasil__ic { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: center; } .sohbet { justify-self: end; } }
 
   /* Shop */
   .dukkan { display: grid; gap: 24px; }
-  .dukkan__foto img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+  .dukkan__foto img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
   .dukkan__bilgi { display: grid; gap: 14px; align-content: center; }
   .dukkan__adres { font-size: 1.05rem; }
   .dukkan__not { color: var(--gri-700); }
@@ -188,11 +235,30 @@ Teslimat zamanı: Akşam (18:00 sonrası)`;
   .saatler td { padding: 6px 0; font-weight: 600; font-variant-numeric: tabular-nums; }
   .saatler tr + tr th, .saatler tr + tr td { border-top: 1px solid var(--gri-200); }
   .dukkan__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .dukkan__rafta { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--gri-200); font-size: 0.92rem; color: var(--gri-700); max-width: 52ch; }
+  .dukkan__rafta a { font-weight: 600; color: var(--murekkep); }
   @media (min-width: 900px) { .dukkan { grid-template-columns: 1.2fr 1fr; gap: 48px; } }
-
-  /* What's in the shop but not online */
-  .rafta { display: grid; gap: 16px; padding: clamp(20px, 3vw, 32px); background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
-  .rafta h2 { font-size: 1.35rem; margin-bottom: 8px; }
-  .rafta p { color: var(--gri-700); max-width: 62ch; }
-  @media (min-width: 720px) { .rafta { grid-template-columns: 1fr auto; align-items: center; gap: 32px; } }
 </style>
+<script>
+  import { ekle, tl } from '../scripts/sepet';
+  // the chat preview types itself in when scrolled to
+  const sohbet = document.querySelector<HTMLElement>('[data-sohbet]');
+  if (sohbet && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => { es.forEach((e) => { if (e.isIntersecting) { sohbet.classList.add('goster'); io.disconnect(); } }); }, { threshold: 0.35 });
+    io.observe(sohbet);
+  } else sohbet?.classList.add('goster');
+
+  // repeat the last order in one tap
+  const son = document.querySelector<HTMLElement>('[data-son-siparis]');
+  try {
+    const k = JSON.parse(localStorage.getItem('ps6-son-siparis') || 'null') as { kalemler: any[]; toplam: number; tarih: string } | null;
+    if (son && k && k.kalemler?.length) {
+      son.querySelector('[data-son-ozet]')!.textContent = `${k.kalemler.reduce((t: number, x: any) => t + x.adet, 0)} ürün, ${tl(k.toplam)}`;
+      son.hidden = false;
+      son.querySelector('[data-son-tekrar]')!.addEventListener('click', () => {
+        k.kalemler.forEach((x: any) => ekle({ slug: x.slug, ad: x.ad, marka: x.marka, boy: x.boy, fiyat: x.fiyat, gorsel: x.gorsel }, x.adet));
+        (window as any).__sepetAc?.();
+      });
+    }
+  } catch {}
+</script>
