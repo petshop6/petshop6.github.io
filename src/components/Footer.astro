@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
+import { site, whatsappUrl } from '../data/site';
+const yil = new Date().getFullYear();
+---
+<footer class="alt">
+  <div class="kap alt__ic">
+    <div class="alt__marka">
+      <Wordmark ters />
+      <p>{site.adres.satir1}<br />{site.adres.satir2}</p>
+      <p class="alt__saat">{site.saatler.map((s) => <span>{s.gun}: {s.saat}</span>)}</p>
+    </div>
+    <div class="alt__kol">
+      <h3>Sipariş</h3>
+      <a href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" boyut={18} /> WhatsApp {site.whatsappGosterim}</a>
+      <a href={`tel:${site.aloMamaTel}`}><Icon ad="phone" boyut={18} /> Alo Mama {site.aloMama}</a>
+      <a href="/teslimat">Sipariş ve teslimat</a>
+      <a href="/sss">Sık sorulanlar</a>
+    </div>
+    <div class="alt__kol">
+      <h3>Ürünler</h3>
+      <a href="/kedi/kuru-mama">Kedi kuru mama</a>
+      <a href="/kedi/yas-mama">Kedi yaş mama</a>
+      <a href="/kedi/kedi-kumu">Kedi kumu</a>
+      <a href="/kopek/kuru-mama">Köpek maması</a>
+      <a href="/kopek/odul">Köpek ödül maması</a>
+    </div>
+    <div class="alt__kol">
+      <h3>Mağaza</h3>
+      <a href="/magaza">Adres ve saatler</a>
+      <a href={site.adres.harita} target="_blank" rel="noopener">Yol tarifi</a>
+      <a href={site.instagram} target="_blank" rel="noopener"><Icon ad="instagram-logo" boyut={18} /> Instagram</a>
+      <a href="/kvkk">KVKK ve gizlilik</a>
+    </div>
+  </div>
+  <div class="kap alt__telif">
+    <span>© {yil} {site.uzunAd}</span>
+    <span>Fiyatlara KDV dahildir. Ödeme teslimatta.</span>
+  </div>
+</footer>
+<style>
+  .alt { background: var(--murekkep); color: #d9d9d6; margin-top: clamp(40px, 6vw, 80px); }
+  .alt__ic { display: grid; gap: 28px; padding-block: clamp(36px, 5vw, 56px) 28px; }
+  .alt__marka { display: grid; gap: 12px; font-size: 1.4rem; }
+  .alt__marka p { font-size: 0.95rem; line-height: 1.5; }
+  .alt__saat { display: grid; gap: 2px; font-size: 0.9rem; color: #b9b9b5; }
+  .alt__kol { display: grid; gap: 8px; align-content: start; }
+  .alt__kol h3 { color: #fff; font-size: 0.95rem; font-stretch: 100%; letter-spacing: 0; margin-bottom: 4px; }
+  .alt__kol a { display: inline-flex; align-items: center; gap: 8px; color: #d9d9d6; text-decoration: none; font-size: 0.95rem; width: fit-content; }
+  .alt__kol a:hover { color: #fff; text-decoration: underline; }
+  .alt__telif { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding-block: 16px 24px; border-top: 1px solid #333; font-size: 0.82rem; color: #9d9d9a; }
+  @media (min-width: 720px) { .alt__ic { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
+</style>

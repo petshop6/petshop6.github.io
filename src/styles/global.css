@@ -1,0 +1,206 @@
+/* Pet Shop 6 · global tokens, fonts, reset, primitives */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url('@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url('@fontsource-variable/archivo/files/archivo-latin-ext-standard-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Hanken Grotesk';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  color-scheme: light;
+  --kirmizi: #d42b1e;
+  --kirmizi-koyu: #b1231a;
+  --kirmizi-acik: #fbeae8;
+  --murekkep: #181818;
+  --gri-900: #2a2a2a;
+  --gri-700: #4b4b4b;
+  --gri-500: #737373;
+  --gri-400: #9a9a97;
+  --gri-300: #cfcfcb;
+  --gri-200: #e4e4e0;
+  --gri-100: #efefec;
+  --gri-50: #f7f7f5;
+  --beyaz: #ffffff;
+  --wa: #1fae52;
+  --wa-koyu: #178f43;
+
+  --font-baslik: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-govde: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+
+  --radius: 6px;
+  --radius-lg: 10px;
+  --golge: 0 1px 2px rgb(24 24 24 / 0.06), 0 6px 18px -8px rgb(24 24 24 / 0.16);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --hiz: 180ms;
+
+  --kap: 1280px;
+  --kenar: clamp(16px, 4vw, 40px);
+  --ust: 64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-govde);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--murekkep);
+  background: var(--gri-50);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, h4 {
+  font-family: var(--font-baslik);
+  font-weight: 800;
+  font-stretch: 108%;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.1rem, 4.4vw, 3.5rem); }
+h2 { font-size: clamp(1.55rem, 2.6vw, 2.15rem); }
+h3 { font-size: clamp(1.15rem, 1.6vw, 1.35rem); font-stretch: 104%; }
+p { margin: 0; }
+:focus-visible { outline: 2px solid var(--murekkep); outline-offset: 2px; }
+::selection { background: var(--kirmizi); color: #fff; }
+
+.kap { width: min(100% - 2 * var(--kenar), var(--kap)); margin-inline: auto; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons: three ranks, one radius */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 18px;
+  border-radius: var(--radius); border: 1px solid var(--kirmizi);
+  background: var(--kirmizi); color: #fff;
+  font-weight: 600; font-size: 0.95rem; line-height: 1; text-decoration: none; white-space: nowrap;
+  transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease), transform var(--hiz) var(--ease);
+}
+.btn:hover { background: var(--kirmizi-koyu); border-color: var(--kirmizi-koyu); }
+.btn:active { transform: translateY(1px); }
+.btn--ikinci { background: transparent; color: var(--murekkep); border-color: var(--gri-300); }
+.btn--ikinci:hover { background: var(--gri-100); border-color: var(--gri-400); }
+.btn--wa { background: var(--wa); border-color: var(--wa); }
+.btn--wa:hover { background: var(--wa-koyu); border-color: var(--wa-koyu); }
+.btn--kucuk { min-height: 38px; padding: 0 14px; font-size: 0.9rem; }
+.btn--genis { width: 100%; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.btn .ikon { width: 18px; height: 18px; }
+.baglanti { font-weight: 600; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.baglanti:hover { color: var(--kirmizi); }
+
+.ikon { width: 20px; height: 20px; fill: currentColor; flex: none; }
+
+/* Forms */
+.alan { display: grid; gap: 6px; }
+.alan label { font-weight: 600; font-size: 0.92rem; }
+.alan .yardim { font-size: 0.85rem; color: var(--gri-500); }
+.alan .hata { font-size: 0.85rem; color: var(--kirmizi-koyu); display: none; }
+.alan.hatali .hata { display: block; }
+.alan.hatali .giris { border-color: var(--kirmizi); }
+.giris {
+  width: 100%; min-height: 44px; padding: 10px 12px;
+  border: 1px solid var(--gri-300); border-radius: var(--radius); background: #fff;
+}
+.giris:focus { border-color: var(--murekkep); outline: none; box-shadow: 0 0 0 3px rgb(24 24 24 / 0.08); }
+.giris::placeholder { color: var(--gri-500); }
+textarea.giris { min-height: 96px; resize: vertical; }
+select.giris { appearance: none; padding-right: 36px; background: #fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' fill='%23181818'><path d='M213.66 101.66l-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z'/></svg>") no-repeat right 12px center / 14px; }
+
+/* Section rhythm */
+.bolum { padding-block: clamp(40px, 6vw, 72px); }
+.bolum--dar { padding-block: clamp(28px, 4vw, 48px); }
+.bolum-baslik { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: clamp(18px, 2.5vw, 28px); }
+.bolum-baslik .baglanti { font-size: 0.95rem; white-space: nowrap; }
+
+/* Product grid */
+.izgara { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 720px) { .izgara { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }
+@media (min-width: 1040px) { .izgara { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.izgara--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .izgara--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Prose for text pages */
+.metin { max-width: 68ch; }
+.metin h2 { margin-top: 2em; margin-bottom: 0.5em; }
+.metin h3 { margin-top: 1.5em; margin-bottom: 0.4em; }
+.metin p + p { margin-top: 0.9em; }
+.metin ul, .metin ol { padding-left: 1.2em; margin: 0.6em 0; }
+.metin li + li { margin-top: 0.3em; }
+
+.rozet { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: var(--gri-100); color: var(--gri-700); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ---- markup injected by scripts (search rows, cart line items) ---- */
+.ara__satir { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 12px; padding: 10px 12px; text-decoration: none; font-size: 0.92rem; }
+.ara__satir:hover { background: var(--gri-50); }
+.ara__satir img { width: 40px; height: 40px; object-fit: contain; }
+.ara__satir span { display: grid; line-height: 1.25; }
+.ara__satir small { color: var(--gri-500); font-size: 0.78rem; }
+.ara__satir b { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }
+.ara__tum { display: block; padding: 10px 12px; border-top: 1px solid var(--gri-200); font-weight: 600; font-size: 0.9rem; text-decoration: none; color: var(--kirmizi); }
+.ara__yok { padding: 12px; font-size: 0.9rem; color: var(--gri-700); }
+
+.kalem { display: grid; grid-template-columns: 72px 1fr; gap: 12px 14px; padding: 14px 0; border-bottom: 1px solid var(--gri-200); }
+.kalem__gorsel { display: grid; place-items: center; width: 72px; height: 72px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius); }
+.kalem__gorsel img { width: 60px; height: 60px; object-fit: contain; }
+.kalem__bilgi { display: grid; align-content: start; gap: 2px; min-width: 0; }
+.kalem__marka { font-size: 0.78rem; color: var(--gri-500); }
+.kalem__ad { font-weight: 600; text-decoration: none; font-size: 0.95rem; line-height: 1.3; }
+.kalem__boy { font-size: 0.85rem; color: var(--gri-700); }
+.kalem__sag { grid-column: 2; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.kalem__tutar { font-family: var(--font-baslik); font-weight: 700; margin-left: auto; }
+.kalem__sil { border: 0; background: transparent; color: var(--gri-500); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
+.kalem__sil:hover { color: var(--kirmizi); }
+.kalem__adet { font-size: 0.9rem; color: var(--gri-700); }
+[data-sepet-liste] { container-type: inline-size; }
+@container (min-width: 520px) { .kalem { grid-template-columns: 72px 1fr auto; } .kalem__sag { grid-column: auto; flex-direction: column; align-items: flex-end; gap: 6px; } .kalem__tutar { margin-left: 0; } }
+
+.adet { display: inline-flex; align-items: center; border: 1px solid var(--gri-300); border-radius: var(--radius); background: #fff; }
+.adet__btn { width: 36px; height: 36px; border: 0; background: transparent; font-size: 1.1rem; line-height: 1; border-radius: var(--radius); }
+.adet__btn:hover { background: var(--gri-100); }
+.adet__sayi { min-width: 28px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.adet--buyuk .adet__btn { width: 44px; height: 44px; }
+
+html.kilit { overflow: hidden; }
+
+[hidden] { display: none !important; }

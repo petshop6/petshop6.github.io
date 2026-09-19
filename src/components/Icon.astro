@@ -1,0 +1,14 @@
+---
+/** Phosphor icon (regular / bold / fill), inlined at build time. */
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+
+interface Props { ad: string; agirlik?: 'regular' | 'bold' | 'fill'; class?: string; boyut?: number; etiket?: string }
+const { ad, agirlik = 'regular', class: cls = '', boyut, etiket } = Astro.props;
+const require = createRequire(import.meta.url);
+const yol = require.resolve(`@phosphor-icons/core/assets/${agirlik}/${ad}${agirlik === 'regular' ? '' : '-' + agirlik}.svg`);
+const kaynak = readFileSync(yol, 'utf8');
+const ic = kaynak.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+const stil = boyut ? `width:${boyut}px;height:${boyut}px` : undefined;
+---
+<svg class={`ikon ${cls}`.trim()} viewBox="0 0 256 256" fill="currentColor" aria-hidden={etiket ? undefined : 'true'} role={etiket ? 'img' : undefined} style={stil} set:html={(etiket ? `<title>${etiket}</title>` : '') + ic} />

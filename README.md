@@ -1,0 +1,59 @@
+# Pet Shop 6 · petshop6-web
+
+Bahçelievler'deki Pet Shop 6 için sipariş sitesi. Müşteri sepetini doldurur, adresini yazar,
+"Siparişi WhatsApp'tan gönder" der; sipariş mesajı mağazanın WhatsApp hattında hazır açılır.
+Sunucu, üyelik ve online ödeme yok: sepet ve adres tarayıcıda (localStorage) tutulur, ödeme kapıda.
+
+Astro 7, statik çıktı. Node 22 (`~/.local/node22`) npm script'lerine gömülü.
+
+```bash
+npm run dev      # http://localhost:4328
+npm run build    # dist/
+npm run preview
+```
+
+## Mağazadan beklenenler (site yayına çıkmadan)
+
+1. **Fiyat listesi.** `src/content/urunler.json` içindeki fiyatlar piyasa seviyesinde örnek
+   değerlerdir. Gerçek fiyatlar girildikten sonra `src/content/ayarlar.json` içinde
+   `"fiyatlarOrnek": false` yapın; sarı uyarı şeridi kalkar.
+2. **WhatsApp numarası.** Tabeladaki 0544 213 13 32 kullanıldı (`ayarlar.json` → `whatsapp`).
+   Farklı bir hat kullanılacaksa oradan değiştirin; tüm bağlantılar oradan beslenir.
+3. **Teslimat bölgesi ve kuralları.** "Ankara içi ücretsiz" varsayıldı; minimum tutar yok.
+   `ayarlar.json` → `teslimat` ve `/teslimat`, `/sss` sayfaları.
+4. **Değişim/iade kuralı.** `/teslimat` sayfasında yalnızca "teslimatta kontrol edin, yanlış ürünü
+   kuryeye geri verin" yazıyor; mağazanın kendi kuralı eklenecek.
+5. **Fotoğraf.** Vitrin fotoğrafları geçici (bkz. KAYNAKLAR.md). Mağazanın kendi çekimleri gelince
+   `src/assets/dukkan/` altındakiler değişecek.
+6. **Ürün listesi.** 58 ürün: kedi/köpek kuru ve yaş mama, ödül, kedi kumu. Kuş, akvaryum,
+   aksesuar kategorileri sitede yok; ana sayfa ve mağaza sayfası WhatsApp'a yönlendiriyor.
+7. **Alan adı.** Instagram biyosundaki petshop6.com çözümlenmiyor ve kayıtlı görünmüyor; alınmalı.
+   `astro.config.mjs` `SITE_URL` ile başka bir hosta da kurulabilir.
+
+## Ürün ekleme / düzenleme
+
+`src/content/urunler.json` bir dizi; her kayıt:
+
+```json
+{
+  "id": "slug", "slug": "slug", "ad": "Ürün adı", "marka": "Reflex Plus",
+  "tur": "kedi | kopek", "kategori": "kuru-mama | yas-mama | odul | kedi-kumu",
+  "etiketler": ["yetişkin", "kısırlaştırılmış"], "aciklama": "Kısa, olgusal.",
+  "secenekler": [{ "boy": "1,5 kg", "fiyat": 390 }, { "boy": "15 kg", "fiyat": 2690 }],
+  "gorsel": "slug.png", "kaynak": "https://...", "oneCikan": false
+}
+```
+
+Görsel `src/assets/urunler/` altına konur (şeffaf PNG tercih). Yeni marka için
+`src/data/site.ts` → `markalar`. `tools/katalog.py` bu dosyayı sıfırdan üretir; elle düzenlenen
+listeyi ezmemek için önce oradaki listeyi güncelleyin.
+
+## Yapı
+
+- `src/pages/` sayfalar: `/`, `/urunler`, `/kedi`, `/kopek`, `/kedi/<kategori>`, `/kopek/<kategori>`,
+  `/marka/<marka>`, `/urun/<slug>`, `/sepet`, `/magaza`, `/teslimat`, `/sss`, `/kvkk`, `404`,
+  `/urunler.json` (arama ve sepet için küçük katalog).
+- `src/scripts/sepet.ts` sepet deposu, çekmece, sepete ekle formları; `katalog.ts` filtre ve
+  sıralama; `ara.ts` üst arama.
+- `src/content/ayarlar.json` mağaza bilgileri; `src/data/site.ts` sabitler ve yardımcılar.
+- Sipariş mesajı formatı `src/pages/sepet.astro` içindeki `mesaj()` fonksiyonunda.

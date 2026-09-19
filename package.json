@@ -1,0 +1,21 @@
+{
+  "name": "petshop6-web",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "PATH=\"$HOME/.local/node22/bin:$PATH\" ASTRO_DEV_BACKGROUND=1 node node_modules/astro/bin/astro.mjs dev",
+    "start": "npm run dev",
+    "build": "PATH=\"$HOME/.local/node22/bin:$PATH\" node node_modules/astro/bin/astro.mjs build",
+    "preview": "PATH=\"$HOME/.local/node22/bin:$PATH\" node node_modules/astro/bin/astro.mjs preview",
+    "check": "PATH=\"$HOME/.local/node22/bin:$PATH\" node node_modules/astro/bin/astro.mjs check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/archivo": "^5.2.0",
+    "@fontsource-variable/hanken-grotesk": "^5.2.0",
+    "@phosphor-icons/core": "^2.1.1",
+    "astro": "^7.3.3",
+    "sharp": "^0.35.4"
+  }
+}

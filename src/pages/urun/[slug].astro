@@ -1,0 +1,160 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { fiyat, kategoriler, site, turler, whatsappUrl } from '../../data/site';
+import { urunler } from '../../data/urunler';
+
+export function getStaticPaths() {
+  return urunler.map((u) => ({ params: { slug: u.slug }, props: { u } }));
+}
+const { u } = Astro.props;
+const benzer = urunler.filter((x) => x.slug !== u.slug && x.tur === u.tur && x.kategori === u.kategori).slice(0, 4);
+const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'contain', format: 'webp' });
+const og = `/og/${u.slug}.jpg`;
+const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
+const enDusuk = Math.min(...u.secenekler.map((s) => s.fiyat));
+const enYuksek = Math.max(...u.secenekler.map((s) => s.fiyat));
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: u.ad,
+  brand: { '@type': 'Brand', name: u.marka },
+  description: u.aciklama,
+  image: new URL(og, Astro.site).toString(),
+  offers: {
+    '@type': 'AggregateOffer', priceCurrency: 'TRY', lowPrice: enDusuk, highPrice: enYuksek, offerCount: u.secenekler.length,
+    availability: 'https://schema.org/InStock', seller: { '@type': 'Organization', name: site.uzunAd },
+  },
+};
+const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
+---
+<Base baslik={u.ad} aciklama={`${u.ad}. ${u.aciklama} ${u.secenekler.map((s) => s.boy).join(', ')}. WhatsApp ile sipariş, Ankara içi ücretsiz teslimat.`} gorsel={og} jsonLd={jsonLd}>
+  <article class="urun">
+    <div class="kap">
+      <nav class="kirinti" aria-label="Konum">
+        <a href="/">Ana sayfa</a><span aria-hidden="true">/</span>
+        <a href={`/${u.tur}`}>{turler[u.tur].ad}</a><span aria-hidden="true">/</span>
+        <a href={`/${u.tur}/${u.kategori}`}>{kategoriler[u.kategori].ad}</a>
+      </nav>
+      <div class="urun__govde">
+        <div class="urun__gorsel">
+          <Image src={u.gorsel} alt={u.ad} width={900} height={900} fit="contain" loading="eager" fetchpriority="high" widths={[480, 900]} sizes="(min-width: 900px) 46vw, 92vw" />
+        </div>
+        <div class="urun__al">
+          <a class="urun__marka" href={`/marka/${u.markaSlug}`}>{u.marka}</a>
+          <h1 class="urun__ad">{u.ad}</h1>
+          <p class="urun__aciklama">{u.aciklama}</p>
+
+          <form class="urun__form" data-sepete-ekle="ac" method="post" action="/sepet">
+            <input type="hidden" name="slug" value={u.slug} />
+            <input type="hidden" name="ad" value={u.ad} />
+            <input type="hidden" name="marka" value={u.marka} />
+            <input type="hidden" name="gorsel" value={kucuk.src} />
+            <fieldset class="boylar">
+              <legend>Boy</legend>
+              {u.secenekler.map((s, i) => (
+                <label class="boy">
+                  <input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === 0} data-fiyat={fiyat(s.fiyat)} />
+                  <span class="boy__ad">{s.boy}</span>
+                  <span class="boy__fiyat">{fiyat(s.fiyat)}</span>
+                </label>
+              ))}
+            </fieldset>
+            <div class="urun__satir">
+              <div class="adet adet--buyuk" role="group" aria-label="Adet">
+                <button type="button" class="adet__btn" data-adet-degistir="-1" aria-label="Azalt">−</button>
+                <input class="adet__giris" type="number" name="adet" value="1" min="1" max="20" aria-label="Adet" />
+                <button type="button" class="adet__btn" data-adet-degistir="1" aria-label="Artır">+</button>
+              </div>
+              <strong class="urun__fiyat" data-fiyat-goster>{fiyat(u.secenekler[0].fiyat)}</strong>
+            </div>
+            <button type="submit" class="btn btn--genis urun__btn"><Icon ad="basket" /> Sepete ekle</button>
+          </form>
+
+          <ul class="urun__notlar">
+            <li><Icon ad="truck" boyut={18} /> {site.teslimat.bolge} teslimat ücretsiz</li>
+            <li><Icon ad="whatsapp-logo" boyut={18} /> Siparişi WhatsApp'tan onaylarsınız, ödeme teslimatta</li>
+            <li><Icon ad="storefront" boyut={18} /> Mağazadan da alabilirsiniz: {site.saatler[0].saat}</li>
+          </ul>
+
+          <dl class="urun__ozellik">
+            <div><dt>Marka</dt><dd>{u.marka}</dd></div>
+            <div><dt>Tür</dt><dd>{turler[u.tur].ad}</dd></div>
+            <div><dt>Kategori</dt><dd>{kategoriler[u.kategori].ad}</dd></div>
+            <div><dt>Kimin için</dt><dd>{u.etiketler.map(ilk).join(', ')}</dd></div>
+            <div><dt>Boylar</dt><dd>{u.secenekler.map((s) => s.boy).join(', ')}</dd></div>
+          </dl>
+          <a class="baglanti urun__sor" href={whatsappUrl(soru)} target="_blank" rel="noopener">Bu ürünü WhatsApp'tan sorun</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  {benzer.length > 0 && (
+    <section class="bolum">
+      <div class="kap">
+        <div class="bolum-baslik">
+          <h2>Aynı raftan</h2>
+          <a class="baglanti" href={`/${u.tur}/${u.kategori}`}>Tümünü gör</a>
+        </div>
+        <div class="izgara">{benzer.map((b) => <ProductCard urun={b} />)}</div>
+      </div>
+    </section>
+  )}
+</Base>
+<style>
+  .urun { padding-top: clamp(16px, 2.5vw, 28px); }
+  .kirinti { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.85rem; color: var(--gri-500); margin-bottom: 16px; }
+  .kirinti a { color: var(--gri-700); text-decoration: none; }
+  .kirinti a:hover { text-decoration: underline; }
+  .urun__govde { display: grid; gap: 24px; }
+  .urun__gorsel { position: relative; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); aspect-ratio: 1; }
+  .urun__gorsel img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; }
+  .urun__al { display: grid; gap: 14px; align-content: start; }
+  .urun__marka { font-weight: 600; color: var(--gri-700); text-decoration: none; font-size: 0.9rem; }
+  .urun__marka:hover { color: var(--kirmizi); }
+  .urun__ad { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+  .urun__aciklama { color: var(--gri-700); max-width: 56ch; }
+  .urun__form { display: grid; gap: 14px; padding: 18px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .boylar { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .boylar legend { font-weight: 700; font-size: 0.92rem; padding: 0 0 8px; }
+  .boy { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--gri-300); border-radius: var(--radius); cursor: pointer; }
+  .boy:has(input:checked) { border-color: var(--murekkep); box-shadow: inset 0 0 0 1px var(--murekkep); }
+  .boy input { accent-color: var(--kirmizi); width: 16px; height: 16px; margin: 0; }
+  .boy__ad { font-weight: 600; }
+  .boy__fiyat { margin-left: auto; font-family: var(--font-baslik); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .urun__satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .adet__giris { width: 48px; height: 44px; border: 0; text-align: center; font-weight: 600; -moz-appearance: textfield; }
+  .adet__giris::-webkit-outer-spin-button, .adet__giris::-webkit-inner-spin-button { appearance: none; margin: 0; }
+  .urun__fiyat { font-family: var(--font-baslik); font-size: 1.7rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .urun__btn.eklendi { background: var(--murekkep); border-color: var(--murekkep); }
+  .urun__notlar { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.92rem; color: var(--gri-700); }
+  .urun__notlar li { display: flex; align-items: center; gap: 8px; }
+  .urun__ozellik { margin: 6px 0 0; display: grid; }
+  .urun__ozellik div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--gri-200); font-size: 0.92rem; }
+  .urun__ozellik div:last-child { border-bottom: 1px solid var(--gri-200); }
+  .urun__ozellik dt { color: var(--gri-500); }
+  .urun__ozellik dd { margin: 0; }
+  .urun__sor { justify-self: start; font-size: 0.92rem; }
+  @media (min-width: 900px) {
+    .urun__govde { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+    .urun__gorsel { position: sticky; top: calc(var(--ust) + 32px + 16px); }
+  }
+</style>
+<script>
+  // quantity stepper + radio price on the product page
+  const form = document.querySelector<HTMLFormElement>('.urun__form');
+  if (form && !form.dataset.init) {
+    form.dataset.init = '1';
+    const giris = form.querySelector<HTMLInputElement>('input[name="adet"]')!;
+    form.querySelectorAll<HTMLButtonElement>('[data-adet-degistir]').forEach((b) => b.addEventListener('click', () => {
+      giris.value = String(Math.min(20, Math.max(1, Number(giris.value || 1) + Number(b.dataset.adetDegistir))));
+    }));
+    form.addEventListener('change', (e) => {
+      const r = e.target as HTMLInputElement;
+      if (r.name === 'boy' && r.dataset.fiyat) form.querySelector('[data-fiyat-goster]')!.textContent = r.dataset.fiyat;
+    });
+  }
+</script>

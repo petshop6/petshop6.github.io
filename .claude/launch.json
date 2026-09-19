@@ -1,0 +1,92 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "piercingland-attach",
+      "url": "http://localhost:4322"
+    },
+    {
+      "name": "piercingland-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/piercingland-web",
+        "run",
+        "dev"
+      ],
+      "port": 4322
+    },
+    {
+      "name": "blackinkart-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/blackinkart-web",
+        "run",
+        "dev",
+        "--",
+        "--host"
+      ],
+      "port": 4321
+    },
+    {
+      "name": "zet-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/zahra/zetelektrik-web",
+        "run",
+        "dev"
+      ],
+      "port": 4324
+    },
+    {
+      "name": "zet-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/zahra/zetelektrik-web",
+        "run",
+        "preview",
+        "--",
+        "--host",
+        "--port",
+        "4325"
+      ],
+      "port": 4325
+    },
+    {
+      "name": "balkabagi-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/balkabagi-web",
+        "run",
+        "dev"
+      ],
+      "port": 4326
+    },
+    {
+      "name": "papillon-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/papillon-web",
+        "run",
+        "dev"
+      ],
+      "port": 4327
+    },
+    {
+      "name": "petshop6-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/huseyinolmez/Desktop/petshop6-web",
+        "run",
+        "dev"
+      ],
+      "port": 4328
+    }
+  ]
+}

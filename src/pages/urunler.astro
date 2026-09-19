@@ -1,0 +1,8 @@
+---
+import Base from '../layouts/Base.astro';
+import Katalog from '../components/Katalog.astro';
+import { urunler } from '../data/urunler';
+---
+<Base baslik="Tüm ürünler" aciklama="Kedi ve köpek maması, yaş mama, ödül maması ve kedi kumu. Sepetinizi doldurun, WhatsApp'tan onaylayın; Ankara içi teslimat ücretsiz.">
+  <Katalog urunler={urunler} baslik="Tüm ürünler" aciklama="Rafımızdaki mama, kum ve ödül ürünleri. Aradığınız listede yoksa WhatsApp'tan sorun; rafta varsa aynı teslimatla getiririz." kirinti={[{ ad: 'Tüm ürünler', href: '' }]} />
+</Base>

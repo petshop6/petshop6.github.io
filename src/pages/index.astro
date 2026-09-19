@@ -1,0 +1,198 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { fiyat, site, whatsappUrl } from '../data/site';
+import { oneCikanlar, urunBul, urunler } from '../data/urunler';
+import dukkan from '../assets/dukkan/vitrin.jpg';
+
+const raf = ['reflex-plus-longevity-kisirlastirilmis', 'pro-plan-sterilised-somonlu', 'advance-adult-tavuklu', 'reflex-aktif-karbonlu-kedi-kumu', 'pro-plan-medium-adult-somonlu', 'reflex-plus-pramy-somonlu-tavuklu'].map((s) => urunBul(s)!);
+const say = (f: (u: typeof urunler[number]) => boolean) => urunler.filter(f).length;
+const tiles = [
+  { href: '/kedi/kuru-mama', ad: 'Kedi kuru mama', n: say((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama'), img: urunBul('reflex-crunchy-bubble-kisirlastirilmis-somonlu')!, buyuk: true },
+  { href: '/kopek/kuru-mama', ad: 'Köpek maması', n: say((u) => u.tur === 'kopek' && u.kategori === 'kuru-mama'), img: urunBul('reflex-plus-longevity-orta-buyuk-yetiskin')! },
+  { href: '/kedi/kedi-kumu', ad: 'Kedi kumu', n: say((u) => u.kategori === 'kedi-kumu'), img: urunBul('reflex-klinik-kedi-kumu')! },
+  { href: '/kedi/yas-mama', ad: 'Yaş mama', n: say((u) => u.kategori === 'yas-mama'), img: urunBul('reflex-plus-pramy-sos-tavuklu-balkabakli')! },
+  { href: '/urunler?kategori=odul', ad: 'Ödül maması', n: say((u) => u.kategori === 'odul'), img: urunBul('reflex-dentastar-mini-kucuk')! },
+];
+const secme = oneCikanlar.slice(0, 8);
+const ornekMesaj = `Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.
+Sipariş no: PS6-260919-K7M2
+
+1 × ${raf[0].ad} (15 kg) = ${fiyat(raf[0].secenekler[1].fiyat)}
+2 × ${raf[3].ad} (10 L) = ${fiyat(raf[3].secenekler[0].fiyat * 2)}
+
+Toplam: ${fiyat(raf[0].secenekler[1].fiyat + raf[3].secenekler[0].fiyat * 2)} (teslimat ücretsiz)
+
+Ad Soyad: Elif Karaca
+Adres: Emek Mah. 8. Cadde 12/4, Çankaya
+Teslimat zamanı: Akşam (18:00 sonrası)`;
+---
+<Base baslik={site.ad}>
+  <section class="giris">
+    <div class="kap giris__ic">
+      <div class="giris__yazi">
+        <h1>Kedi ve köpek maması, kapınıza.</h1>
+        <p class="giris__alt">Sepetinizi doldurun, WhatsApp'tan onaylayın. {site.teslimat.bolge} teslimat ücretsiz, ödeme kapıda.</p>
+        <div class="giris__btn">
+          <a class="btn" href="/urunler">Ürünlere bak</a>
+          <a class="btn btn--ikinci" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
+        </div>
+      </div>
+      <div class="raf" aria-label="Raftan seçmeler">
+        {raf.map((u, i) => (
+          <a class="raf__urun" href={`/urun/${u.slug}`} title={u.ad}>
+            <Image src={u.gorsel} alt={u.ad} width={420} height={420} fit="contain" loading={i < 6 ? 'eager' : 'lazy'} widths={[210, 420]} sizes="(min-width: 900px) 14vw, 30vw" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum bolum--dar">
+    <div class="kap">
+      <div class="raflar">
+        {tiles.map((t) => (
+          <a class:list={['raflar__tile', { 'raflar__tile--buyuk': t.buyuk }]} href={t.href}>
+            <span class="raflar__yazi"><strong>{t.ad}</strong><small>{t.n} ürün</small></span>
+            <Image src={t.img.gorsel} alt="" width={t.buyuk ? 520 : 300} height={t.buyuk ? 520 : 300} fit="contain" loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <div class="kap">
+      <div class="bolum-baslik">
+        <h2>Seçtiklerimiz</h2>
+        <a class="baglanti" href="/urunler">Tüm ürünler</a>
+      </div>
+      <div class="izgara">{secme.map((u) => <ProductCard urun={u} />)}</div>
+    </div>
+  </section>
+
+  <section class="nasil">
+    <div class="kap nasil__ic">
+      <div class="nasil__yazi">
+        <h2>Nasıl sipariş verilir</h2>
+        <ol class="adimlar">
+          <li><span><strong>Sepete ekleyin.</strong> Boyu seçin, adedi yazın. Üye olmak gerekmez.</span></li>
+          <li><span><strong>WhatsApp'tan gönderin.</strong> Adresinizi yazın; sipariş mesajı WhatsApp'ta hazır açılır, siz sadece gönderirsiniz.</span></li>
+          <li><span><strong>Kapıda ödeyin.</strong> Onaylayıp teslimat saatini yazarız. Nakit veya kart, {site.teslimat.bolge} ücretsiz.</span></li>
+        </ol>
+        <p class="nasil__alt">Telefonla sipariş alışkanlığı olanlar için Alo Mama hattı yerinde: <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a></p>
+      </div>
+      <div class="sohbet" aria-label="Örnek sipariş mesajı">
+        <div class="sohbet__bas"><Icon ad="whatsapp-logo" boyut={20} /> Pet Shop 6 <span>{site.whatsappGosterim}</span></div>
+        <pre class="sohbet__balon">{ornekMesaj}</pre>
+        <div class="sohbet__balon sohbet__balon--yanit">Merhaba Elif Hanım, siparişiniz hazır. 19:00-20:00 arası kapıdayız.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum">
+    <div class="kap dukkan">
+      <div class="dukkan__foto">
+        <Image src={dukkan} alt="Pet Shop 6 vitrini, 54. Cadde" width={1200} height={900} loading="lazy" widths={[640, 1200]} sizes="(min-width: 900px) 55vw, 100vw" />
+      </div>
+      <div class="dukkan__bilgi">
+        <h2>Mağaza</h2>
+        <p class="dukkan__adres">{site.adres.satir1}<br />{site.adres.satir2}</p>
+        <p class="dukkan__not">{site.adres.not}</p>
+        <table class="saatler">
+          <tbody>{site.saatler.map((s) => <tr><th scope="row">{s.gun}</th><td>{s.saat}</td></tr>)}</tbody>
+        </table>
+        <div class="dukkan__btn">
+          <a class="btn btn--ikinci" href={site.adres.harita} target="_blank" rel="noopener"><Icon ad="map-pin" /> Yol tarifi</a>
+          <a class="btn btn--ikinci" href="/magaza">Mağaza sayfası</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum bolum--dar">
+    <div class="kap rafta">
+      <div>
+        <h2>Sitede olmayan, rafta olan</h2>
+        <p>Kuş yemi ve kafes, akvaryum balığı ve yemi, tasma, mama kabı, taşıma çantası, kum kabı. Hepsi mağazada. Sitede göremediğinizi WhatsApp'tan sorun, sepetinize ekleyip getirelim.</p>
+      </div>
+      <a class="btn btn--wa" href={whatsappUrl('Merhaba, sitede göremediğim bir ürünü sormak istiyorum: ')} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> WhatsApp'tan sor</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero: copy + a real shelf of the products */
+  .giris { background: #fff; border-bottom: 1px solid var(--gri-200); }
+  .giris__ic { display: grid; gap: 28px; padding-block: clamp(28px, 5vw, 64px); }
+  .giris__yazi { display: grid; gap: 18px; align-content: center; }
+  .giris__alt { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--gri-700); max-width: 44ch; }
+  .giris__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .raf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 6px; padding: 0 6px; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); background: var(--gri-50); }
+  .raf__urun { display: grid; place-items: end center; padding: 14px 4px 8px; border-bottom: 3px solid var(--gri-300); }
+  .raf__urun:nth-child(n + 4) { border-bottom: 0; padding-bottom: 12px; }
+  .raf__urun img { width: 100%; max-height: 190px; object-fit: contain; object-position: bottom; transition: transform 300ms var(--ease); }
+  .raf__urun:hover img { transform: translateY(-4px); }
+  @media (min-width: 900px) {
+    .giris__ic { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
+    .raf__urun img { max-height: 220px; }
+  }
+
+  /* Category tiles: one big, four small */
+  .raflar { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .raflar__tile { position: relative; display: grid; grid-template-rows: auto 1fr; gap: 6px; min-height: 170px; padding: 14px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); text-decoration: none; overflow: hidden; transition: border-color var(--hiz) var(--ease); }
+  .raflar__tile:hover { border-color: var(--gri-400); }
+  .raflar__yazi { display: grid; gap: 2px; z-index: 1; }
+  .raflar__yazi strong { font-family: var(--font-baslik); font-weight: 800; font-stretch: 106%; letter-spacing: -0.01em; font-size: 1.15rem; line-height: 1.1; }
+  .raflar__yazi small { color: var(--gri-500); font-size: 0.82rem; }
+  .raflar__tile img { justify-self: end; align-self: end; width: 62%; max-height: 130px; object-fit: contain; object-position: right bottom; transition: transform 300ms var(--ease); }
+  .raflar__tile:hover img { transform: scale(1.04); }
+  .raflar__tile--buyuk { grid-column: span 2; min-height: 220px; background: var(--kirmizi); border-color: var(--kirmizi); }
+  .raflar__tile--buyuk .raflar__yazi strong { color: #fff; font-size: 1.6rem; }
+  .raflar__tile--buyuk .raflar__yazi small { color: rgb(255 255 255 / 0.8); }
+  .raflar__tile--buyuk img { width: 45%; max-height: 200px; }
+  @media (min-width: 720px) {
+    .raflar { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 200px 200px; }
+    .raflar__tile--buyuk { grid-row: span 2; grid-column: span 2; min-height: 0; }
+    .raflar__tile--buyuk img { max-height: 300px; width: 50%; }
+  }
+
+  /* How it works: steps + the real message the site produces */
+  .nasil { background: var(--murekkep); color: #fff; padding-block: clamp(40px, 6vw, 72px); }
+  .nasil__ic { display: grid; gap: 32px; }
+  .nasil__yazi { display: grid; gap: 22px; align-content: center; }
+  .adimlar { margin: 0; padding: 0; list-style: none; counter-reset: adim; display: grid; gap: 16px; }
+  .adimlar li { counter-increment: adim; display: grid; grid-template-columns: 40px 1fr; gap: 14px; color: #d9d9d6; line-height: 1.5; }
+  .adimlar li::before { content: counter(adim); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--kirmizi); color: #fff; font-family: var(--font-baslik); font-weight: 800; font-size: 1.05rem; }
+  .adimlar strong { color: #fff; }
+  .nasil__alt { color: #b9b9b5; font-size: 0.95rem; }
+  .nasil__alt a { color: #fff; font-weight: 600; }
+  .sohbet { background: #e9e3d8; border-radius: var(--radius-lg); padding: 12px; display: grid; gap: 10px; align-content: start; color: var(--murekkep); max-width: 440px; width: 100%; justify-self: center; }
+  .sohbet__bas { display: flex; align-items: center; gap: 8px; font-weight: 700; padding: 4px 6px 8px; border-bottom: 1px solid rgb(24 24 24 / 0.1); }
+  .sohbet__bas .ikon { color: var(--wa-koyu); }
+  .sohbet__bas span { margin-left: auto; font-weight: 500; font-size: 0.85rem; color: var(--gri-700); }
+  .sohbet__balon { margin: 0; align-self: end; justify-self: end; max-width: 92%; padding: 10px 12px; border-radius: 10px 2px 10px 10px; background: #d9fdd3; font: 0.86rem/1.45 var(--font-govde); white-space: pre-wrap; box-shadow: 0 1px 1px rgb(0 0 0 / 0.08); }
+  .sohbet__balon--yanit { justify-self: start; background: #fff; border-radius: 2px 10px 10px 10px; }
+  @media (min-width: 900px) { .nasil__ic { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: center; } .sohbet { justify-self: end; } }
+
+  /* Shop */
+  .dukkan { display: grid; gap: 24px; }
+  .dukkan__foto img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); }
+  .dukkan__bilgi { display: grid; gap: 14px; align-content: center; }
+  .dukkan__adres { font-size: 1.05rem; }
+  .dukkan__not { color: var(--gri-700); }
+  .saatler { border-collapse: collapse; font-size: 0.95rem; }
+  .saatler th { text-align: left; font-weight: 500; color: var(--gri-700); padding: 6px 24px 6px 0; }
+  .saatler td { padding: 6px 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .saatler tr + tr th, .saatler tr + tr td { border-top: 1px solid var(--gri-200); }
+  .dukkan__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  @media (min-width: 900px) { .dukkan { grid-template-columns: 1.2fr 1fr; gap: 48px; } }
+
+  /* What's in the shop but not online */
+  .rafta { display: grid; gap: 16px; padding: clamp(20px, 3vw, 32px); background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .rafta h2 { font-size: 1.35rem; margin-bottom: 8px; }
+  .rafta p { color: var(--gri-700); max-width: 62ch; }
+  @media (min-width: 720px) { .rafta { grid-template-columns: 1fr auto; align-items: center; gap: 32px; } }
+</style>

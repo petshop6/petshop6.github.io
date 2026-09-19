@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, whatsappUrl } from '../data/site';
+---
+<Base baslik="Sipariş ve teslimat" aciklama="Pet Shop 6'dan nasıl sipariş verilir: sepet, WhatsApp onayı, Ankara içi ücretsiz teslimat, kapıda ödeme, iade ve değişim.">
+  <section class="sayfa">
+    <div class="kap">
+      <h1>Sipariş ve teslimat</h1>
+      <div class="metin">
+        <h2>Sipariş nasıl verilir</h2>
+        <ol>
+          <li>Ürünü seçin, boyunu ve adedini belirleyin, sepete ekleyin. Üyelik yok.</li>
+          <li>Sepet sayfasında adınızı ve adresinizi yazın. "Siparişi WhatsApp'tan gönder"e basın.</li>
+          <li>Sipariş mesajı WhatsApp'ta hazır açılır. Gönder'e basmanız yeterli.</li>
+          <li>Mesajınızı okuyup onaylarız, teslimat saatini aynı sohbetten yazarız.</li>
+        </ol>
+        <p>Sipariş mesajında sipariş numarası, ürünler, adetler, toplam tutar ve adresiniz yer alır. Mesajı göndermeden önce içeriğini görebilir, düzenleyebilirsiniz.</p>
+        <p>Telefonla sipariş vermek isterseniz Alo Mama hattı açık: <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a>.</p>
+
+        <h2>Teslimat</h2>
+        <p>{site.teslimat.metin}</p>
+        <p>Teslimat zamanı tercihinizi mesajınızda belirtebilirsiniz (bugün, yarın, akşam); mümkünse ona göre planlarız, olmazsa uygun saati yazarız. Ankara dışına gönderim yapmıyoruz.</p>
+
+        <h2>Ödeme</h2>
+        <p>Ödeme teslimatta: nakit veya kredi kartı. Sitede ödeme alınmaz, kart bilgisi istenmez.</p>
+
+        <h2>Fiyatlar ve stok</h2>
+        <p>Sitedeki fiyatlar mağaza fiyatlarıdır, KDV dahildir. Fiyat değişikliği olursa siparişi onaylarken yazarız; kabul etmezseniz sipariş iptal olur. Bir ürün o an rafta yoksa size haber verir, muadilini öneririz.</p>
+
+        <h2>Değişim ve iade</h2>
+        <p>Ürünleri teslimatta kontrol edin. Yanlış veya hasarlı gelen ürünü kuryeye geri verebilirsiniz; doğrusunu getiririz. Diğer değişim talepleri için WhatsApp'tan yazın. Açılmış mama ve kum, hijyen gereği iade alınmaz.</p>
+
+        <h2>Sorunuz mu var</h2>
+        <p><a href={whatsappUrl()} target="_blank" rel="noopener">WhatsApp {site.whatsappGosterim}</a> ya da <a href={`tel:${site.aloMamaTel}`}>Alo Mama {site.aloMama}</a>. Çalışma saatleri içinde hemen dönüyoruz.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .sayfa { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .sayfa h1 { margin-bottom: 8px; }
+</style>

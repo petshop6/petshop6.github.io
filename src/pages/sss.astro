@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, whatsappUrl } from '../data/site';
+const sorular = [
+  { s: 'Siparişi nasıl veriyorum?', c: 'Ürünleri sepete ekleyin, sepet sayfasında adresinizi yazın ve "WhatsApp\'tan gönder"e basın. Mesaj WhatsApp\'ta hazır açılır; siz gönderirsiniz, biz onaylarız.' },
+  { s: 'Üye olmam gerekiyor mu?', c: 'Hayır. Ad, adres ve telefon yeter; o da sadece WhatsApp mesajında yazılı olur. Sitede hesap açılmaz, bilgileriniz sunucuda tutulmaz.' },
+  { s: 'Teslimat ücretsiz mi?', c: `Evet, ${site.teslimat.bolge.toLocaleLowerCase('tr-TR')} teslimat ücretsiz ve minimum sipariş tutarı yok. Teslimat saatini siparişi onaylarken yazarız.` },
+  { s: 'Ödemeyi nasıl yapıyorum?', c: 'Kapıda, nakit veya kredi kartıyla. Sitede ödeme alınmaz.' },
+  { s: 'Sitede olmayan bir ürün istiyorum.', c: 'WhatsApp\'tan yazın. Mağazada mama ve kumun dışında kuş yemi, akvaryum ürünleri, tasma, kap ve taşıma çantası da var; stokta olanı aynı teslimatla getiririz.' },
+  { s: 'Fiyatlar güncel mi?', c: 'Sitedeki fiyatlar mağaza fiyatlarıdır. Fiyat değiştiyse onaylarken söyleriz; kabul etmezseniz sipariş iptal olur.' },
+  { s: 'Yanlış ürün geldi, ne yapmalıyım?', c: 'Teslimatta kontrol edip kuryeye geri verin, doğrusunu getiririz. Açılmış mama ve kum hijyen gereği iade alınmaz.' },
+  { s: 'Hangi mamayı seçeceğimi bilmiyorum.', c: 'Kedinizin veya köpeğinizin yaşını, kilosunu, kısırlaştırılmış olup olmadığını ve varsa hassasiyetini WhatsApp\'tan yazın; raftaki seçenekleri fiyatlarıyla birlikte söyleriz. Sağlık sorunu varsa önce veterinerinize danışın.' },
+  { s: 'Telefonla sipariş verebilir miyim?', c: `Evet. Alo Mama: ${site.aloMama}. Çalışma saatleri ${site.saatler[0].saat} (Pazar ${site.saatler[1].saat}).` },
+];
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: sorular.map((q) => ({ '@type': 'Question', name: q.s, acceptedAnswer: { '@type': 'Answer', text: q.c } })),
+};
+---
+<Base baslik="Sık sorulanlar" aciklama="Sipariş, teslimat, ödeme ve değişim hakkında sık sorulan sorular." jsonLd={jsonLd}>
+  <section class="sayfa">
+    <div class="kap">
+      <h1>Sık sorulanlar</h1>
+      <div class="sss">
+        {sorular.map((q, i) => (
+          <details class="sss__soru" open={i === 0}>
+            <summary>{q.s}</summary>
+            <p>{q.c}</p>
+          </details>
+        ))}
+      </div>
+      <p class="sss__alt">Cevabı bulamadınız mı? <a class="baglanti" href={whatsappUrl()} target="_blank" rel="noopener">WhatsApp'tan yazın</a>.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .sayfa { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .sayfa h1 { margin-bottom: 20px; }
+  .sss { max-width: 72ch; border-top: 1px solid var(--gri-200); }
+  .sss__soru { border-bottom: 1px solid var(--gri-200); }
+  .sss__soru summary { cursor: pointer; padding: 16px 0; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .sss__soru summary::-webkit-details-marker { display: none; }
+  .sss__soru summary::after { content: '+'; font-family: var(--font-baslik); font-weight: 700; color: var(--gri-500); }
+  .sss__soru[open] summary::after { content: '−'; }
+  .sss__soru p { padding: 0 0 18px; color: var(--gri-700); max-width: 64ch; }
+  .sss__alt { margin-top: 24px; color: var(--gri-700); }
+</style>

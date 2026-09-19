@@ -1,0 +1,24 @@
+---
+/** "PET SHOP 6" set like the storefront sign: heavy, wide Archivo. */
+interface Props { class?: string; ters?: boolean }
+const { class: cls = '', ters = false } = Astro.props;
+---
+<span class={`wm ${ters ? 'wm--ters' : ''} ${cls}`.trim()} aria-label="Pet Shop 6">
+  <span class="wm__a">Pet Shop</span><span class="wm__6">6</span>
+</span>
+<style>
+  .wm {
+    display: inline-flex; align-items: center; gap: 0.32em;
+    font-family: var(--font-baslik); font-weight: 900; font-stretch: 118%;
+    letter-spacing: -0.03em; line-height: 1; text-transform: uppercase; color: var(--murekkep);
+    white-space: nowrap;
+  }
+  .wm__6 {
+    display: inline-grid; place-items: center;
+    min-width: 1.35em; height: 1.35em; padding-inline: 0.18em;
+    border-radius: 0.2em; background: var(--kirmizi); color: #fff;
+    font-stretch: 100%; letter-spacing: 0;
+  }
+  .wm--ters { color: #fff; }
+  .wm--ters .wm__6 { background: #fff; color: var(--kirmizi); }
+</style>

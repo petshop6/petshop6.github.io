@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+import vitrin from '../assets/dukkan/vitrin.jpg';
+import onu from '../assets/dukkan/onu.jpg';
+---
+<Base baslik="Mağaza" aciklama={`Pet Shop 6, ${site.adres.satir1}, ${site.adres.satir2}. ${site.saatler.map((s) => s.gun + ' ' + s.saat).join(', ')}. Alo Mama ${site.aloMama}.`}>
+  <section class="magaza">
+    <div class="kap">
+      <h1>Mağaza</h1>
+      <div class="magaza__ust">
+        <div class="magaza__bilgi">
+          <p class="magaza__adres">{site.adres.satir1}<br />{site.adres.satir2}</p>
+          <p class="magaza__not">{site.adres.not}</p>
+          <table class="saatler">
+            <caption class="sr">Çalışma saatleri</caption>
+            <tbody>{site.saatler.map((s) => <tr><th scope="row">{s.gun}</th><td>{s.saat}</td></tr>)}</tbody>
+          </table>
+          <div class="magaza__iletisim">
+            <a href={`tel:${site.aloMamaTel}`}><Icon ad="phone" boyut={18} /> Alo Mama {site.aloMama}</a>
+            <a href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" boyut={18} /> WhatsApp {site.whatsappGosterim}</a>
+            <a href={site.instagram} target="_blank" rel="noopener"><Icon ad="instagram-logo" boyut={18} /> @petshop6</a>
+          </div>
+          <div class="magaza__btn">
+            <a class="btn" href={site.adres.harita} target="_blank" rel="noopener"><Icon ad="map-pin" /> Yol tarifi</a>
+            <a class="btn btn--ikinci" href="/urunler">Ürünlere bak</a>
+          </div>
+        </div>
+        <div class="magaza__foto">
+          <Image src={vitrin} alt="Pet Shop 6 vitrini" width={1000} height={750} loading="eager" />
+        </div>
+      </div>
+
+      <div class="magaza__alt">
+        <div class="magaza__harita">
+          <iframe src={site.adres.haritaEmbed} title="Pet Shop 6 harita" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <div class="magaza__metin">
+          <h2>Dükkanda ne var</h2>
+          <p>Raflarda Pro Plan, Reflex, Reflex Plus ve Advance kedi ve köpek mamaları, yaş mamalar, ödül mamaları ve kedi kumu. Bunların dışında kuş yemi ve kafes, akvaryum balığı ve balık yemi, tasma, mama ve su kabı, taşıma çantası, kum kabı ve bakım ürünleri var.</p>
+          <p>Sitede sadece mama, kum ve ödül ürünleri var. Diğerleri için mağazaya uğrayın ya da WhatsApp'tan sorun; stokta olanı sepetinize ekleyip aynı teslimatla getiririz.</p>
+          <Image src={onu} alt="Pet Shop 6, dükkan önü" width={900} height={675} loading="lazy" class="magaza__foto2" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .magaza { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .magaza h1 { margin-bottom: 20px; }
+  .magaza__ust { display: grid; gap: 24px; }
+  .magaza__bilgi { display: grid; gap: 14px; align-content: center; }
+  .magaza__adres { font-size: 1.15rem; font-weight: 600; }
+  .magaza__not { color: var(--gri-700); max-width: 48ch; }
+  .saatler { border-collapse: collapse; font-size: 0.95rem; }
+  .saatler th { text-align: left; font-weight: 500; color: var(--gri-700); padding: 6px 24px 6px 0; }
+  .saatler td { padding: 6px 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .saatler tr + tr th, .saatler tr + tr td { border-top: 1px solid var(--gri-200); }
+  .magaza__iletisim { display: grid; gap: 8px; }
+  .magaza__iletisim a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; width: fit-content; }
+  .magaza__iletisim a:hover { text-decoration: underline; }
+  .magaza__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .magaza__foto img { width: 100%; border-radius: var(--radius-lg); }
+  .magaza__alt { display: grid; gap: 24px; margin-top: clamp(28px, 4vw, 48px); }
+  .magaza__harita { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gri-200); background: var(--gri-100); }
+  .magaza__harita iframe { width: 100%; height: 100%; border: 0; }
+  .magaza__metin { display: grid; gap: 12px; align-content: start; }
+  .magaza__metin p { color: var(--gri-700); max-width: 60ch; }
+  .magaza__foto2 { border-radius: var(--radius-lg); margin-top: 8px; }
+  @media (min-width: 900px) {
+    .magaza__ust { grid-template-columns: 1fr 1.25fr; gap: 48px; }
+    .magaza__alt { grid-template-columns: 1.25fr 1fr; gap: 48px; }
+  }
+</style>

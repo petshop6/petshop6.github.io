@@ -1,0 +1,1387 @@
+[
+  {
+    "slug": "pro-plan-sterilised-somonlu",
+    "ad": "Pro Plan Sterilised Somonlu Kısırlaştırılmış Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "yetişkin",
+      "somon"
+    ],
+    "aciklama": "Kısırlaştırılmış yetişkin kediler için somon içerikli kuru mama. OptiRenal formülü.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 590
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1090
+      },
+      {
+        "boy": "10 kg",
+        "fiyat": 3290
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-sterilised-somon",
+    "oneCikan": true,
+    "gorsel": "pro-plan-sterilised-somonlu.png"
+  },
+  {
+    "slug": "pro-plan-sterilised-hindili",
+    "ad": "Pro Plan Sterilised Hindili Kısırlaştırılmış Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "yetişkin",
+      "hindi"
+    ],
+    "aciklama": "Kısırlaştırılmış yetişkin kediler için hindi eti içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 590
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1090
+      },
+      {
+        "boy": "10 kg",
+        "fiyat": 3290
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-sterilised-hindi",
+    "oneCikan": false,
+    "gorsel": "pro-plan-sterilised-hindili.png"
+  },
+  {
+    "slug": "pro-plan-kitten-tavuklu",
+    "ad": "Pro Plan Kitten Tavuklu Yavru Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru",
+      "tavuk"
+    ],
+    "aciklama": "1-12 aylık yavru kediler için tavuk içerikli kuru mama. Gebe ve emziren kedilere de uygundur.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 620
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1140
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-kitten-tavuk",
+    "oneCikan": true,
+    "gorsel": "pro-plan-kitten-tavuklu.png"
+  },
+  {
+    "slug": "pro-plan-delicate-kuzulu",
+    "ad": "Pro Plan Delicate Kuzulu Hassas Sindirim Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "hassas sindirim",
+      "kuzu"
+    ],
+    "aciklama": "Hassas sindirimli yetişkin kediler için kuzu eti içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 610
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1120
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-delicate-kuzu",
+    "oneCikan": false,
+    "gorsel": "pro-plan-delicate-kuzulu.png"
+  },
+  {
+    "slug": "pro-plan-derma-care-somonlu",
+    "ad": "Pro Plan Derma Care Somonlu Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "deri ve tüy",
+      "somon"
+    ],
+    "aciklama": "Deri ve tüy sağlığı için somon içerikli yetişkin kedi kuru maması.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 610
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1120
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-derma-care-somon",
+    "oneCikan": false,
+    "gorsel": "pro-plan-derma-care-somonlu.png"
+  },
+  {
+    "slug": "reflex-plus-longevity-kisirlastirilmis",
+    "ad": "Reflex Plus Longevity Kısırlaştırılmış Yetişkin Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "yetişkin"
+    ],
+    "aciklama": "Kısırlaştırılmış yetişkin kediler için kuru mama. Tahılsız, tavuk içerikli.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 390
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2690
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-kisirlastirilmis-yetiskin-kedi-mamasi",
+    "oneCikan": true,
+    "gorsel": "reflex-plus-longevity-kisirlastirilmis.png"
+  },
+  {
+    "slug": "reflex-plus-longevity-yetiskin",
+    "ad": "Reflex Plus Longevity Yetişkin Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin"
+    ],
+    "aciklama": "Yetişkin kediler için kuru mama. Tahılsız, tavuk içerikli.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 390
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2690
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-yetiskin-kedi-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-longevity-yetiskin.png"
+  },
+  {
+    "slug": "reflex-plus-longevity-yavru",
+    "ad": "Reflex Plus Longevity Yavru Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru"
+    ],
+    "aciklama": "12 aya kadar yavru kediler için kuru mama. Tahılsız, tavuk içerikli.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 410
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-yavru-kedi-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-longevity-yavru.png"
+  },
+  {
+    "slug": "reflex-crunchy-bubble-kisirlastirilmis-somonlu",
+    "ad": "Reflex Crunchy Bubble Kısırlaştırılmış Somonlu Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "yetişkin",
+      "somon"
+    ],
+    "aciklama": "Kısırlaştırılmış yetişkin kediler için somonlu kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 340
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2390
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-sterilized-salmon",
+    "oneCikan": false,
+    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-somonlu.png"
+  },
+  {
+    "slug": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu",
+    "ad": "Reflex Crunchy Bubble Kısırlaştırılmış Tavuklu Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "yetişkin",
+      "tavuk"
+    ],
+    "aciklama": "Kısırlaştırılmış yetişkin kediler için tavuklu kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 340
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2390
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/eflex-crunchy-bubble-adult-cat-sterilized-chicken",
+    "oneCikan": false,
+    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu.png"
+  },
+  {
+    "slug": "reflex-crunchy-bubble-yetiskin-tavuklu",
+    "ad": "Reflex Crunchy Bubble Yetişkin Tavuklu Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "tavuk"
+    ],
+    "aciklama": "Yetişkin kediler için tavuklu kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 330
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2290
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-chicken",
+    "oneCikan": false,
+    "gorsel": "reflex-crunchy-bubble-yetiskin-tavuklu.png"
+  },
+  {
+    "slug": "reflex-crunchy-bubble-urinary-tavuklu",
+    "ad": "Reflex Crunchy Bubble Urinary Tavuklu Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "üriner",
+      "tavuk"
+    ],
+    "aciklama": "İdrar yolu sağlığı için formüle edilmiş tavuklu yetişkin kedi maması.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 350
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-urinary-chicken",
+    "oneCikan": false,
+    "gorsel": "reflex-crunchy-bubble-urinary-tavuklu.png"
+  },
+  {
+    "slug": "reflex-somonlu-hamsili",
+    "ad": "Reflex Somonlu ve Hamsili Yetişkin Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "somon"
+    ],
+    "aciklama": "Yetişkin kediler için somon ve hamsi içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 320
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2190
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-somonlu-ve-hamsili-yetiskin-kedi-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-somonlu-hamsili.png"
+  },
+  {
+    "slug": "advance-adult-tavuklu",
+    "ad": "Advance Adult Tavuklu Yetişkin Kedi Maması",
+    "marka": "Advance",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "tavuk"
+    ],
+    "aciklama": "Yetişkin kediler için tavuk ve pirinç içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 720
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1320
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/adult-1000379.html",
+    "oneCikan": false,
+    "gorsel": "advance-adult-tavuklu.png"
+  },
+  {
+    "slug": "advance-kitten",
+    "ad": "Advance Kitten Tavuklu Yavru Kedi Maması",
+    "marka": "Advance",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru",
+      "tavuk"
+    ],
+    "aciklama": "Yavru kediler ile gebe ve emziren kediler için tavuk ve pirinç içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "400 g",
+        "fiyat": 260
+      },
+      {
+        "boy": "1,5 kg",
+        "fiyat": 760
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/kitten-1000382.html",
+    "oneCikan": false,
+    "gorsel": "advance-kitten.png"
+  },
+  {
+    "slug": "advance-sensitive-care-somonlu",
+    "ad": "Advance Sensitive Care Somonlu Kedi Maması",
+    "marka": "Advance",
+    "tur": "kedi",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "hassas sindirim",
+      "somon"
+    ],
+    "aciklama": "Hassas sindirim ve deri için somon ve pirinç içerikli yetişkin kedi maması.",
+    "secenekler": [
+      {
+        "boy": "1,5 kg",
+        "fiyat": 760
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1390
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/sensitive-1000380.html",
+    "oneCikan": false,
+    "gorsel": "advance-sensitive-care-somonlu.png"
+  },
+  {
+    "slug": "reflex-plus-pramy-somonlu-tavuklu",
+    "ad": "Reflex Plus Pramy Jöle İçinde Somonlu ve Tavuklu Yaş Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "pouch",
+      "somon"
+    ],
+    "aciklama": "Jöle içinde somonlu ve tavuklu pouch. Yetişkin kediler için tamamlayıcı mama.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 42
+      },
+      {
+        "boy": "12×85 g",
+        "fiyat": 480
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-somonlu-ve-tavuklu",
+    "oneCikan": true,
+    "gorsel": "reflex-plus-pramy-somonlu-tavuklu.png"
+  },
+  {
+    "slug": "reflex-plus-pramy-ton-balikli-tavuklu",
+    "ad": "Reflex Plus Pramy Jöle İçinde Ton Balıklı ve Tavuklu Yaş Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "pouch",
+      "ton balığı"
+    ],
+    "aciklama": "Jöle içinde ton balıklı ve tavuklu pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 42
+      },
+      {
+        "boy": "12×85 g",
+        "fiyat": 480
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-ton-balikli-ve-tavuklu",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-pramy-ton-balikli-tavuklu.png"
+  },
+  {
+    "slug": "reflex-plus-pramy-yagsiz-ton-balikli",
+    "ad": "Reflex Plus Pramy Jöle İçinde Yağsız Ton Balıklı Yaş Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "pouch",
+      "ton balığı"
+    ],
+    "aciklama": "Jöle içinde yağsız ton balıklı pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 42
+      },
+      {
+        "boy": "12×85 g",
+        "fiyat": 480
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-yagsiz-ton-balikli",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-pramy-yagsiz-ton-balikli.png"
+  },
+  {
+    "slug": "reflex-plus-pramy-sos-tavuklu-balkabakli",
+    "ad": "Reflex Plus Pramy Sos İçinde Tavuklu, Bal Kabaklı ve Havuçlu Yaş Kedi Maması",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "pouch",
+      "tavuk"
+    ],
+    "aciklama": "Sos içinde tavuklu, bal kabaklı ve havuçlu pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 42
+      },
+      {
+        "boy": "12×85 g",
+        "fiyat": 480
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-sos-icinde-tavuklu-bal-kabakli-ve-havuclu",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-pramy-sos-tavuklu-balkabakli.png"
+  },
+  {
+    "slug": "reflex-plus-pramy-yavru-somonlu-mousse",
+    "ad": "Reflex Plus Pramy Yavru Kediler için Somonlu Mousse",
+    "marka": "Reflex Plus",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yavru",
+      "somon"
+    ],
+    "aciklama": "Yavru kediler için somonlu mousse kıvamında yaş mama.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 45
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-yavru-kediler-icin-somonlu-mousse",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-pramy-yavru-somonlu-mousse.png"
+  },
+  {
+    "slug": "reflex-essential-tavuk-goguslu",
+    "ad": "Reflex Essential Et Suyu İçinde Tavuk Göğüslü Yetişkin Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "tavuk"
+    ],
+    "aciklama": "Et suyu içinde tavuk göğüslü konserve. Yetişkin kediler için tamamlayıcı mama.",
+    "secenekler": [
+      {
+        "boy": "70 g",
+        "fiyat": 38
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/essential-/-et-suyu-icinde-tavuk-goguslu-yetiskin-kedi-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-essential-tavuk-goguslu.png"
+  },
+  {
+    "slug": "reflex-essentials-yavru-ton-somon",
+    "ad": "Reflex Essentials Et Suyu İçinde Ton Balıklı ve Somonlu Yavru Kedi Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yavru",
+      "ton balığı",
+      "somon"
+    ],
+    "aciklama": "Et suyu içinde ton balıklı ve somonlu konserve. Yavru kediler için.",
+    "secenekler": [
+      {
+        "boy": "70 g",
+        "fiyat": 38
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/essentials-/-et-suyu-icinde-ton-balikli-ve-somonlu-yavru-kedi-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-essentials-yavru-ton-somon.png"
+  },
+  {
+    "slug": "pro-plan-adult-7-ton-balikli",
+    "ad": "Pro Plan Adult 7+ Kıyılmış Ton Balıklı Yaş Kedi Maması",
+    "marka": "Pro Plan",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "7+ yaş",
+      "pouch",
+      "ton balığı"
+    ],
+    "aciklama": "7 yaş ve üzeri kediler için kıyılmış ton balıklı pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 48
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-adult-ton-balikli",
+    "oneCikan": false,
+    "gorsel": "pro-plan-adult-7-ton-balikli.png"
+  },
+  {
+    "slug": "advance-adult-chicken-yas",
+    "ad": "Advance Adult Tavuklu Yaş Kedi Maması",
+    "marka": "Advance",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yetişkin",
+      "pouch",
+      "tavuk"
+    ],
+    "aciklama": "Yetişkin kediler için tavuklu pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 52
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/adult-chicken-1000393.html",
+    "oneCikan": false,
+    "gorsel": "advance-adult-chicken-yas.png"
+  },
+  {
+    "slug": "advance-kitten-chicken-yas",
+    "ad": "Advance Kitten Tavuklu Yaş Yavru Kedi Maması",
+    "marka": "Advance",
+    "tur": "kedi",
+    "kategori": "yas-mama",
+    "etiketler": [
+      "yavru",
+      "pouch",
+      "tavuk"
+    ],
+    "aciklama": "Yavru kediler için tavuklu pouch.",
+    "secenekler": [
+      {
+        "boy": "85 g",
+        "fiyat": 52
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/kitten-chicken-1000394.html",
+    "oneCikan": false,
+    "gorsel": "advance-kitten-chicken-yas.png"
+  },
+  {
+    "slug": "reflex-happy-hour-kisirlastirilmis",
+    "ad": "Reflex Happy Hour Kısırlaştırılmış Kediler için Ödül Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "kısırlaştırılmış",
+      "ödül"
+    ],
+    "aciklama": "Kısırlaştırılmış kediler için kıtır ödül maması.",
+    "secenekler": [
+      {
+        "boy": "60 g",
+        "fiyat": 65
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/happy-hour-/-kisirlastirilmis-kediler-icin-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-happy-hour-kisirlastirilmis.png"
+  },
+  {
+    "slug": "reflex-pocket-treats-tuy-yumagi",
+    "ad": "Reflex Pocket Treats Tüy Yumağı Kontrolü Kedi Ödül Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "tüy yumağı"
+    ],
+    "aciklama": "Tüy yumağı kontrolüne yardımcı kıtır ödül maması.",
+    "secenekler": [
+      {
+        "boy": "60 g",
+        "fiyat": 65
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/pocket-treats-/-tuy-yumagi-kontrolu-icin-kedi-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-pocket-treats-tuy-yumagi.png"
+  },
+  {
+    "slug": "reflex-pocket-treats-agiz-dis",
+    "ad": "Reflex Pocket Treats Ağız ve Diş Sağlığı Kedi Ödül Maması",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "diş"
+    ],
+    "aciklama": "Ağız ve diş sağlığı için kıtır ödül maması.",
+    "secenekler": [
+      {
+        "boy": "60 g",
+        "fiyat": 65
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/pocket-treats-agiz-ve-dis-sagligi",
+    "oneCikan": false,
+    "gorsel": "reflex-pocket-treats-agiz-dis.png"
+  },
+  {
+    "slug": "reflex-meaty-sticks-somonlu",
+    "ad": "Reflex Meaty Sticks Somonlu Kedi Ödül Çubuğu",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "çubuk",
+      "somon"
+    ],
+    "aciklama": "Somonlu etli ödül çubuğu, 3 adet.",
+    "secenekler": [
+      {
+        "boy": "3×5 g",
+        "fiyat": 32
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/meaty-sticks-/-somonlu-cubuk-2",
+    "oneCikan": true,
+    "gorsel": "reflex-meaty-sticks-somonlu.png"
+  },
+  {
+    "slug": "reflex-meaty-sticks-yavru-hindi",
+    "ad": "Reflex Meaty Sticks Yavru Kediler için Hindi Etli Çubuk",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "yavru",
+      "ödül",
+      "çubuk"
+    ],
+    "aciklama": "Yavru kediler için hindi etli ödül çubuğu, 3 adet.",
+    "secenekler": [
+      {
+        "boy": "3×5 g",
+        "fiyat": 32
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/meaty-sticks-/-yavru-kediler-icin-hindi-etli-cubuk",
+    "oneCikan": false,
+    "gorsel": "reflex-meaty-sticks-yavru-hindi.png"
+  },
+  {
+    "slug": "reflex-meat-fillet-tavuk",
+    "ad": "Reflex Meat Fillet Tavuk Fileto Kedi Ödülü",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "tavuk"
+    ],
+    "aciklama": "Kedi ödülü olarak tavuk fileto.",
+    "secenekler": [
+      {
+        "boy": "20 g",
+        "fiyat": 45
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/meat-fillet-/-tavuk-fileto",
+    "oneCikan": false,
+    "gorsel": "reflex-meat-fillet-tavuk.png"
+  },
+  {
+    "slug": "reflex-aktif-karbonlu-kedi-kumu",
+    "ad": "Reflex Aktif Karbonlu Topaklanan Kedi Kumu",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kedi-kumu",
+    "etiketler": [
+      "topaklanan",
+      "aktif karbon"
+    ],
+    "aciklama": "Doğal aktif karbonlu, hızlı topaklanan bentonit kedi kumu. Amonyak kokusunu bloke eder.",
+    "secenekler": [
+      {
+        "boy": "10 L",
+        "fiyat": 290
+      },
+      {
+        "boy": "20 L",
+        "fiyat": 540
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
+    "oneCikan": true,
+    "gorsel": "reflex-aktif-karbonlu-kedi-kumu.png"
+  },
+  {
+    "slug": "reflex-aktif-karbon-granullu-kedi-kumu",
+    "ad": "Reflex Aktif Karbon Granüllü Topaklanan Kedi Kumu",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kedi-kumu",
+    "etiketler": [
+      "topaklanan",
+      "aktif karbon"
+    ],
+    "aciklama": "Aktif karbon tanecikli topaklanan bentonit kedi kumu.",
+    "secenekler": [
+      {
+        "boy": "10 L",
+        "fiyat": 290
+      },
+      {
+        "boy": "20 L",
+        "fiyat": 540
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
+    "oneCikan": false,
+    "gorsel": "reflex-aktif-karbon-granullu-kedi-kumu.png"
+  },
+  {
+    "slug": "reflex-klinik-kedi-kumu",
+    "ad": "Reflex Klinik Topaklanan Kedi Kumu",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kedi-kumu",
+    "etiketler": [
+      "topaklanan",
+      "klinik"
+    ],
+    "aciklama": "Özel formüllü tanecikli topaklanan kedi kumu. Kapalı ortamda beslenen kediler için.",
+    "secenekler": [
+      {
+        "boy": "10 L",
+        "fiyat": 300
+      },
+      {
+        "boy": "20 L",
+        "fiyat": 560
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
+    "oneCikan": false,
+    "gorsel": "reflex-klinik-kedi-kumu.png"
+  },
+  {
+    "slug": "reflex-parfumsuz-kedi-kumu",
+    "ad": "Reflex Hassas Kediler İçin Parfümsüz Topaklanan Kedi Kumu",
+    "marka": "Reflex",
+    "tur": "kedi",
+    "kategori": "kedi-kumu",
+    "etiketler": [
+      "topaklanan",
+      "parfümsüz"
+    ],
+    "aciklama": "Parfümsüz, kompakt taneli doğal bentonit kedi kumu. Patiye yapışmaz.",
+    "secenekler": [
+      {
+        "boy": "10 L",
+        "fiyat": 280
+      },
+      {
+        "boy": "20 L",
+        "fiyat": 520
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
+    "oneCikan": false,
+    "gorsel": "reflex-parfumsuz-kedi-kumu.png"
+  },
+  {
+    "slug": "pro-plan-medium-adult-somonlu",
+    "ad": "Pro Plan Medium Adult Sensitive Skin Somonlu Köpek Maması",
+    "marka": "Pro Plan",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "orta ırk",
+      "hassas deri",
+      "somon"
+    ],
+    "aciklama": "Orta ırk yetişkin köpekler için somon içerikli kuru mama. Hassas deri için.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 990
+      },
+      {
+        "boy": "14 kg",
+        "fiyat": 3890
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-medium-adult-somon",
+    "oneCikan": true,
+    "gorsel": "pro-plan-medium-adult-somonlu.png"
+  },
+  {
+    "slug": "pro-plan-medium-puppy-kuzulu",
+    "ad": "Pro Plan Medium Puppy Kuzulu Yavru Köpek Maması",
+    "marka": "Pro Plan",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru",
+      "orta ırk",
+      "kuzu"
+    ],
+    "aciklama": "Orta ırk yavru köpekler için kuzu eti içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 990
+      },
+      {
+        "boy": "12 kg",
+        "fiyat": 3490
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-medium-puppy-kuzueti",
+    "oneCikan": false,
+    "gorsel": "pro-plan-medium-puppy-kuzulu.png"
+  },
+  {
+    "slug": "pro-plan-small-mini-adult-somonlu",
+    "ad": "Pro Plan Small & Mini Adult Sensitive Skin Somonlu Köpek Maması",
+    "marka": "Pro Plan",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "küçük ırk",
+      "somon"
+    ],
+    "aciklama": "Küçük ırk yetişkin köpekler için somon içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 1040
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-small-mini-adult-somon",
+    "oneCikan": false,
+    "gorsel": "pro-plan-small-mini-adult-somonlu.png"
+  },
+  {
+    "slug": "pro-plan-large-athletic-somonlu",
+    "ad": "Pro Plan Large Athletic Adult Sensitive Skin Somonlu Köpek Maması",
+    "marka": "Pro Plan",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "büyük ırk",
+      "somon"
+    ],
+    "aciklama": "Büyük ırk, atletik yapılı yetişkin köpekler için somon içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "14 kg",
+        "fiyat": 3990
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-large-athletic-somon",
+    "oneCikan": false,
+    "gorsel": "pro-plan-large-athletic-somonlu.png"
+  },
+  {
+    "slug": "pro-plan-all-size-light",
+    "ad": "Pro Plan All Size Adult Light Tavuklu Köpek Maması",
+    "marka": "Pro Plan",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "kilo kontrolü",
+      "tavuk"
+    ],
+    "aciklama": "Kilo kontrolü için düşük yağlı, tavuk içerikli yetişkin köpek maması.",
+    "secenekler": [
+      {
+        "boy": "14 kg",
+        "fiyat": 3890
+      }
+    ],
+    "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-allsize-tavuk",
+    "oneCikan": false,
+    "gorsel": "pro-plan-all-size-light.png"
+  },
+  {
+    "slug": "reflex-plus-longevity-orta-buyuk-yetiskin",
+    "ad": "Reflex Plus Longevity Orta ve Büyük Irk Yetişkin Köpek Maması",
+    "marka": "Reflex Plus",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "orta ırk",
+      "büyük ırk"
+    ],
+    "aciklama": "Orta ve büyük ırk yetişkin köpekler için kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 520
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2290
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-orta-ve-buyuk-irk-yetiskin-kopek-mamasi",
+    "oneCikan": true,
+    "gorsel": "reflex-plus-longevity-orta-buyuk-yetiskin.png"
+  },
+  {
+    "slug": "reflex-plus-longevity-mini-kucuk-yetiskin",
+    "ad": "Reflex Plus Longevity Mini ve Küçük Irk Yetişkin Köpek Maması",
+    "marka": "Reflex Plus",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "küçük ırk"
+    ],
+    "aciklama": "Mini ve küçük ırk yetişkin köpekler için kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 540
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-mini-ve-kucuk-irk-yetiskin-kopek-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-longevity-mini-kucuk-yetiskin.png"
+  },
+  {
+    "slug": "reflex-plus-kuzu-orta-buyuk-yavru",
+    "ad": "Reflex Plus Kuzu Etli Orta ve Büyük Irk Yavru Köpek Maması",
+    "marka": "Reflex Plus",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru",
+      "orta ırk",
+      "büyük ırk",
+      "kuzu"
+    ],
+    "aciklama": "Orta ve büyük ırk yavru köpekler için kuzu etli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 540
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2390
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-kuzu-etli-orta-ve-buyuk-irk-yavru-kopek-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-kuzu-orta-buyuk-yavru.png"
+  },
+  {
+    "slug": "reflex-plus-tavuklu-orta-buyuk-yetiskin",
+    "ad": "Reflex Plus Tavuklu Orta ve Büyük Irk Yetişkin Köpek Maması",
+    "marka": "Reflex Plus",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "orta ırk",
+      "büyük ırk",
+      "tavuk"
+    ],
+    "aciklama": "Orta ve büyük ırk yetişkin köpekler için tavuklu kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 490
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 2190
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-tavuklu-orta-ve-buyuk-irk-yetiskin-kopek-mamasi-2",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-tavuklu-orta-buyuk-yetiskin.png"
+  },
+  {
+    "slug": "reflex-plus-tavuklu-mini-kucuk-yavru",
+    "ad": "Reflex Plus Tavuklu Mini ve Küçük Irk Yavru Köpek Maması",
+    "marka": "Reflex Plus",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yavru",
+      "küçük ırk",
+      "tavuk"
+    ],
+    "aciklama": "Mini ve küçük ırk yavru köpekler için tavuklu kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 520
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-plus-tavuklu-mini-ve-kucuk-irk-yavru-kopek-mamasi-2",
+    "oneCikan": false,
+    "gorsel": "reflex-plus-tavuklu-mini-kucuk-yavru.png"
+  },
+  {
+    "slug": "reflex-somonlu-kuzulu-yetiskin-kopek",
+    "ad": "Reflex Somonlu ve Kuzu Etli Yetişkin Köpek Maması",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "somon",
+      "kuzu"
+    ],
+    "aciklama": "Yetişkin köpekler için somon ve kuzu etli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 440
+      },
+      {
+        "boy": "15 kg",
+        "fiyat": 1890
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/reflex-somonlu-ve-kuzu-etli-yetiskin-kopek-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-somonlu-kuzulu-yetiskin-kopek.png"
+  },
+  {
+    "slug": "advance-adult-medium",
+    "ad": "Advance Adult Medium Tavuklu Köpek Maması",
+    "marka": "Advance",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "orta ırk",
+      "tavuk"
+    ],
+    "aciklama": "Orta ırk yetişkin köpekler için tavuk ve pirinç içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 1190
+      },
+      {
+        "boy": "14 kg",
+        "fiyat": 4490
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-medium-1000414.html",
+    "oneCikan": false,
+    "gorsel": "advance-adult-medium.png"
+  },
+  {
+    "slug": "advance-adult-mini",
+    "ad": "Advance Adult Mini Tavuklu Köpek Maması",
+    "marka": "Advance",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "küçük ırk",
+      "tavuk"
+    ],
+    "aciklama": "Küçük ırk yetişkin köpekler için tavuk ve pirinç içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "800 g",
+        "fiyat": 420
+      },
+      {
+        "boy": "3 kg",
+        "fiyat": 1240
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-mini-1000404.html",
+    "oneCikan": false,
+    "gorsel": "advance-adult-mini.png"
+  },
+  {
+    "slug": "advance-adult-maxi",
+    "ad": "Advance Adult Maxi Tavuklu Köpek Maması",
+    "marka": "Advance",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "büyük ırk",
+      "tavuk"
+    ],
+    "aciklama": "Büyük ırk yetişkin köpekler için tavuk ve pirinç içerikli kuru mama.",
+    "secenekler": [
+      {
+        "boy": "14 kg",
+        "fiyat": 4490
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-maxi-1000419.html",
+    "oneCikan": false,
+    "gorsel": "advance-adult-maxi.png"
+  },
+  {
+    "slug": "advance-sensitive-care-kuzulu",
+    "ad": "Advance Adult Sensitive Care Kuzulu Köpek Maması",
+    "marka": "Advance",
+    "tur": "kopek",
+    "kategori": "kuru-mama",
+    "etiketler": [
+      "yetişkin",
+      "hassas sindirim",
+      "kuzu"
+    ],
+    "aciklama": "Hassas sindirim ve deri için kuzu ve pirinç içerikli yetişkin köpek maması.",
+    "secenekler": [
+      {
+        "boy": "3 kg",
+        "fiyat": 1290
+      },
+      {
+        "boy": "12 kg",
+        "fiyat": 4290
+      }
+    ],
+    "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-sensitive-care-lamb-1000428.html",
+    "oneCikan": false,
+    "gorsel": "advance-sensitive-care-kuzulu.png"
+  },
+  {
+    "slug": "reflex-dentastar-mini-kucuk",
+    "ad": "Reflex Dentastar Çiğnemelik Diş Çubukları · Mini ve Küçük Irk",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "diş",
+      "küçük ırk"
+    ],
+    "aciklama": "Küçük ırk yetişkin köpekler için çiğnemelik diş çubuğu.",
+    "secenekler": [
+      {
+        "boy": "7 adet",
+        "fiyat": 95
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/dentastar-/-cignemelik-dis-cubuklari-mini-ve-kucuk-irk-yetiskin-kopek-odul-mamasi",
+    "oneCikan": true,
+    "gorsel": "reflex-dentastar-mini-kucuk.png"
+  },
+  {
+    "slug": "reflex-dentastar-buyuk",
+    "ad": "Reflex Dentastar Çiğnemelik Diş Çubukları · Büyük Irk",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "diş",
+      "büyük ırk"
+    ],
+    "aciklama": "Büyük ırk yetişkin köpekler için çiğnemelik diş çubuğu.",
+    "secenekler": [
+      {
+        "boy": "7 adet",
+        "fiyat": 135
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/dentastar-/-cignemelik-dis-cubuklari-buyuk-irk-yetiskin-kopek-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-dentastar-buyuk.png"
+  },
+  {
+    "slug": "reflex-cookie-bites-mini-bones",
+    "ad": "Reflex Cookie Bites Mini Bones Köpek Bisküvisi",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "bisküvi"
+    ],
+    "aciklama": "Kemik şeklinde köpek bisküvisi.",
+    "secenekler": [
+      {
+        "boy": "180 g",
+        "fiyat": 85
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/cookie-bites-/-mini-bones",
+    "oneCikan": false,
+    "gorsel": "reflex-cookie-bites-mini-bones.png"
+  },
+  {
+    "slug": "reflex-twix-tavuklu-biftekli",
+    "ad": "Reflex Twix Tavuklu & Biftekli Çiğneme Çubukları",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "çiğneme"
+    ],
+    "aciklama": "Yetişkin köpekler için tavuklu ve biftekli çiğneme çubuğu.",
+    "secenekler": [
+      {
+        "boy": "75 g",
+        "fiyat": 75
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/twix-/-tavuklu-biftekli-cigneme-cubuklari-yetiskin-kopek-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-twix-tavuklu-biftekli.png"
+  },
+  {
+    "slug": "reflex-bacon-chips",
+    "ad": "Reflex Bacon Chips Çiğnemelik Jambon Dilimleri",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "çiğneme"
+    ],
+    "aciklama": "Yetişkin köpekler için çiğnemelik jambon dilimi.",
+    "secenekler": [
+      {
+        "boy": "75 g",
+        "fiyat": 75
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/bacon-chips-/-cignemelik-jambon-dilimleri-yetiskin-kopek-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-bacon-chips.png"
+  },
+  {
+    "slug": "reflex-pocket-treats-eklem",
+    "ad": "Reflex Pocket Treats Eklem Sağlığı Köpek Ödül Maması",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "eklem"
+    ],
+    "aciklama": "Eklem sağlığına destek için kıtır ödül maması.",
+    "secenekler": [
+      {
+        "boy": "75 g",
+        "fiyat": 70
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/pocket-treats-/-eklem-sagligi-icin-kopek-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-pocket-treats-eklem.png"
+  },
+  {
+    "slug": "reflex-semi-moist-peynirli",
+    "ad": "Reflex Semi Moist Peynirli Köpek Ödül Maması",
+    "marka": "Reflex",
+    "tur": "kopek",
+    "kategori": "odul",
+    "etiketler": [
+      "ödül",
+      "peynir"
+    ],
+    "aciklama": "Yarı nemli peynirli ödül maması.",
+    "secenekler": [
+      {
+        "boy": "80 g",
+        "fiyat": 70
+      }
+    ],
+    "kaynak": "https://www.reflexmama.com/semi-moist-peynirli-kopek-odul-mamasi",
+    "oneCikan": false,
+    "gorsel": "reflex-semi-moist-peynirli.png"
+  }
+]

@@ -1,0 +1,156 @@
+---
+import Icon from './Icon.astro';
+import ProductCard from './ProductCard.astro';
+import { kategoriler, markalar, turler, type Kategori, type MarkaSlug, type Tur } from '../data/site';
+import type { Urun } from '../data/urunler';
+
+interface Props {
+  urunler: Urun[];
+  baslik: string;
+  aciklama?: string;
+  sabit?: { tur?: Tur; kategori?: Kategori; marka?: MarkaSlug };
+  kirinti?: { ad: string; href: string }[];
+}
+const { urunler, baslik, aciklama, sabit = {}, kirinti = [] } = Astro.props;
+
+const say = <T extends string>(al: (u: Urun) => T) => {
+  const m = new Map<T, number>();
+  urunler.forEach((u) => m.set(al(u), (m.get(al(u)) ?? 0) + 1));
+  return m;
+};
+const turSay = say((u) => u.tur);
+const katSay = say((u) => u.kategori);
+const markaSay = say((u) => u.markaSlug);
+const ozellikler = ['yavru', 'yetişkin', 'kısırlaştırılmış', 'küçük ırk', 'orta ırk', 'büyük ırk', 'hassas sindirim', 'topaklanan', 'pouch'] as const;
+const ozSay = new Map<string, number>();
+urunler.forEach((u) => u.etiketler.forEach((e) => { if ((ozellikler as readonly string[]).includes(e)) ozSay.set(e, (ozSay.get(e) ?? 0) + 1); }));
+const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
+---
+<section class="katalog" data-katalog>
+  <div class="kap">
+    {kirinti.length > 0 && (
+      <nav class="kirinti" aria-label="Konum">
+        <a href="/">Ana sayfa</a>
+        {kirinti.map((k) => <><span aria-hidden="true">/</span>{k.href ? <a href={k.href}>{k.ad}</a> : <span>{k.ad}</span>}</>)}
+      </nav>
+    )}
+    <div class="katalog__bas">
+      <h1>{baslik}</h1>
+      {aciklama && <p class="katalog__aciklama">{aciklama}</p>}
+    </div>
+    <div class="katalog__arac">
+      <button type="button" class="btn btn--ikinci btn--kucuk katalog__filtre-btn" data-filtre-ac><Icon ad="funnel" boyut={18} /> Filtrele</button>
+      <p class="katalog__sayi"><span data-katalog-sayi>{urunler.length}</span> ürün <span class="katalog__arama-notu" data-arama-notu hidden></span></p>
+      <label class="katalog__sirala">
+        <span>Sırala</span>
+        <select class="giris" data-sirala>
+          <option value="onerilen">Önerilen</option>
+          <option value="fiyat-artan">Fiyat: düşükten yükseğe</option>
+          <option value="fiyat-azalan">Fiyat: yüksekten düşüğe</option>
+          <option value="ad">Ada göre</option>
+        </select>
+      </label>
+    </div>
+    <div class="katalog__govde">
+      <aside class="filtre" data-filtre aria-label="Filtreler">
+        <div class="filtre__bas">
+          <strong>Filtreler</strong>
+          <button type="button" class="filtre__kapat" data-filtre-kapat aria-label="Kapat"><Icon ad="x" boyut={20} /></button>
+        </div>
+        <form data-filtre-form>
+          {!sabit.tur && turSay.size > 1 && (
+            <fieldset class="filtre__grup">
+              <legend>Tür</legend>
+              {Object.entries(turler).filter(([k]) => turSay.has(k as Tur)).map(([k, v]) => (
+                <label><input type="checkbox" name="tur" value={k} /> {v.ad} <small>{turSay.get(k as Tur)}</small></label>
+              ))}
+            </fieldset>
+          )}
+          {!sabit.kategori && katSay.size > 1 && (
+            <fieldset class="filtre__grup">
+              <legend>Kategori</legend>
+              {Object.entries(kategoriler).filter(([k]) => katSay.has(k as Kategori)).map(([k, v]) => (
+                <label><input type="checkbox" name="kategori" value={k} /> {v.ad} <small>{katSay.get(k as Kategori)}</small></label>
+              ))}
+            </fieldset>
+          )}
+          {!sabit.marka && markaSay.size > 1 && (
+            <fieldset class="filtre__grup">
+              <legend>Marka</legend>
+              {Object.entries(markalar).filter(([k]) => markaSay.has(k as MarkaSlug)).map(([k, v]) => (
+                <label><input type="checkbox" name="marka" value={k} /> {v.ad} <small>{markaSay.get(k as MarkaSlug)}</small></label>
+              ))}
+            </fieldset>
+          )}
+          {ozSay.size > 1 && (
+            <fieldset class="filtre__grup">
+              <legend>Özellik</legend>
+              {ozellikler.filter((o) => ozSay.has(o)).map((o) => (
+                <label><input type="checkbox" name="etiket" value={o} /> {ilk(o)} <small>{ozSay.get(o)}</small></label>
+              ))}
+            </fieldset>
+          )}
+          <div class="filtre__alt">
+            <button type="button" class="baglanti" data-filtre-sifirla>Filtreleri temizle</button>
+            <button type="button" class="btn btn--genis filtre__uygula" data-filtre-kapat><span>Ürünleri göster (<span data-katalog-sayi>{urunler.length}</span>)</span></button>
+          </div>
+        </form>
+      </aside>
+      <div class="katalog__liste">
+        <div class="izgara" data-katalog-izgara>
+          {urunler.map((u, i) => <ProductCard urun={u} oncelik={i < 4} />)}
+        </div>
+        <div class="katalog__bos" data-katalog-bos hidden>
+          <p><strong>Bu filtrelerle ürün bulunamadı.</strong></p>
+          <p>Aradığınız ürün rafta olabilir; listede yoksa WhatsApp'tan sorun, varsa sepete ekleyip gönderelim.</p>
+          <div class="katalog__bos-btn">
+            <button type="button" class="btn btn--ikinci" data-filtre-sifirla>Filtreleri temizle</button>
+            <a class="btn btn--wa" href="https://wa.me/905442131332" target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> WhatsApp'tan sor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .katalog { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .kirinti { display: flex; flex-wrap: wrap; gap: 8px; font-size: 0.85rem; color: var(--gri-500); margin-bottom: 14px; }
+  .kirinti a { color: var(--gri-700); text-decoration: none; }
+  .kirinti a:hover { text-decoration: underline; }
+  .katalog__bas { display: grid; gap: 8px; margin-bottom: 18px; }
+  .katalog__aciklama { max-width: 62ch; color: var(--gri-700); }
+  .katalog__arac { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--gri-200); border-bottom: 1px solid var(--gri-200); margin-bottom: 20px; }
+  .katalog__sayi { color: var(--gri-700); font-size: 0.92rem; margin-right: auto; }
+  .katalog__arama-notu { color: var(--murekkep); font-weight: 600; }
+  .katalog__sirala { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+  .katalog__sirala span { display: none; }
+  .katalog__sirala .giris { min-height: 38px; padding: 0 34px 0 10px; width: auto; font-size: 0.9rem; }
+  .katalog__govde { display: grid; gap: 28px; }
+  .filtre { display: none; }
+  .filtre__bas { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .filtre__kapat { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: var(--radius); background: var(--gri-100); }
+  .filtre__grup { border: 0; padding: 12px 0; margin: 0; border-top: 1px solid var(--gri-200); display: grid; gap: 6px; }
+  .filtre__grup legend { float: left; width: 100%; font-weight: 700; padding: 0 0 8px; font-size: 0.95rem; }
+  .filtre__grup label { display: flex; align-items: center; gap: 8px; font-size: 0.93rem; padding: 2px 0; cursor: pointer; }
+  .filtre__grup label small { color: var(--gri-500); margin-left: auto; font-variant-numeric: tabular-nums; }
+  .filtre__grup input { width: 17px; height: 17px; accent-color: var(--kirmizi); margin: 0; }
+  .filtre__alt { display: grid; gap: 10px; padding-top: 14px; border-top: 1px solid var(--gri-200); }
+  .filtre__alt .baglanti { border: 0; background: transparent; justify-self: start; font-size: 0.9rem; }
+  .katalog__bos { padding: 40px 0; max-width: 52ch; display: grid; gap: 10px; color: var(--gri-700); }
+  .katalog__bos strong { color: var(--murekkep); }
+  .katalog__bos-btn { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+  @media (max-width: 899px) {
+    .katalog.filtre-acik .filtre { display: block; position: fixed; inset: 0; z-index: 60; background: #fff; padding: 16px var(--kenar) 24px; overflow: auto; }
+  }
+  @media (min-width: 900px) {
+    .katalog__govde { grid-template-columns: 220px 1fr; gap: 36px; }
+    .filtre { display: block; position: sticky; top: calc(var(--ust) + 32px + 16px); align-self: start; max-height: calc(100dvh - var(--ust) - 60px); overflow: auto; }
+    .filtre__bas, .filtre__uygula { display: none; }
+    .katalog__filtre-btn { display: none; }
+    .katalog__sirala span { display: inline; color: var(--gri-700); }
+  }
+</style>
+<script>
+  import { baslat } from '../scripts/katalog';
+  baslat();
+</script>

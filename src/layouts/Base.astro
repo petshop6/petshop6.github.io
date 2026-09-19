@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CartDrawer from '../components/CartDrawer.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+interface Props {
+  baslik: string;
+  aciklama?: string;
+  gorsel?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  robots?: string;
+}
+const { baslik, aciklama = site.aciklama, gorsel = '/og.jpg', jsonLd, robots } = Astro.props;
+const tamBaslik = baslik === site.ad ? `${site.uzunAd} · Kedi ve köpek maması, WhatsApp ile sipariş` : `${baslik} · ${site.ad}`;
+const kanonik = new URL(Astro.url.pathname, Astro.site);
+const isletme = {
+  '@context': 'https://schema.org',
+  '@type': 'PetStore',
+  name: site.uzunAd,
+  url: Astro.site?.toString(),
+  telephone: site.aloMamaTel,
+  image: new URL(gorsel, Astro.site).toString(),
+  address: { '@type': 'PostalAddress', streetAddress: site.adres.satir1, addressLocality: 'Çankaya', addressRegion: 'Ankara', postalCode: '06490', addressCountry: 'TR' },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '10:00', closes: '22:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '11:00', closes: '22:00' },
+  ],
+  sameAs: [site.instagram],
+};
+const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [])];
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tamBaslik}</title>
+    <meta name="description" content={aciklama} />
+    <link rel="canonical" href={kanonik} />
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#d42b1e" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.uzunAd} />
+    <meta property="og:title" content={tamBaslik} />
+    <meta property="og:description" content={aciklama} />
+    <meta property="og:url" content={kanonik} />
+    <meta property="og:image" content={new URL(gorsel, Astro.site)} />
+    <meta property="og:locale" content="tr_TR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  </head>
+  <body>
+    <a class="atla" href="#icerik">İçeriğe geç</a>
+    <Header />
+    {site.fiyatlarOrnek && (
+      <div class="ornek" role="note">
+        <span class="kap">Fiyatlar örnektir; mağazanın fiyat listesi yüklendiğinde güncellenecek.</span>
+      </div>
+    )}
+    <main id="icerik">
+      <slot />
+    </main>
+    <Footer />
+    <CartDrawer />
+    <div class="sepet-cubuk" data-sepet-cubuk hidden>
+      <button type="button" class="sepet-cubuk__btn" data-sepet-ac>
+        <Icon ad="basket" boyut={20} />
+        <span>Sepet</span>
+        <b data-sepet-sayi>0</b>
+      </button>
+    </div>
+    <script>
+      import { baslat } from '../scripts/sepet';
+      baslat();
+    </script>
+  </body>
+</html>
+<style>
+  .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--murekkep); color: #fff; border-radius: var(--radius); }
+  .atla:focus { top: 8px; }
+  .ornek { background: #fff7d6; color: #6b5300; font-size: 0.82rem; text-align: center; padding: 6px 0; border-bottom: 1px solid #f0e2a0; }
+  .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(255 255 255 / 0.92); backdrop-filter: blur(8px); border-top: 1px solid var(--gri-200); }
+  .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--kirmizi); color: #fff; font-weight: 700; font-size: 1rem; }
+  .sepet-cubuk__btn b { background: #fff; color: var(--kirmizi); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
+  @media (min-width: 720px) { .sepet-cubuk { display: none; } }
+  @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) { padding-bottom: 72px; } }
+</style>

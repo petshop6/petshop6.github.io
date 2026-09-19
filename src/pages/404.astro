@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base baslik="Sayfa bulunamadı" robots="noindex">
+  <section class="sayfa">
+    <div class="kap">
+      <h1>Sayfa bulunamadı</h1>
+      <p class="p">Aradığınız sayfa taşınmış ya da hiç olmamış olabilir.</p>
+      <div class="btn-grup">
+        <a class="btn" href="/urunler">Ürünlere bak</a>
+        <a class="btn btn--ikinci" href="/">Ana sayfa</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .sayfa { padding-block: clamp(40px, 8vw, 96px) 0; }
+  .p { margin: 12px 0 20px; color: var(--gri-700); }
+  .btn-grup { display: flex; gap: 10px; flex-wrap: wrap; }
+</style>

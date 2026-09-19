@@ -1,0 +1,136 @@
+---
+import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
+import { site, whatsappUrl } from '../data/site';
+
+const yol = Astro.url.pathname;
+const nav = [
+  { href: '/kedi', ad: 'Kedi' },
+  { href: '/kopek', ad: 'Köpek' },
+  { href: '/kedi/kedi-kumu', ad: 'Kedi Kumu' },
+  { href: '/urunler', ad: 'Tüm Ürünler' },
+  { href: '/magaza', ad: 'Mağaza' },
+];
+const aktif = (h: string) => (h === '/urunler' ? yol === h : yol === h || (h !== '/' && yol.startsWith(h + '/')));
+---
+<header class="ust">
+  <div class="ust__cubuk">
+    <div class="kap ust__cubuk-ic">
+      <span><Icon ad="truck" boyut={16} /> {site.teslimat.bolge} ücretsiz teslimat</span>
+      <span class="ust__tel">Alo Mama <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a> <span aria-hidden="true">·</span> WhatsApp <a href={whatsappUrl()} target="_blank" rel="noopener">{site.whatsappGosterim}</a></span>
+    </div>
+  </div>
+  <div class="ust__ana">
+    <div class="kap ust__ic">
+      <button type="button" class="ust__menu" data-menu-ac aria-label="Menü"><Icon ad="list" boyut={24} /></button>
+      <a href="/" class="ust__logo" aria-label="Pet Shop 6 ana sayfa"><Wordmark /></a>
+      <nav class="ust__nav" aria-label="Kategoriler">
+        {nav.map((n) => <a href={n.href} aria-current={aktif(n.href) ? 'page' : undefined}>{n.ad}</a>)}
+      </nav>
+      <form class="ara" role="search" action="/urunler" method="get" data-ara>
+        <label for="ara-giris" class="sr">Ürün ara</label>
+        <Icon ad="magnifying-glass" boyut={18} class="ara__ikon" />
+        <input id="ara-giris" class="ara__giris" type="search" name="q" placeholder="Mama, kum, marka ara" autocomplete="off" />
+        <div class="ara__sonuc" data-ara-sonuc hidden></div>
+      </form>
+      <div class="ust__aksiyon">
+        <a class="ust__wa" href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" boyut={22} /><span>WhatsApp</span></a>
+        <button type="button" class="ust__sepet" data-sepet-ac aria-label="Sepeti aç">
+          <Icon ad="basket" boyut={22} />
+          <span>Sepet</span>
+          <b class="ust__rozet" data-sepet-sayi hidden>0</b>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<dialog id="menu" class="menu" aria-label="Menü">
+  <div class="menu__ic">
+    <div class="menu__bas">
+      <Wordmark />
+      <button type="button" class="menu__kapat" data-menu-kapat aria-label="Kapat"><Icon ad="x" boyut={22} /></button>
+    </div>
+    <form class="ara ara--menu" role="search" action="/urunler" method="get">
+      <label for="ara-giris-m" class="sr">Ürün ara</label>
+      <Icon ad="magnifying-glass" boyut={18} class="ara__ikon" />
+      <input id="ara-giris-m" class="ara__giris" type="search" name="q" placeholder="Mama, kum, marka ara" />
+    </form>
+    <nav class="menu__nav" aria-label="Sayfalar">
+      <a href="/kedi">Kedi <small>mama, ödül, kum</small></a>
+      <a href="/kopek">Köpek <small>mama, ödül</small></a>
+      <a href="/kedi/kedi-kumu">Kedi Kumu</a>
+      <a href="/urunler">Tüm Ürünler</a>
+      <a href="/magaza">Mağaza</a>
+      <a href="/teslimat">Sipariş ve Teslimat</a>
+      <a href="/sss">Sık Sorulanlar</a>
+    </nav>
+    <div class="menu__alt">
+      <a class="btn btn--wa btn--genis" href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> WhatsApp'tan yaz</a>
+      <a class="btn btn--ikinci btn--genis" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .ust { position: sticky; top: 0; z-index: 40; background: #fff; border-bottom: 1px solid var(--gri-200); }
+  .ust__cubuk { background: var(--murekkep); color: #fff; font-size: 0.82rem; }
+  .ust__cubuk-ic { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 32px; }
+  .ust__cubuk-ic span { display: inline-flex; align-items: center; gap: 6px; }
+  .ust__cubuk a { color: #fff; font-weight: 600; text-decoration: none; }
+  .ust__cubuk a:hover { text-decoration: underline; }
+  .ust__ana { min-height: var(--ust); display: flex; align-items: center; }
+  .ust__ic { display: flex; align-items: center; gap: 12px; min-height: var(--ust); }
+  .ust__logo { text-decoration: none; font-size: 1.15rem; margin-right: 8px; }
+  .ust__nav { display: none; gap: 2px; }
+  .ust__nav a { padding: 8px 10px; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--gri-900); }
+  .ust__nav a:hover { background: var(--gri-100); }
+  .ust__nav a[aria-current] { color: var(--kirmizi); }
+  .ust__menu { display: inline-grid; place-items: center; width: 40px; height: 40px; border: 0; background: transparent; border-radius: var(--radius); }
+  .ust__menu:hover { background: var(--gri-100); }
+  .ara { position: relative; display: none; flex: 1; max-width: 380px; margin-left: auto; }
+  :global(.ara__ikon) { position: absolute; left: 12px; top: 50%; translate: 0 -50%; color: var(--gri-500); pointer-events: none; }
+  .ara__giris { width: 100%; height: 40px; padding: 0 12px 0 38px; border: 1px solid var(--gri-300); border-radius: var(--radius); background: var(--gri-50); }
+  .ara__giris:focus { outline: none; border-color: var(--murekkep); background: #fff; }
+  .ara__giris::-webkit-search-cancel-button { appearance: none; }
+  .ara__sonuc { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); box-shadow: var(--golge); overflow: hidden; z-index: 50; }
+  .ust__aksiyon { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+  .ust__wa, .ust__sepet { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 10px; border: 0; border-radius: var(--radius); background: transparent; color: var(--murekkep); font-weight: 600; text-decoration: none; font-size: 0.95rem; position: relative; }
+  .ust__wa { color: var(--wa-koyu); }
+  .ust__wa span, .ust__sepet span { display: none; }
+  .ust__wa:hover, .ust__sepet:hover { background: var(--gri-100); }
+  .ust__rozet { position: absolute; top: 2px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--kirmizi); color: #fff; font-size: 0.72rem; font-weight: 700; display: grid; place-items: center; line-height: 1; }
+  @media (min-width: 720px) { .ust__wa span, .ust__sepet span { display: inline; } .ust__rozet { position: static; margin-left: -2px; } .ara { display: block; } .ust__aksiyon { margin-left: 0; } }
+  @media (min-width: 1040px) { .ust__nav { display: flex; } .ust__menu { display: none; } .ust__logo { font-size: 1.3rem; } }
+  @media (max-width: 719px) { .ust__cubuk-ic { justify-content: center; } .ust__cubuk-ic .ust__tel { display: none; } }
+
+  /* Mobile menu */
+  .menu { border: 0; padding: 0; margin: 0; max-width: none; max-height: none; width: min(100%, 360px); height: 100dvh; background: #fff; box-shadow: var(--golge); }
+  .menu::backdrop { background: rgb(24 24 24 / 0.4); }
+  .menu[open] { animation: menu-gir 260ms var(--ease); }
+  .menu.kapaniyor { animation: menu-cik 200ms var(--ease) forwards; }
+  @keyframes menu-gir { from { translate: -100% 0; } to { translate: 0 0; } }
+  @keyframes menu-cik { to { translate: -100% 0; } }
+  .menu__ic { display: flex; flex-direction: column; height: 100%; padding: 16px; gap: 18px; }
+  .menu__bas { display: flex; align-items: center; justify-content: space-between; font-size: 1.15rem; }
+  .menu__kapat { display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: var(--gri-100); border-radius: var(--radius); }
+  .ara--menu { display: block; max-width: none; margin: 0; }
+  .menu__nav { display: grid; }
+  .menu__nav a { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid var(--gri-200); text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+  .menu__nav small { font-weight: 500; color: var(--gri-500); font-size: 0.85rem; }
+  .menu__alt { margin-top: auto; display: grid; gap: 8px; }
+</style>
+
+<script>
+  import { baslat as aramaBaslat } from '../scripts/ara';
+  const dlg = document.getElementById('menu') as HTMLDialogElement | null;
+  if (dlg && !dlg.dataset.init) {
+    dlg.dataset.init = '1';
+    const kapat = () => { dlg.classList.add('kapaniyor'); setTimeout(() => { dlg.close(); dlg.classList.remove('kapaniyor'); }, 190); };
+    document.querySelectorAll('[data-menu-ac]').forEach((b) => b.addEventListener('click', () => dlg.showModal()));
+    dlg.querySelectorAll('[data-menu-kapat]').forEach((b) => b.addEventListener('click', kapat));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) kapat(); });
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); kapat(); });
+  }
+  aramaBaslat();
+</script>

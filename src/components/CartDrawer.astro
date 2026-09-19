@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<dialog id="sepet-cekmece" class="cekmece" aria-label="Sepet">
+  <div class="cekmece__ic">
+    <div class="cekmece__bas">
+      <h2>Sepet <span class="cekmece__n">(<span data-sepet-adet>0</span>)</span></h2>
+      <button type="button" class="cekmece__kapat" data-sepet-kapat aria-label="Kapat"><Icon ad="x" boyut={22} /></button>
+    </div>
+    <div class="cekmece__bos" data-sepet-bos>
+      <Icon ad="basket" boyut={40} class="cekmece__bos-ikon" />
+      <p><strong>Sepetiniz boş.</strong></p>
+      <p>Mama, kum ve ödül ürünlerine göz atın; sepetinizi WhatsApp'tan onaylayın.</p>
+      <a class="btn btn--ikinci" href="/urunler" data-sepet-kapat>Ürünlere bak</a>
+    </div>
+    <div class="cekmece__dolu" data-sepet-dolu hidden>
+      <ul class="cekmece__liste" data-sepet-liste></ul>
+      <div class="cekmece__alt">
+        <div class="cekmece__toplam">
+          <span>Ara toplam</span>
+          <strong data-sepet-toplam>0 ₺</strong>
+        </div>
+        <p class="cekmece__not"><Icon ad="truck" boyut={16} /> {site.teslimat.bolge} teslimat ücretsiz</p>
+        <a class="btn btn--genis" href="/sepet">Siparişi tamamla</a>
+        <button type="button" class="baglanti cekmece__devam" data-sepet-kapat>Alışverişe devam et</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+<style>
+  .cekmece { border: 0; padding: 0; margin: 0 0 0 auto; max-width: none; max-height: none; width: min(100%, 440px); height: 100dvh; background: #fff; box-shadow: var(--golge); }
+  .cekmece::backdrop { background: rgb(24 24 24 / 0.4); }
+  .cekmece[open] { animation: cekmece-gir 280ms var(--ease); }
+  .cekmece.kapaniyor { animation: cekmece-cik 200ms var(--ease) forwards; }
+  @keyframes cekmece-gir { from { translate: 100% 0; } to { translate: 0 0; } }
+  @keyframes cekmece-cik { to { translate: 100% 0; } }
+  .cekmece__ic { display: flex; flex-direction: column; height: 100%; }
+  .cekmece__bas { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--gri-200); }
+  .cekmece__bas h2 { font-size: 1.3rem; }
+  .cekmece__n { font-weight: 500; color: var(--gri-500); font-family: var(--font-govde); font-size: 1rem; }
+  .cekmece__kapat { display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: var(--gri-100); border-radius: var(--radius); }
+  .cekmece__bos { display: grid; gap: 10px; justify-items: start; padding: 32px 20px; color: var(--gri-700); }
+  :global(.cekmece__bos-ikon) { color: var(--gri-400); }
+  .cekmece__bos p strong { color: var(--murekkep); }
+  .cekmece__dolu { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .cekmece__liste { list-style: none; margin: 0; padding: 0 20px; overflow: auto; flex: 1; }
+  .cekmece__alt { padding: 16px 20px 20px; border-top: 1px solid var(--gri-200); display: grid; gap: 10px; background: #fff; }
+  .cekmece__toplam { display: flex; justify-content: space-between; align-items: baseline; font-size: 1.05rem; }
+  .cekmece__toplam strong { font-family: var(--font-baslik); font-size: 1.35rem; }
+  .cekmece__not { display: flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--gri-700); }
+  .cekmece__devam { border: 0; background: transparent; justify-self: center; font-size: 0.9rem; }
+</style>

@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import Katalog from '../../components/Katalog.astro';
+import { turler, type Tur } from '../../data/site';
+import { urunler } from '../../data/urunler';
+
+export function getStaticPaths() {
+  return (Object.keys(turler) as Tur[]).map((tur) => ({ params: { tur } }));
+}
+const tur = Astro.params.tur as Tur;
+const liste = urunler.filter((u) => u.tur === tur);
+const aciklama = tur === 'kedi'
+  ? 'Kuru ve yaş kedi maması, kedi kumu ve ödül mamaları. Yavru, yetişkin ve kısırlaştırılmış kediler için seçenekler.'
+  : 'Küçük, orta ve büyük ırklar için kuru köpek maması ve ödül mamaları. Yavru ve yetişkin seçenekleri.';
+---
+<Base baslik={turler[tur].baslik} aciklama={aciklama + ' WhatsApp ile sipariş, Ankara içi ücretsiz teslimat.'}>
+  <Katalog urunler={liste} baslik={turler[tur].baslik} aciklama={aciklama} sabit={{ tur }} kirinti={[{ ad: turler[tur].ad, href: '' }]} />
+</Base>

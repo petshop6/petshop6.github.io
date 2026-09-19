@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Katalog from '../../components/Katalog.astro';
+import { kategoriler, turler, type Kategori, type Tur } from '../../data/site';
+import { urunler } from '../../data/urunler';
+
+export function getStaticPaths() {
+  const yollar: { params: { tur: Tur; kategori: Kategori } }[] = [];
+  for (const tur of Object.keys(turler) as Tur[])
+    for (const kategori of Object.keys(kategoriler) as Kategori[])
+      if (urunler.some((u) => u.tur === tur && u.kategori === kategori)) yollar.push({ params: { tur, kategori } });
+  return yollar;
+}
+const tur = Astro.params.tur as Tur;
+const kategori = Astro.params.kategori as Kategori;
+const liste = urunler.filter((u) => u.tur === tur && u.kategori === kategori);
+const baslik = kategori === 'kedi-kumu' ? 'Kedi kumu' : `${turler[tur].ad} ${kategoriler[kategori].ad.toLocaleLowerCase('tr-TR')}`;
+const aciklamalar: Record<string, string> = {
+  'kedi/kuru-mama': 'Pro Plan, Reflex Plus, Reflex ve Advance kuru kedi mamaları. 1,5 kg\'dan 15 kg\'a kadar boylar.',
+  'kedi/yas-mama': 'Pouch ve konserve yaş kedi mamaları. Tekli veya kolili alabilirsiniz.',
+  'kedi/odul': 'Kıtır ödüller, etli çubuklar ve fileto ödüller.',
+  'kedi/kedi-kumu': 'Topaklanan bentonit kedi kumları: aktif karbonlu, klinik ve parfümsüz seçenekler. 10 L ve 20 L.',
+  'kopek/kuru-mama': 'Küçük, orta ve büyük ırk köpekler için kuru mama. Yavru ve yetişkin formülleri.',
+  'kopek/odul': 'Diş çubukları, bisküviler ve çiğnemelik ödüller.',
+};
+const aciklama = aciklamalar[`${tur}/${kategori}`] ?? '';
+---
+<Base baslik={baslik} aciklama={`${aciklama} WhatsApp ile sipariş, Ankara içi ücretsiz teslimat.`}>
+  <Katalog urunler={liste} baslik={baslik} aciklama={aciklama} sabit={{ tur, kategori }} kirinti={[{ ad: turler[tur].ad, href: `/${tur}` }, { ad: kategoriler[kategori].ad, href: '' }]} />
+</Base>

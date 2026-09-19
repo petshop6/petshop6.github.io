@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import Katalog from '../../components/Katalog.astro';
+import { markalar, type MarkaSlug } from '../../data/site';
+import { urunler } from '../../data/urunler';
+
+export function getStaticPaths() {
+  return (Object.keys(markalar) as MarkaSlug[]).map((marka) => ({ params: { marka } }));
+}
+const marka = Astro.params.marka as MarkaSlug;
+const liste = urunler.filter((u) => u.markaSlug === marka);
+const ad = markalar[marka].ad;
+---
+<Base baslik={`${ad} ürünleri`} aciklama={`Pet Shop 6 rafındaki ${ad} ürünleri. WhatsApp ile sipariş, Ankara içi ücretsiz teslimat.`}>
+  <Katalog urunler={liste} baslik={ad} sabit={{ marka }} kirinti={[{ ad: 'Markalar', href: '/urunler' }, { ad, href: '' }]} />
+</Base>

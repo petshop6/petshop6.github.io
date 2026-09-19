@@ -1,0 +1,35 @@
+{
+  "ad": "Pet Shop 6",
+  "uzunAd": "Pet Shop 6 Bahçelievler",
+  "slogan": "Bahçelievler'in pet shop'u. Sipariş WhatsApp'tan, teslimat ücretsiz.",
+  "aciklama": "Bahçelievler 54. Cadde'de kedi ve köpek maması, kedi kumu ve ödül mamaları. Sepetinizi doldurun, WhatsApp'tan onaylayın; Ankara içine ücretsiz teslim edelim.",
+  "whatsapp": "905442131332",
+  "whatsappGosterim": "0544 213 13 32",
+  "aloMama": "0312 213 13 32",
+  "aloMamaTel": "+903122131332",
+  "adres": {
+    "satir1": "Yukarı Bahçelievler Mah. 54. Cadde No: 3/B",
+    "satir2": "Çankaya / Ankara",
+    "not": "54. Cadde'nin eski adı 6. Cadde. İsmimiz oradan.",
+    "harita": "https://maps.google.com/?q=Pet+Shop+6,+54.+Cadde+No:3,+Yukar%C4%B1+Bah%C3%A7elievler,+%C3%87ankaya,+Ankara",
+    "haritaEmbed": "https://www.google.com/maps?q=Pet+Shop+6+54.+Cadde+No:3+Yukar%C4%B1+Bah%C3%A7elievler+%C3%87ankaya+Ankara&z=16&output=embed"
+  },
+  "saatler": [
+    {
+      "gun": "Pazartesi - Cumartesi",
+      "saat": "10:00 - 22:00"
+    },
+    {
+      "gun": "Pazar",
+      "saat": "11:00 - 22:00"
+    }
+  ],
+  "teslimat": {
+    "bolge": "Ankara içi",
+    "ucret": 0,
+    "metin": "Ankara içi teslimat ücretsiz, minimum sipariş tutarı yok. Teslimat saatini siparişi onaylarken WhatsApp'tan yazarız.",
+    "minimum": 0
+  },
+  "instagram": "https://www.instagram.com/petshop6/",
+  "fiyatlarOrnek": true
+}

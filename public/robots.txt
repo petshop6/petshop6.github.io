@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.petshop6.com/sitemap-index.xml

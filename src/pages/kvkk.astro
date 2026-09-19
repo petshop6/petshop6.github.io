@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base baslik="KVKK ve gizlilik" aciklama="Pet Shop 6 web sitesinde hangi verilerin nasıl işlendiği." robots="noindex, follow">
+  <section class="sayfa">
+    <div class="kap">
+      <h1>KVKK ve gizlilik</h1>
+      <div class="metin">
+        <p>Bu site {site.uzunAd} tarafından işletilir. 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında veri sorumlusu {site.uzunAd}'dir ({site.adres.satir1}, {site.adres.satir2}).</p>
+
+        <h2>Sitede ne toplanır</h2>
+        <p>Sitede üyelik yoktur ve bir sunucuya kişisel veri gönderilmez. Sepetiniz ve teslimat bilgileriniz (ad, telefon, adres) yalnızca kendi cihazınızın tarayıcı belleğinde tutulur; bir sonraki siparişte kolaylık olsun diye. Tarayıcı verilerini sildiğinizde bunlar da silinir.</p>
+
+        <h2>WhatsApp ile sipariş</h2>
+        <p>"Siparişi WhatsApp'tan gönder" dediğinizde sipariş içeriği ve teslimat bilgileriniz bir WhatsApp mesajı olarak hazırlanır ve sizin onayınızla, sizin hesabınızdan bize gönderilir. Bu mesaj WhatsApp'ın (Meta Platforms) altyapısından geçer; WhatsApp'ın kendi gizlilik politikası geçerlidir. Mesajı biz siparişinizi hazırlamak, teslim etmek ve gerekirse sizinle iletişim kurmak için kullanırız; üçüncü kişilerle paylaşmayız ve reklam amacıyla kullanmayız.</p>
+
+        <h2>Çerezler ve analitik</h2>
+        <p>Sitede reklam ya da takip çerezi yoktur. Mağaza sayfasındaki harita Google Haritalar'dan yüklenir; o alan Google'ın çerez politikasına tabidir.</p>
+
+        <h2>Haklarınız</h2>
+        <p>KVKK'nın 11. maddesi kapsamında verilerinize erişme, düzeltme ve silinmesini isteme hakkınız var. WhatsApp sohbet geçmişinin bizim tarafımızdan silinmesini istiyorsanız aynı sohbetten ya da mağazadan yazılı olarak talep edebilirsiniz.</p>
+
+        <h2>İletişim</h2>
+        <p>{site.uzunAd}, {site.adres.satir1}, {site.adres.satir2}. Telefon {site.aloMama}.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .sayfa { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .sayfa h1 { margin-bottom: 8px; }
+</style>

@@ -1,0 +1,198 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+---
+<Base baslik="Sepet" aciklama="Sepetinizi kontrol edin, adresinizi yazın ve siparişi WhatsApp'tan gönderin." robots="noindex">
+  <section class="sepet" data-sepet-sayfa>
+    <div class="kap">
+      <h1>Sepet</h1>
+
+      <div class="sepet__bos" data-sepet-bos>
+        <p><strong>Sepetiniz boş.</strong></p>
+        <p>Ürünleri sepete ekleyin; burada adresinizi yazıp siparişi WhatsApp'tan gönderirsiniz.</p>
+        <a class="btn" href="/urunler">Ürünlere bak</a>
+      </div>
+
+      <div class="sepet__govde" data-sepet-dolu hidden>
+        <div class="sepet__urunler">
+          <ul class="sepet__liste" data-sepet-liste></ul>
+          <a class="baglanti sepet__devam" href="/urunler"><Icon ad="arrow-left" boyut={16} /> Alışverişe devam et</a>
+        </div>
+
+        <div class="sepet__ozet">
+          <form class="teslimat" data-teslimat-form novalidate>
+            <h2>Teslimat bilgileri</h2>
+            <div class="alan">
+              <label for="ad">Ad Soyad</label>
+              <input class="giris" id="ad" name="ad" type="text" autocomplete="name" required />
+              <span class="hata">Adınızı yazın.</span>
+            </div>
+            <div class="alan">
+              <label for="tel">Telefon</label>
+              <input class="giris" id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="05xx xxx xx xx" />
+              <span class="yardim">WhatsApp numaranızdan farklıysa yazın.</span>
+            </div>
+            <div class="alan">
+              <label for="adres">Adres</label>
+              <textarea class="giris" id="adres" name="adres" autocomplete="street-address" required placeholder="Mahalle, cadde/sokak, bina no, daire, ilçe"></textarea>
+              <span class="hata">Teslimat adresini yazın.</span>
+            </div>
+            <div class="alan">
+              <label for="zaman">Teslimat zamanı</label>
+              <select class="giris" id="zaman" name="zaman">
+                <option value="Fark etmez">Fark etmez</option>
+                <option value="Bugün">Bugün</option>
+                <option value="Yarın">Yarın</option>
+                <option value="Akşam (18:00 sonrası)">Akşam (18:00 sonrası)</option>
+              </select>
+            </div>
+            <div class="alan">
+              <label for="not">Not <span class="yardim">(isteğe bağlı)</span></label>
+              <textarea class="giris" id="not" name="not" placeholder="Kapı zili çalışmıyor, kapıcıya bırakın vb."></textarea>
+            </div>
+
+            <div class="ozet">
+              <div class="ozet__satir"><span>Ürünler (<span data-sepet-adet>0</span> adet)</span><strong data-sepet-toplam>0 ₺</strong></div>
+              <div class="ozet__satir"><span>Teslimat ({site.teslimat.bolge})</span><strong>Ücretsiz</strong></div>
+              <div class="ozet__satir ozet__satir--toplam"><span>Toplam</span><strong data-sepet-toplam>0 ₺</strong></div>
+              <p class="ozet__not">Ödeme teslimatta: nakit veya kart. Mağaza mesajınızı onaylayıp teslimat saatini yazar.</p>
+            </div>
+
+            <button type="submit" class="btn btn--wa btn--genis sepet__gonder"><Icon ad="whatsapp-logo" /> Siparişi WhatsApp'tan gönder</button>
+            <details class="onizle">
+              <summary>Gönderilecek mesajı gör</summary>
+              <pre data-onizleme></pre>
+            </details>
+          </form>
+
+          <div class="gonderildi" data-gonderildi hidden>
+            <Icon ad="check" agirlik="bold" boyut={28} class="gonderildi__ikon" />
+            <h2>Mesaj WhatsApp'ta açıldı</h2>
+            <p>Sipariş no: <strong data-siparis-no></strong></p>
+            <p>WhatsApp'ta <strong>Gönder</strong>'e bastıysanız siparişiniz bize ulaştı. Onaylayıp teslimat saatini aynı sohbetten yazacağız.</p>
+            <div class="gonderildi__btn">
+              <a class="btn btn--wa" data-tekrar-ac href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> Mesajı tekrar aç</a>
+              <button type="button" class="btn btn--ikinci" data-sepet-temizle>Sepeti temizle</button>
+            </div>
+            <p class="gonderildi__alt">Açılmadıysa: <a href={whatsappUrl()} target="_blank" rel="noopener">{site.whatsappGosterim}</a> numarasına mesajı kendiniz yapıştırabilir veya <a href={`tel:${site.aloMamaTel}`}>Alo Mama {site.aloMama}</a>'yi arayabilirsiniz.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .sepet { padding-top: clamp(20px, 3vw, 36px); }
+  .sepet h1 { margin-bottom: 20px; }
+  .sepet__bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); max-width: 520px; color: var(--gri-700); }
+  .sepet__bos strong { color: var(--murekkep); }
+  .sepet__govde { display: grid; gap: 28px; }
+  .sepet__liste { list-style: none; margin: 0; padding: 0 20px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .sepet__liste :global(.kalem:last-child) { border-bottom: 0; }
+  .sepet__devam { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 0.92rem; }
+  .teslimat { display: grid; gap: 16px; padding: 22px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .teslimat h2 { font-size: 1.25rem; }
+  .ozet { display: grid; gap: 8px; padding: 14px 0 0; border-top: 1px solid var(--gri-200); }
+  .ozet__satir { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.95rem; }
+  .ozet__satir--toplam { font-size: 1.1rem; padding-top: 8px; border-top: 1px solid var(--gri-200); }
+  .ozet__satir--toplam strong { font-family: var(--font-baslik); font-size: 1.5rem; }
+  .ozet__not { font-size: 0.85rem; color: var(--gri-700); }
+  .sepet__gonder { min-height: 50px; font-size: 1rem; }
+  .onizle { font-size: 0.88rem; }
+  .onizle summary { cursor: pointer; color: var(--gri-700); }
+  .onizle pre { margin: 10px 0 0; padding: 12px; background: var(--gri-50); border-radius: var(--radius); white-space: pre-wrap; font: 0.85rem/1.5 var(--font-govde); color: var(--gri-900); }
+  .gonderildi { display: grid; gap: 12px; padding: 24px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  :global(.gonderildi__ikon) { width: 44px; height: 44px; padding: 8px; border-radius: 50%; background: var(--wa); color: #fff; }
+  .gonderildi h2 { font-size: 1.35rem; }
+  .gonderildi__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .gonderildi__alt { font-size: 0.88rem; color: var(--gri-700); }
+  @media (min-width: 900px) {
+    .sepet__govde { grid-template-columns: minmax(0, 1.3fr) minmax(360px, 0.9fr); gap: 40px; align-items: start; }
+    .sepet__ozet { position: sticky; top: calc(var(--ust) + 32px + 16px); }
+  }
+</style>
+<script>
+  import { kalemleriCiz, kalemOlaylari, oku, temizle, tl, toplamTutar } from '../scripts/sepet';
+
+  const kok = document.querySelector<HTMLElement>('[data-sepet-sayfa]');
+  if (kok && !kok.dataset.init) {
+    kok.dataset.init = '1';
+    const form = kok.querySelector<HTMLFormElement>('[data-teslimat-form]')!;
+    const onizleme = kok.querySelector<HTMLElement>('[data-onizleme]')!;
+    const gonderildi = kok.querySelector<HTMLElement>('[data-gonderildi]')!;
+    const WA = 'https://wa.me/905442131332';
+    const ADRES_ANAHTAR = 'ps6-teslimat';
+
+    // remember delivery details for the next order
+    try {
+      const k = JSON.parse(localStorage.getItem(ADRES_ANAHTAR) || '{}');
+      for (const ad of ['ad', 'tel', 'adres', 'zaman']) { const el = form.elements.namedItem(ad) as HTMLInputElement | null; if (el && k[ad]) el.value = k[ad]; }
+    } catch {}
+
+    const siparisNo = () => {
+      const t = new Date();
+      const g = t.getFullYear().toString().slice(2) + String(t.getMonth() + 1).padStart(2, '0') + String(t.getDate()).padStart(2, '0');
+      const r = Array.from(crypto.getRandomValues(new Uint8Array(4)), (b) => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[b % 32]).join('');
+      return `PS6-${g}-${r}`;
+    };
+    let no = siparisNo();
+
+    function mesaj() {
+      const k = oku();
+      const fd = new FormData(form);
+      const v = (a: string) => String(fd.get(a) || '').trim();
+      const satirlar = k.map((x) => `${x.adet} × ${x.ad} (${x.boy}) = ${tl(x.adet * x.fiyat)}`);
+      return [
+        'Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.',
+        `Sipariş no: ${no}`,
+        '',
+        ...satirlar,
+        '',
+        `Toplam: ${tl(toplamTutar(k))} (teslimat ücretsiz)`,
+        '',
+        `Ad Soyad: ${v('ad') || '-'}`,
+        v('tel') ? `Telefon: ${v('tel')}` : null,
+        `Adres: ${v('adres') || '-'}`,
+        `Teslimat zamanı: ${v('zaman') || 'Fark etmez'}`,
+        v('not') ? `Not: ${v('not')}` : null,
+      ].filter((s) => s !== null).join('\n');
+    }
+    function ciz() {
+      kalemleriCiz(kok!, { duzenlenebilir: true });
+      onizleme.textContent = mesaj();
+    }
+    ciz();
+    document.addEventListener('sepet:degisti', ciz);
+    form.addEventListener('input', () => { onizleme.textContent = mesaj(); });
+
+    kalemOlaylari(kok);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+      for (const ad of ['ad', 'adres']) {
+        const el = form.elements.namedItem(ad) as HTMLInputElement;
+        const alan = el.closest('.alan')!;
+        const bos = !el.value.trim();
+        alan.classList.toggle('hatali', bos);
+        if (bos && ok) { el.focus(); ok = false; }
+      }
+      if (!ok || oku().length === 0) return;
+      try {
+        const fd = new FormData(form);
+        localStorage.setItem(ADRES_ANAHTAR, JSON.stringify({ ad: fd.get('ad'), tel: fd.get('tel'), adres: fd.get('adres'), zaman: fd.get('zaman') }));
+      } catch {}
+      const url = `${WA}?text=${encodeURIComponent(mesaj())}`;
+      (kok!.querySelector('[data-tekrar-ac]') as HTMLAnchorElement).href = url;
+      kok!.querySelector('[data-siparis-no]')!.textContent = no;
+      window.open(url, '_blank', 'noopener');
+      form.hidden = true;
+      gonderildi.hidden = false;
+      gonderildi.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    kok.querySelector('[data-sepet-temizle]')!.addEventListener('click', () => {
+      temizle(); no = siparisNo(); form.hidden = false; gonderildi.hidden = true; ciz();
+    });
+  }
+</script>
