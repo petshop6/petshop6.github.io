@@ -8,7 +8,7 @@ import { fiyat, site, whatsappUrl } from '../data/site';
 import { kampanyalilar, oneCikanlar, urunBul, urunler } from '../data/urunler';
 import dukkan from '../assets/dukkan/vitrin.jpg';
 import kopekKesik from '../assets/foto/kopek-kesik.png';
-import kediKesik from '../assets/foto/kedi-masa-kesik.png';
+import kediKesik from '../assets/foto/kedi-masa-kesik-sol.png';
 import kediFoto from '../assets/foto/kedi.jpg';
 import kopekFoto from '../assets/foto/kopek.jpg';
 import yavruKedi from '../assets/foto/yavru-kedi.jpg';
@@ -57,11 +57,11 @@ const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat 
             <a class="afis__son-tum" href="/siparislerim">Siparişlerim</a>
           </div>
         </div>
+        <div class="afis__arka" aria-hidden="true"><span class="afis__daire" data-katman="0.35"></span></div>
         <div class="afis__hayvanlar" aria-hidden="true" data-sahne>
-          <span class="afis__daire" data-katman="0.35"></span>
           <Image class="afis__mama" src={afisMama.gorsel} alt="" width={420} height={600} fit="contain" loading="eager" data-katman="0.7" />
+          <Image class="afis__kedi" src={kediKesik} alt="" width={720} height={600} loading="eager" fetchpriority="high" data-katman="1.4" />
           <Image class="afis__kopek" src={kopekKesik} alt="" width={700} height={750} loading="eager" fetchpriority="high" data-katman="1" />
-          <Image class="afis__kedi" src={kediKesik} alt="" width={900} height={508} loading="eager" fetchpriority="high" data-katman="1.5" />
         </div>
       </div>
       <ul class="sozler">
@@ -178,21 +178,23 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .afis__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 10px 14px; border-radius: var(--radius-lg); background: #fff; font-size: 0.92rem; width: fit-content; }
   .afis__son .baglanti { border: 0; background: transparent; padding: 0; color: var(--kirmizi); }
   .afis__son-tum { color: var(--gri-700); font-size: 0.88rem; }
-  /* the scene: red disc behind, mama bag, dog, cat; each layer parallaxes with the pointer */
-  .afis__hayvanlar { position: relative; height: 230px; margin: 0 calc(-1 * clamp(22px, 3.5vw, 44px)) calc(-1 * clamp(22px, 3.5vw, 44px)); overflow: hidden; }
-  .afis__hayvanlar > * { position: absolute; bottom: 0; will-change: transform; }
-  .afis__hayvanlar > img { width: auto; }
-  .afis__daire { right: -10%; bottom: -38%; width: 300px; aspect-ratio: 1; border-radius: 50%; background: var(--kirmizi); }
-  .afis__mama { left: 0; height: 68%; rotate: -7deg; transform-origin: bottom center; filter: drop-shadow(0 18px 22px rgb(24 24 24 / 0.22)); }
-  .afis__kopek { right: 38%; height: 100%; filter: drop-shadow(0 16px 20px rgb(24 24 24 / 0.22)); }
-  .afis__kedi { right: 0; height: 62%; filter: drop-shadow(0 10px 16px rgb(24 24 24 / 0.22)); }
+  /* the scene: red disc clipped inside the banner; pets on top and allowed to break out of the box */
+  .afis { overflow: hidden; }
+  .afis__arka { position: absolute; inset: 0; border-radius: 16px; overflow: hidden; pointer-events: none; }
+  .afis__daire { position: absolute; right: -10%; bottom: -38%; width: 300px; aspect-ratio: 1; border-radius: 50%; background: var(--kirmizi); will-change: transform; }
+  .afis__hayvanlar { position: relative; height: 250px; margin: 0 calc(-1 * clamp(22px, 3.5vw, 44px)) calc(-1 * clamp(22px, 3.5vw, 44px)); }
+  .afis__hayvanlar > img { position: absolute; bottom: 0; width: auto; will-change: transform; }
+  .afis__mama { left: 2%; height: 52%; rotate: -7deg; transform-origin: bottom center; filter: drop-shadow(0 18px 22px rgb(24 24 24 / 0.22)); z-index: 4; }
+  .afis__kedi { right: -2%; height: 100%; z-index: 2; filter: drop-shadow(0 12px 18px rgb(24 24 24 / 0.24)); }
+  .afis__kopek { right: 50%; height: 82%; z-index: 3; filter: drop-shadow(0 16px 20px rgb(24 24 24 / 0.22)); }
   @media (min-width: 900px) {
-    .afis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 440px; }
-    .afis__hayvanlar { position: absolute; inset: 0 0 0 auto; width: 54%; height: auto; margin: 0; overflow: visible; }
+    .afis-bolum { padding-top: 64px; }
+    .afis { overflow: visible; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 420px; }
+    .afis__hayvanlar { position: absolute; inset: 0 0 0 auto; width: 56%; height: auto; margin: 0; }
     .afis__daire { right: -4%; bottom: -36%; width: 560px; }
-    .afis__mama { left: -3%; height: 64%; }
-    .afis__kopek { right: 30%; height: 100%; }
-    .afis__kedi { right: -1%; height: 60%; }
+    .afis__mama { left: 6%; height: 50%; z-index: 4; }
+    .afis__kedi { right: -1%; height: 112%; }
+    .afis__kopek { right: 46%; height: 88%; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .afis__yazi > * { animation: gir-yukari 600ms var(--ease) both; }
@@ -210,7 +212,8 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .sozler { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 0.9rem; color: var(--gri-900); }
   .sozler li { display: flex; align-items: center; gap: 8px; }
   .sozler .ikon { color: var(--kirmizi); }
-  .sozler a { font-weight: 600; text-decoration: none; }
+  .sozler a { font-weight: 600; text-decoration: none; white-space: nowrap; }
+  @media (max-width: 899px) { .sozler li:last-child { grid-column: span 2; } }
   .sozler a:hover { text-decoration: underline; }
   @media (min-width: 900px) { .sozler { grid-template-columns: repeat(4, auto); justify-content: space-between; padding: 0 8px; } }
 
@@ -277,7 +280,7 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   const sahne = document.querySelector<HTMLElement>('[data-sahne]');
   const afis = sahne?.closest<HTMLElement>('.afis');
   if (sahne && afis && matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
-    const katmanlar = Array.from(sahne.querySelectorAll<HTMLElement>('[data-katman]'));
+    const katmanlar = Array.from(afis.querySelectorAll<HTMLElement>('[data-katman]'));
     let hedefX = 0, hedefY = 0, x = 0, y = 0, tik = 0;
     const ciz = () => {
       x += (hedefX - x) * 0.12; y += (hedefY - y) * 0.12;
