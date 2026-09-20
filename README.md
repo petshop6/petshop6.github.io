@@ -6,6 +6,10 @@ Sunucu, üyelik ve online ödeme yok: sepet ve adres tarayıcıda (localStorage)
 
 Astro 7, statik çıktı. Node 22 (`~/.local/node22`) npm script'lerine gömülü.
 
+**Yayın:** https://petshop6.github.io (GitHub Pages, repo `petshop6/petshop6.github.io`). `main`'e her
+push `.github/workflows/deploy.yml` ile yayınlanır. Alan adı bağlanınca Settings → Pages'te custom
+domain girin ve repo değişkeni `SITE_URL`'i o adrese ayarlayın.
+
 ```bash
 npm run dev      # http://localhost:4328
 npm run build    # dist/
