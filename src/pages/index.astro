@@ -31,6 +31,7 @@ const kategoriTile = [
   { href: '/urunler?kategori=odul', ad: 'Ödül maması', img: urunBul('reflex-dentastar-mini-kucuk')!, n: say((u) => u.kategori === 'odul') },
 ];
 const secme = oneCikanlar.slice(0, 8);
+const afisMama = urunBul('reflex-plus-longevity-kisirlastirilmis')!;
 const kumlar = urunler.filter((u) => u.kategori === 'kedi-kumu');
 const kisirlar = urunler.filter((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama' && u.etiketler.includes('kısırlaştırılmış'));
 const kopekOdul = urunler.filter((u) => u.tur === 'kopek' && u.kategori === 'odul');
@@ -56,9 +57,11 @@ const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat 
             <a class="afis__son-tum" href="/siparislerim">Siparişlerim</a>
           </div>
         </div>
-        <div class="afis__hayvanlar" aria-hidden="true">
-          <Image class="afis__kopek" src={kopekKesik} alt="" width={700} height={750} loading="eager" fetchpriority="high" />
-          <Image class="afis__kedi" src={kediKesik} alt="" width={900} height={508} loading="eager" fetchpriority="high" />
+        <div class="afis__hayvanlar" aria-hidden="true" data-sahne>
+          <span class="afis__daire" data-katman="0.35"></span>
+          <Image class="afis__mama" src={afisMama.gorsel} alt="" width={420} height={600} fit="contain" loading="eager" data-katman="0.7" />
+          <Image class="afis__kopek" src={kopekKesik} alt="" width={700} height={750} loading="eager" fetchpriority="high" data-katman="1" />
+          <Image class="afis__kedi" src={kediKesik} alt="" width={900} height={508} loading="eager" fetchpriority="high" data-katman="1.5" />
         </div>
       </div>
       <ul class="sozler">
@@ -175,23 +178,34 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .afis__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 10px 14px; border-radius: var(--radius-lg); background: #fff; font-size: 0.92rem; width: fit-content; }
   .afis__son .baglanti { border: 0; background: transparent; padding: 0; color: var(--kirmizi); }
   .afis__son-tum { color: var(--gri-700); font-size: 0.88rem; }
-  .afis__hayvanlar { position: relative; height: 200px; margin: 0 calc(-1 * clamp(22px, 3.5vw, 44px)) calc(-1 * clamp(22px, 3.5vw, 44px)); }
-  .afis__kopek, .afis__kedi { position: absolute; bottom: 0; width: auto; }
-  .afis__kopek { right: 44%; height: 100%; }
-  .afis__kedi { right: 4%; height: 58%; }
+  /* the scene: red disc behind, mama bag, dog, cat; each layer parallaxes with the pointer */
+  .afis__hayvanlar { position: relative; height: 230px; margin: 0 calc(-1 * clamp(22px, 3.5vw, 44px)) calc(-1 * clamp(22px, 3.5vw, 44px)); overflow: hidden; }
+  .afis__hayvanlar > * { position: absolute; bottom: 0; will-change: transform; }
+  .afis__hayvanlar > img { width: auto; }
+  .afis__daire { right: -10%; bottom: -38%; width: 300px; aspect-ratio: 1; border-radius: 50%; background: var(--kirmizi); }
+  .afis__mama { left: 0; height: 68%; rotate: -7deg; transform-origin: bottom center; filter: drop-shadow(0 18px 22px rgb(24 24 24 / 0.22)); }
+  .afis__kopek { right: 38%; height: 100%; filter: drop-shadow(0 16px 20px rgb(24 24 24 / 0.22)); }
+  .afis__kedi { right: 0; height: 62%; filter: drop-shadow(0 10px 16px rgb(24 24 24 / 0.22)); }
   @media (min-width: 900px) {
-    .afis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 420px; }
-    .afis__hayvanlar { position: absolute; inset: 0 0 0 auto; width: 52%; height: auto; margin: 0; }
-    .afis__kopek { right: 40%; height: 96%; }
-    .afis__kedi { right: 2%; height: 56%; }
+    .afis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 440px; }
+    .afis__hayvanlar { position: absolute; inset: 0 0 0 auto; width: 54%; height: auto; margin: 0; overflow: visible; }
+    .afis__daire { right: -4%; bottom: -36%; width: 560px; }
+    .afis__mama { left: -3%; height: 64%; }
+    .afis__kopek { right: 30%; height: 100%; }
+    .afis__kedi { right: -1%; height: 60%; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .afis__yazi > * { animation: gir-yukari 600ms var(--ease) both; }
     .afis__yazi > *:nth-child(2) { animation-delay: 70ms; }
     .afis__yazi > *:nth-child(3) { animation-delay: 140ms; }
-    .afis__kopek { animation: afis-cik 700ms var(--ease) both 120ms; }
-    .afis__kedi { animation: afis-cik 700ms var(--ease) both 260ms; }
+    .afis__daire { animation: afis-daire 900ms var(--ease) both; }
+    .afis__mama { animation: afis-mama 800ms var(--ease) both 80ms; }
+    .afis__kopek { animation: afis-cik 700ms var(--ease) both 160ms; }
+    .afis__kedi { animation: afis-cik 700ms var(--ease) both 320ms, afis-nefes 4.5s ease-in-out 1.2s infinite; }
     @keyframes afis-cik { from { translate: 0 12%; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+    @keyframes afis-daire { from { scale: 0.6; opacity: 0; } to { scale: 1; opacity: 1; } }
+    @keyframes afis-mama { from { translate: -30% 6%; opacity: 0; rotate: -14deg; } to { translate: 0 0; opacity: 1; rotate: -7deg; } }
+    @keyframes afis-nefes { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 6px; } }
   }
   .sozler { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 0.9rem; color: var(--gri-900); }
   .sozler li { display: flex; align-items: center; gap: 8px; }
@@ -259,6 +273,24 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
 </style>
 <script>
   import { ekle, tl, siparisler } from '../scripts/sepet';
+  // pointer parallax on the banner scene (desktop with a mouse only)
+  const sahne = document.querySelector<HTMLElement>('[data-sahne]');
+  const afis = sahne?.closest<HTMLElement>('.afis');
+  if (sahne && afis && matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+    const katmanlar = Array.from(sahne.querySelectorAll<HTMLElement>('[data-katman]'));
+    let hedefX = 0, hedefY = 0, x = 0, y = 0, tik = 0;
+    const ciz = () => {
+      x += (hedefX - x) * 0.12; y += (hedefY - y) * 0.12;
+      katmanlar.forEach((k) => { const g = Number(k.dataset.katman); k.style.transform = `translate(${(x * 14 * g).toFixed(1)}px, ${(y * 8 * g).toFixed(1)}px)`; });
+      if (Math.abs(hedefX - x) > 0.002 || Math.abs(hedefY - y) > 0.002) tik = requestAnimationFrame(ciz); else tik = 0;
+    };
+    afis.addEventListener('pointermove', (e) => {
+      const r = afis.getBoundingClientRect();
+      hedefX = ((e.clientX - r.left) / r.width - 0.5) * 2; hedefY = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      if (!tik) tik = requestAnimationFrame(ciz);
+    });
+    afis.addEventListener('pointerleave', () => { hedefX = 0; hedefY = 0; if (!tik) tik = requestAnimationFrame(ciz); });
+  }
   // the chat preview types itself in when scrolled to
   const sohbet = document.querySelector<HTMLElement>('[data-sohbet]');
   if (sohbet && 'IntersectionObserver' in window) {
