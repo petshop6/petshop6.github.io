@@ -47,6 +47,22 @@ import { site, whatsappUrl } from '../data/site';
                 <option value="Akşam (18:00 sonrası)">Akşam (18:00 sonrası)</option>
               </select>
             </div>
+            <fieldset class="duzenli">
+              <legend class="sr">Düzenli sipariş</legend>
+              <label class="duzenli__sec">
+                <input type="checkbox" name="duzenli" value="1" />
+                <span><strong>Bunu düzenli getirin</strong><small>Aynı ürünler, aynı adres. Her seferinde WhatsApp'tan onay isteriz; istediğiniz zaman bırakırsınız.</small></span>
+              </label>
+              <label class="duzenli__aralik alan">
+                <span class="sr">Ne sıklıkla</span>
+                <select class="giris" name="aralik">
+                  <option value="2 haftada bir">2 haftada bir</option>
+                  <option value="3 haftada bir">3 haftada bir</option>
+                  <option value="4 haftada bir" selected>4 haftada bir</option>
+                  <option value="6 haftada bir">6 haftada bir</option>
+                </select>
+              </label>
+            </fieldset>
             <div class="alan">
               <label for="not">Not <span class="yardim">(isteğe bağlı)</span></label>
               <textarea class="giris" id="not" name="not" placeholder="Kapı zili çalışmıyor, kapıcıya bırakın vb."></textarea>
@@ -71,6 +87,7 @@ import { site, whatsappUrl } from '../data/site';
             <h2>Mesaj WhatsApp'ta açıldı</h2>
             <p>Sipariş no: <strong data-siparis-no></strong></p>
             <p>WhatsApp'ta <strong>Gönder</strong>'e bastıysanız siparişiniz bize ulaştı. Onaylayıp teslimat saatini aynı sohbetten yazacağız.</p>
+            <p class="gonderildi__gecmis">Bu sipariş <a href="/siparislerim">Siparişlerim</a>'e kaydedildi; oradan tek dokunuşla tekrarlayabilirsiniz.</p>
             <div class="gonderildi__btn">
               <a class="btn btn--wa" data-tekrar-ac href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> Mesajı tekrar aç</a>
               <button type="button" class="btn btn--ikinci" data-sepet-temizle>Sepeti temizle</button>
@@ -99,6 +116,14 @@ import { site, whatsappUrl } from '../data/site';
   .ozet__satir--toplam strong { font-family: var(--font-baslik); font-size: 1.5rem; }
   .ozet__not { font-size: 0.85rem; color: var(--gri-700); }
   .sepet__gonder { min-height: 50px; font-size: 1rem; }
+  .duzenli { border: 0; padding: 14px; margin: 0; display: grid; gap: 10px; background: var(--gri-50); border-radius: var(--radius-lg); }
+  .duzenli__sec { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start; cursor: pointer; }
+  .duzenli__sec input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--kirmizi); }
+  .duzenli__sec span { display: grid; gap: 2px; }
+  .duzenli__sec small { color: var(--gri-700); font-size: 0.85rem; line-height: 1.4; }
+  .duzenli__aralik { display: none; }
+  .duzenli:has(input:checked) .duzenli__aralik { display: grid; }
+  .gonderildi__gecmis { font-size: 0.9rem; color: var(--gri-700); }
   .onizle { font-size: 0.88rem; }
   .onizle summary { cursor: pointer; color: var(--gri-700); }
   .onizle pre { margin: 10px 0 0; padding: 12px; background: var(--gri-50); border-radius: var(--radius); white-space: pre-wrap; font: 0.85rem/1.5 var(--font-govde); color: var(--gri-900); }
@@ -113,7 +138,7 @@ import { site, whatsappUrl } from '../data/site';
   }
 </style>
 <script>
-  import { kalemleriCiz, kalemOlaylari, oku, temizle, tl, toplamTutar } from '../scripts/sepet';
+  import { kalemleriCiz, kalemOlaylari, oku, siparisKaydet, temizle, tl, toplamTutar } from '../scripts/sepet';
 
   const kok = document.querySelector<HTMLElement>('[data-sepet-sayfa]');
   if (kok && !kok.dataset.init) {
@@ -155,6 +180,7 @@ import { site, whatsappUrl } from '../data/site';
         v('tel') ? `Telefon: ${v('tel')}` : null,
         `Adres: ${v('adres') || '-'}`,
         `Teslimat zamanı: ${v('zaman') || 'Fark etmez'}`,
+        fd.get('duzenli') ? `Düzenli sipariş: ${v('aralik')} (aynı ürünler, her seferinde onay isteyin)` : null,
         v('not') ? `Not: ${v('not')}` : null,
       ].filter((s) => s !== null).join('\n');
     }
@@ -183,8 +209,10 @@ import { site, whatsappUrl } from '../data/site';
         const fd = new FormData(form);
         localStorage.setItem(ADRES_ANAHTAR, JSON.stringify({ ad: fd.get('ad'), tel: fd.get('tel'), adres: fd.get('adres'), zaman: fd.get('zaman') }));
       } catch {}
-      try { localStorage.setItem('ps6-son-siparis', JSON.stringify({ kalemler: oku(), toplam: toplamTutar(), tarih: new Date().toISOString() })); } catch {}
-      const url = `${WA}?text=${encodeURIComponent(mesaj())}`;
+      const metin = mesaj();
+      const fd2 = new FormData(form);
+      siparisKaydet({ no, tarih: new Date().toISOString(), kalemler: oku(), toplam: toplamTutar(), duzenli: fd2.get('duzenli') ? String(fd2.get('aralik')) : undefined, mesaj: metin });
+      const url = `${WA}?text=${encodeURIComponent(metin)}`;
       (kok!.querySelector('[data-tekrar-ac]') as HTMLAnchorElement).href = url;
       kok!.querySelector('[data-siparis-no]')!.textContent = no;
       window.open(url, '_blank', 'noopener');

@@ -89,6 +89,12 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
               ))}
             </fieldset>
           )}
+          {urunler.some((u) => u.kampanya) && (
+            <fieldset class="filtre__grup">
+              <legend>Fiyat</legend>
+              <label><input type="checkbox" name="kampanya" value="1" /> Kampanyalı <small>{urunler.filter((u) => u.kampanya).length}</small></label>
+            </fieldset>
+          )}
           {ozSay.size > 1 && (
             <fieldset class="filtre__grup">
               <legend>Özellik</legend>

@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base baslik="Siparişlerim" aciklama="Bu cihazdan verdiğiniz siparişler; tek dokunuşla tekrar sipariş verin." robots="noindex">
+  <section class="sayfa" data-siparisler>
+    <div class="kap">
+      <h1>Siparişlerim</h1>
+      <p class="sayfa__alt">Bu cihazdan gönderdiğiniz siparişler burada tutulur; sunucuda değil, sadece bu tarayıcıda. Bir siparişi tekrarlamak için "Tekrar sipariş ver"e basın, sepetiniz aynı ürünlerle dolar.</p>
+
+      <div class="bos" data-bos>
+        <p><strong>Henüz sipariş yok.</strong></p>
+        <p>İlk siparişinizi WhatsApp'tan gönderdiğinizde burada görünür.</p>
+        <a class="btn" href="/urunler">Ürünlere bak</a>
+      </div>
+
+      <ol class="liste" data-liste></ol>
+      <p class="sayfa__not" data-not hidden>Tarayıcı verilerini silerseniz bu liste de silinir. Sipariş numarasıyla WhatsApp sohbetinden her zaman bulabilirsiniz: <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener">{site.whatsappGosterim}</a>.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .sayfa { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .sayfa h1 { margin-bottom: 8px; }
+  .sayfa__alt { color: var(--gri-700); max-width: 62ch; margin-bottom: 24px; }
+  .bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: #fff; border-radius: var(--radius-lg); max-width: 520px; color: var(--gri-700); }
+  .bos strong { color: var(--murekkep); }
+  .liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 760px; }
+  .liste :global(.sip) { display: grid; gap: 12px; padding: 18px 20px; background: #fff; border-radius: var(--radius-lg); }
+  .liste :global(.sip__bas) { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+  .liste :global(.sip__no) { font-family: var(--font-baslik); font-weight: 800; font-size: 1.05rem; }
+  .liste :global(.sip__tarih) { color: var(--gri-500); font-size: 0.9rem; }
+  .liste :global(.sip__duzenli) { font-size: 0.85rem; font-weight: 600; color: var(--kirmizi-koyu); }
+  .liste :global(.sip__kalemler) { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.93rem; color: var(--gri-900); }
+  .liste :global(.sip__kalemler li) { display: flex; justify-content: space-between; gap: 12px; }
+  .liste :global(.sip__kalemler b) { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }
+  .liste :global(.sip__toplam) { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--gri-200); font-weight: 600; }
+  .liste :global(.sip__toplam strong) { font-family: var(--font-baslik); font-size: 1.15rem; }
+  .liste :global(.sip__btn) { display: flex; flex-wrap: wrap; gap: 8px; }
+  .liste :global(.sip__sil) { margin-left: auto; border: 0; background: transparent; color: var(--gri-500); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
+  .sayfa__not { margin-top: 20px; font-size: 0.88rem; color: var(--gri-700); max-width: 62ch; }
+</style>
+<script>
+  import { ekle, siparisler, siparisSil, tl } from '../scripts/sepet';
+  const kok = document.querySelector<HTMLElement>('[data-siparisler]');
+  if (kok && !kok.dataset.init) {
+    kok.dataset.init = '1';
+    const liste = kok.querySelector<HTMLElement>('[data-liste]')!;
+    const bos = kok.querySelector<HTMLElement>('[data-bos]')!;
+    const not = kok.querySelector<HTMLElement>('[data-not]')!;
+    const WA = 'https://wa.me/905442131332';
+    const tarih = (iso: string) => new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const kacar = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+    function ciz() {
+      const s = siparisler();
+      bos.hidden = s.length > 0; not.hidden = s.length === 0;
+      liste.innerHTML = s.map((o) => `
+        <li class="sip" data-no="${kacar(o.no)}">
+          <div class="sip__bas">
+            <span class="sip__no">${kacar(o.no)}</span>
+            <span class="sip__tarih">${tarih(o.tarih)}</span>
+            ${o.duzenli ? `<span class="sip__duzenli">Düzenli: ${kacar(o.duzenli)}</span>` : ''}
+          </div>
+          <ul class="sip__kalemler">${o.kalemler.map((k) => `<li><span>${k.adet} × ${kacar(k.ad)} (${kacar(k.boy)})</span><b>${tl(k.adet * k.fiyat)}</b></li>`).join('')}</ul>
+          <div class="sip__toplam"><span>Toplam</span><strong>${tl(o.toplam)}</strong></div>
+          <div class="sip__btn">
+            <button type="button" class="btn btn--kucuk" data-tekrar>Tekrar sipariş ver</button>
+            <a class="btn btn--ikinci btn--kucuk" href="${WA}?text=${encodeURIComponent(o.mesaj)}" target="_blank" rel="noopener">Mesajı WhatsApp'ta aç</a>
+            <button type="button" class="sip__sil" data-sil>Listeden kaldır</button>
+          </div>
+        </li>`).join('');
+    }
+    liste.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const li = t.closest<HTMLElement>('.sip'); if (!li) return;
+      const o = siparisler().find((x) => x.no === li.dataset.no); if (!o) return;
+      if (t.closest('[data-tekrar]')) {
+        o.kalemler.forEach((k) => ekle({ slug: k.slug, ad: k.ad, marka: k.marka, boy: k.boy, fiyat: k.fiyat, gorsel: k.gorsel }, k.adet));
+        (window as any).__sepetAc?.();
+      } else if (t.closest('[data-sil]')) { siparisSil(o.no); ciz(); }
+    });
+    ciz();
+  }
+</script>

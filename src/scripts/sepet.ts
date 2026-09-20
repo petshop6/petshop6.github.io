@@ -40,6 +40,20 @@ export function adetAyarla(slug: string, boy: string, adet: number) {
 }
 export function temizle() { yaz([]); }
 
+/* ---------- order history (this device only) ---------- */
+export interface Siparis { no: string; tarih: string; kalemler: Kalem[]; toplam: number; duzenli?: string; mesaj: string }
+const SIPARIS_ANAHTAR = 'ps6-siparisler';
+export function siparisler(): Siparis[] {
+  try { const d = JSON.parse(localStorage.getItem(SIPARIS_ANAHTAR) || '[]'); return Array.isArray(d) ? d : []; } catch { return []; }
+}
+export function siparisKaydet(s: Siparis) {
+  const liste = [s, ...siparisler().filter((x) => x.no !== s.no)].slice(0, 20);
+  try { localStorage.setItem(SIPARIS_ANAHTAR, JSON.stringify(liste)); } catch {}
+}
+export function siparisSil(no: string) {
+  try { localStorage.setItem(SIPARIS_ANAHTAR, JSON.stringify(siparisler().filter((x) => x.no !== no))); } catch {}
+}
+
 /* ---------- UI ---------- */
 
 function rozetGuncelle() {
@@ -103,7 +117,11 @@ export function kalemOlaylari(kok: HTMLElement) {
 function cekmece() {
   const dlg = document.getElementById('sepet-cekmece') as HTMLDialogElement | null;
   if (!dlg) return;
-  const ac = () => { kalemleriCiz(dlg, { duzenlenebilir: true }); dlg.showModal(); document.documentElement.classList.add('kilit'); };
+  const ac = () => {
+    kalemleriCiz(dlg, { duzenlenebilir: true });
+    const g = dlg.querySelector<HTMLElement>('[data-sepet-gecmis]'); if (g) g.hidden = siparisler().length === 0;
+    dlg.showModal(); document.documentElement.classList.add('kilit');
+  };
   const kapat = () => { dlg.classList.add('kapaniyor'); setTimeout(() => { dlg.close(); dlg.classList.remove('kapaniyor'); }, 200); };
   document.querySelectorAll('[data-sepet-ac]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); ac(); }));
   dlg.querySelectorAll('[data-sepet-kapat]').forEach((b) => b.addEventListener('click', kapat));
@@ -145,8 +163,11 @@ function boySecimi() {
     if (!el.matches('[data-boy-sec]')) return;
     const kok = el.closest('form') || document;
     const g = kok.querySelector<HTMLElement>('[data-fiyat-goster]');
-    const f = el instanceof HTMLSelectElement ? el.selectedOptions[0]?.dataset.fiyat : el.dataset.fiyat;
+    const src = el instanceof HTMLSelectElement ? el.selectedOptions[0] : el;
+    const f = src?.dataset.fiyat;
     if (g && f) g.textContent = f;
+    const eski = kok.querySelector<HTMLElement>('[data-eski-goster]');
+    if (eski) { eski.textContent = src?.dataset.eski || ''; eski.hidden = !src?.dataset.eski; }
   });
 }
 

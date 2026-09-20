@@ -3,7 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import { fiyat, kategoriler, site, turler, whatsappUrl } from '../../data/site';
+import { fiyat, kategoriler, site, stokSor, turler, whatsappUrl } from '../../data/site';
 import { urunler } from '../../data/urunler';
 
 export function getStaticPaths() {
@@ -14,6 +14,8 @@ const benzer = urunler.filter((x) => x.slug !== u.slug && x.tur === u.tur && x.k
 const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'contain', format: 'webp' });
 const og = `/og/${u.slug}.jpg`;
 const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
+const varsayilan = Math.max(0, u.secenekler.findIndex((s) => s.eskiFiyat && s.eskiFiyat > s.fiyat));
+const ilkSec = u.secenekler[varsayilan];
 const enDusuk = Math.min(...u.secenekler.map((s) => s.fiyat));
 const enYuksek = Math.max(...u.secenekler.map((s) => s.fiyat));
 const jsonLd = {
@@ -43,7 +45,7 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
           <Image src={u.gorsel} alt={u.ad} width={900} height={900} fit="contain" loading="eager" fetchpriority="high" widths={[480, 900]} sizes="(min-width: 900px) 46vw, 92vw" />
         </div>
         <div class="urun__al">
-          <a class="urun__marka" href={`/marka/${u.markaSlug}`}>{u.marka}</a>
+          <a class="urun__marka" href={`/marka/${u.markaSlug}`}>{u.marka}</a>{u.kampanya && u.stok && <span class="urun__kampanya">Kampanya</span>}
           <h1 class="urun__ad">{u.ad}</h1>
           <p class="urun__aciklama">{u.aciklama}</p>
 
@@ -57,9 +59,9 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
               <div class="boylar__liste">
                 {u.secenekler.map((s, i) => (
                   <label class="boy">
-                    <input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === 0} data-fiyat={fiyat(s.fiyat)} data-boy-sec />
+                    <input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === varsayilan} disabled={!u.stok} data-fiyat={fiyat(s.fiyat)} data-eski={s.eskiFiyat ? fiyat(s.eskiFiyat) : ''} data-boy-sec />
                     <span class="boy__ad">{s.boy}</span>
-                    <span class="boy__fiyat">{fiyat(s.fiyat)}</span>
+                    <span class="boy__fiyat">{s.eskiFiyat && <s>{fiyat(s.eskiFiyat)}</s>} {fiyat(s.fiyat)}</span>
                   </label>
                 ))}
               </div>
@@ -70,15 +72,25 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
                 <input class="adet__giris" type="number" name="adet" value="1" min="1" max="20" aria-label="Adet" />
                 <button type="button" class="adet__btn" data-adet-degistir="1" aria-label="Artır">+</button>
               </div>
-              <strong class="urun__fiyat" data-fiyat-goster>{fiyat(u.secenekler[0].fiyat)}</strong>
+              <span class="urun__fiyatlar">
+                <s class="urun__eski" data-eski-goster hidden={!ilkSec.eskiFiyat}>{ilkSec.eskiFiyat ? fiyat(ilkSec.eskiFiyat) : ''}</s>
+                <strong class="urun__fiyat" data-fiyat-goster>{fiyat(ilkSec.fiyat)}</strong>
+              </span>
             </div>
-            <button type="submit" class="btn btn--genis urun__btn"><Icon ad="basket" /> Sepete ekle</button>
+            {u.stok ? (
+              <button type="submit" class="btn btn--genis urun__btn"><Icon ad="basket" /> Sepete ekle</button>
+            ) : (
+              <div class="urun__yok">
+                <p><strong>Şu an rafta yok.</strong> Gelince haber verelim; WhatsApp'tan tek mesaj yeter.</p>
+                <a class="btn btn--wa btn--genis" href={stokSor(u.ad)} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> Gelince haber ver</a>
+              </div>
+            )}
           </form>
-          <div class="urun__cubuk" data-urun-cubuk hidden>
+          <div class="urun__cubuk" data-urun-cubuk hidden={true} data-stok={u.stok ? '1' : '0'}>
             <div class="urun__cubuk-ic">
               <span class="urun__cubuk-ad">{u.ad}</span>
-              <strong data-fiyat-goster>{fiyat(u.secenekler[0].fiyat)}</strong>
-              <button type="button" class="btn btn--kucuk" data-cubuk-ekle>Sepete ekle</button>
+              <strong data-fiyat-goster>{fiyat(ilkSec.fiyat)}</strong>
+              {u.stok ? <button type="button" class="btn btn--kucuk" data-cubuk-ekle>Sepete ekle</button> : <a class="btn btn--wa btn--kucuk" href={stokSor(u.ad)} target="_blank" rel="noopener">Haber ver</a>}
             </div>
           </div>
 
@@ -124,6 +136,15 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .urun__al { display: grid; gap: 14px; align-content: start; }
   .urun__marka { font-weight: 600; color: var(--gri-700); text-decoration: none; font-size: 0.9rem; }
   .urun__marka:hover { color: var(--kirmizi); }
+  .urun__kampanya { margin-left: 10px; font-size: 0.8rem; font-weight: 700; color: var(--kirmizi); }
+  .urun__fiyatlar { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
+  .urun__eski { font-size: 0.9rem; color: var(--gri-500); }
+  .urun__eski:not([hidden]) + .urun__fiyat { color: var(--kirmizi); }
+  .urun__yok { display: grid; gap: 10px; padding-top: 4px; }
+  .urun__yok p { font-size: 0.92rem; color: var(--gri-700); }
+  .urun__yok strong { color: var(--murekkep); }
+  .boy__fiyat s { opacity: 0.6; margin-right: 4px; }
+  .boy:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
   .urun__ad { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
   .urun__aciklama { color: var(--gri-700); max-width: 56ch; }
   .urun__form { display: grid; gap: 14px; padding: 18px; background: #fff; border: 1px solid var(--gri-200); border-radius: 16px; }
@@ -175,11 +196,11 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
     });
     // sticky buy bar on phones once the main button scrolls away; hidden while the cart bar is showing
     const cubuk = document.querySelector<HTMLElement>('[data-urun-cubuk]');
-    const btn = form.querySelector<HTMLButtonElement>('.urun__btn');
+    const btn = form.querySelector<HTMLElement>('.urun__btn, .urun__yok');
     if (cubuk && btn && 'IntersectionObserver' in window) {
       const io = new IntersectionObserver(([e]) => { cubuk.hidden = e.isIntersecting; }, { threshold: 0 });
       io.observe(btn);
-      cubuk.querySelector('[data-cubuk-ekle]')!.addEventListener('click', () => form.requestSubmit());
+      cubuk.querySelector('[data-cubuk-ekle]')?.addEventListener('click', () => form.requestSubmit());
     }
   }
 </script>

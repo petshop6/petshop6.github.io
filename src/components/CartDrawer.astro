@@ -13,6 +13,7 @@ import { site } from '../data/site';
       <p><strong>Sepetiniz boş.</strong></p>
       <p>Mama, kum ve ödül ürünlerine göz atın; sepetinizi WhatsApp'tan onaylayın.</p>
       <a class="btn btn--ikinci" href="/urunler" data-sepet-kapat>Ürünlere bak</a>
+      <a class="baglanti cekmece__gecmis" href="/siparislerim" data-sepet-gecmis hidden>Önceki siparişimi tekrarla</a>
     </div>
     <div class="cekmece__dolu" data-sepet-dolu hidden>
       <ul class="cekmece__liste" data-sepet-liste></ul>
@@ -43,6 +44,7 @@ import { site } from '../data/site';
   .cekmece__bos { display: grid; gap: 10px; justify-items: start; padding: 32px 20px; color: var(--gri-700); }
   :global(.cekmece__bos-ikon) { color: var(--gri-400); }
   .cekmece__bos p strong { color: var(--murekkep); }
+  .cekmece__gecmis { font-size: 0.9rem; }
   .cekmece__dolu { display: flex; flex-direction: column; flex: 1; min-height: 0; }
   .cekmece__liste { list-style: none; margin: 0; padding: 0 20px; overflow: auto; flex: 1; }
   .cekmece__alt { padding: 16px 20px 20px; border-top: 1px solid var(--gri-200); display: grid; gap: 10px; background: #fff; }

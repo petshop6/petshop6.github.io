@@ -13,13 +13,20 @@ PU = 'https://www.purina.com.tr'
 AD = 'https://www.advance-affinity.com'
 
 def rf(p): return RF + 'upload/product_gallery/' + p
-def s(*v): return [{'boy': b, 'fiyat': f} for b, f in v]
+def s(*v):
+    # ('3 kg', 1090) or ('3 kg', 990, 1090) -> eskiFiyat marks a campaign price
+    out = []
+    for t in v:
+        d = {'boy': t[0], 'fiyat': t[1]}
+        if len(t) > 2 and t[2]: d['eskiFiyat'] = t[2]
+        out.append(d)
+    return out
 
 # slug, ad, marka, tur, kategori, etiketler, aciklama, secenekler, gorsel-url, kaynak-sayfa, oneCikan
 P = []
-def add(slug, ad, marka, tur, kat, etk, acik, sec, img, kaynak, one=False):
+def add(slug, ad, marka, tur, kat, etk, acik, sec, img, kaynak, one=False, stok=True):
     P.append(dict(slug=slug, ad=ad, marka=marka, tur=tur, kategori=kat, etiketler=etk, aciklama=acik,
-                  secenekler=sec, gorselUrl=img, kaynak=kaynak, oneCikan=one))
+                  secenekler=sec, gorselUrl=img, kaynak=kaynak, oneCikan=one, stok=stok))
 
 # ---------- KEDİ · KURU MAMA ----------
 add('pro-plan-sterilised-somonlu', 'Pro Plan Sterilised Somonlu Kısırlaştırılmış Kedi Maması', 'Pro Plan', 'kedi', 'kuru-mama',
@@ -61,7 +68,7 @@ add('reflex-plus-longevity-yavru', 'Reflex Plus Longevity Yavru Kedi Maması', '
     rf('product_gallery_2025-12-10_17-16-09.png'), RF + 'reflex-plus-longevity-yavru-kedi-mamasi')
 add('reflex-crunchy-bubble-kisirlastirilmis-somonlu', 'Reflex Crunchy Bubble Kısırlaştırılmış Somonlu Kedi Maması', 'Reflex', 'kedi', 'kuru-mama',
     ['kısırlaştırılmış', 'yetişkin', 'somon'], 'Kısırlaştırılmış yetişkin kediler için somonlu kuru mama.',
-    s(('1,5 kg', 340), ('15 kg', 2390)),
+    s(('1,5 kg', 340), ('15 kg', 2190, 2390)),
     rf('product_gallery_2026-07-24_14-18-291.png'), RF + 'reflex-crunchy-bubble-adult-cat-sterilized-salmon')
 add('reflex-crunchy-bubble-kisirlastirilmis-tavuklu', 'Reflex Crunchy Bubble Kısırlaştırılmış Tavuklu Kedi Maması', 'Reflex', 'kedi', 'kuru-mama',
     ['kısırlaştırılmış', 'yetişkin', 'tavuk'], 'Kısırlaştırılmış yetişkin kediler için tavuklu kuru mama.',
@@ -169,7 +176,7 @@ add('reflex-meat-fillet-tavuk', 'Reflex Meat Fillet Tavuk Fileto Kedi Ödülü',
 # ---------- KEDİ · KUM ----------
 add('reflex-aktif-karbonlu-kedi-kumu', 'Reflex Aktif Karbonlu Topaklanan Kedi Kumu', 'Reflex', 'kedi', 'kedi-kumu',
     ['topaklanan', 'aktif karbon'], 'Doğal aktif karbonlu, hızlı topaklanan bentonit kedi kumu. Amonyak kokusunu bloke eder.',
-    s(('10 L', 290), ('20 L', 540)),
+    s(('10 L', 260, 290), ('20 L', 490, 540)),
     rf('product_gallery_2021-05-17_14-58-05.png'), RF + 'reflex-kedi-kumlari', True)
 add('reflex-aktif-karbon-granullu-kedi-kumu', 'Reflex Aktif Karbon Granüllü Topaklanan Kedi Kumu', 'Reflex', 'kedi', 'kedi-kumu',
     ['topaklanan', 'aktif karbon'], 'Aktif karbon tanecikli topaklanan bentonit kedi kumu.',
@@ -229,7 +236,7 @@ add('reflex-plus-tavuklu-orta-buyuk-yetiskin', 'Reflex Plus Tavuklu Orta ve Büy
 add('reflex-plus-tavuklu-mini-kucuk-yavru', 'Reflex Plus Tavuklu Mini ve Küçük Irk Yavru Köpek Maması', 'Reflex Plus', 'kopek', 'kuru-mama',
     ['yavru', 'küçük ırk', 'tavuk'], 'Mini ve küçük ırk yavru köpekler için tavuklu kuru mama.',
     s(('3 kg', 520)),
-    rf('product_gallery_2025-11-17_17-05-11.png'), RF + 'reflex-plus-tavuklu-mini-ve-kucuk-irk-yavru-kopek-mamasi-2')
+    rf('product_gallery_2025-11-17_17-05-11.png'), RF + 'reflex-plus-tavuklu-mini-ve-kucuk-irk-yavru-kopek-mamasi-2', stok=False)
 add('reflex-somonlu-kuzulu-yetiskin-kopek', 'Reflex Somonlu ve Kuzu Etli Yetişkin Köpek Maması', 'Reflex', 'kopek', 'kuru-mama',
     ['yetişkin', 'somon', 'kuzu'], 'Yetişkin köpekler için somon ve kuzu etli kuru mama.',
     s(('3 kg', 440), ('15 kg', 1890)),
@@ -302,7 +309,7 @@ for p in P:
             print('ok ', fn, dest.stat().st_size)
         except Exception as e:
             print('ERR', fn, e)
-    q = dict(p); q['gorsel'] = fn; del q['gorselUrl']
+    q = dict(p); q['gorsel'] = fn; q['id'] = p['slug']; del q['gorselUrl']
     out.append(q)
 
 (ROOT / 'src/content/urunler.json').write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

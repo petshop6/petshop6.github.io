@@ -39,10 +39,21 @@ npm run preview
   "id": "slug", "slug": "slug", "ad": "Ürün adı", "marka": "Reflex Plus",
   "tur": "kedi | kopek", "kategori": "kuru-mama | yas-mama | odul | kedi-kumu",
   "etiketler": ["yetişkin", "kısırlaştırılmış"], "aciklama": "Kısa, olgusal.",
-  "secenekler": [{ "boy": "1,5 kg", "fiyat": 390 }, { "boy": "15 kg", "fiyat": 2690 }],
-  "gorsel": "slug.png", "kaynak": "https://...", "oneCikan": false
+  "secenekler": [{ "boy": "1,5 kg", "fiyat": 390 }, { "boy": "15 kg", "fiyat": 2490, "eskiFiyat": 2690 }],
+  "gorsel": "slug.png", "kaynak": "https://...", "oneCikan": false, "stok": true
 }
 ```
+
+- **Kampanya:** bir boya `eskiFiyat` yazın; kart ve ürün sayfası üstü çizili eski fiyatı ve kırmızı yeni
+  fiyatı gösterir, o boy varsayılan seçili gelir, ana sayfada "Kampanya" şeridi ve katalogda
+  "Kampanyalı" filtresi kendiliğinden açılır. Şu an iki üründe **örnek** kampanya var
+  (Reflex Crunchy Bubble Kısır Somonlu 15 kg, Reflex Aktif Karbonlu kum); gerçek liste gelince silin.
+- **Rafta yok:** `"stok": false` yazın; sepete ekle yerine "Gelince haber ver" WhatsApp bağlantısı
+  çıkar, görsel soluklaşır, "Rafta yok" etiketi gelir. Örnek: Reflex Plus Tavuklu Mini Yavru.
+- **Düzenli sipariş:** sepet sayfasındaki "Bunu düzenli getirin" kutusu ve aralık seçimi WhatsApp
+  mesajına `Düzenli sipariş: 4 haftada bir` satırını ekler. Takip mağazada; site bir şey göndermez.
+- **Siparişlerim** (`/siparislerim`): gönderilen siparişler cihazda (localStorage, son 20) tutulur;
+  "Tekrar sipariş ver" sepeti aynı ürünlerle doldurur, "Mesajı WhatsApp'ta aç" aynı metni yeniden açar.
 
 Görsel `src/assets/urunler/` altına konur (şeffaf PNG tercih). Yeni marka için
 `src/data/site.ts` → `markalar`. `tools/katalog.py` bu dosyayı sıfırdan üretir; elle düzenlenen
@@ -53,7 +64,7 @@ listeyi ezmemek için önce oradaki listeyi güncelleyin.
 - `src/pages/` sayfalar: `/`, `/urunler`, `/kedi`, `/kopek`, `/kedi/<kategori>`, `/kopek/<kategori>`,
   `/marka/<marka>`, `/urun/<slug>`, `/sepet`, `/magaza`, `/teslimat`, `/sss`, `/kvkk`, `404`,
   `/urunler.json` (arama ve sepet için küçük katalog).
-- `src/scripts/sepet.ts` sepet deposu, çekmece, sepete ekle formları; `katalog.ts` filtre ve
-  sıralama; `ara.ts` üst arama.
+- `src/scripts/sepet.ts` sepet deposu, çekmece, sepete ekle formları, sipariş geçmişi; `katalog.ts`
+  filtre ve sıralama; `ara.ts` üst arama.
 - `src/content/ayarlar.json` mağaza bilgileri; `src/data/site.ts` sabitler ve yardımcılar.
 - Sipariş mesajı formatı `src/pages/sepet.astro` içindeki `mesaj()` fonksiyonunda.

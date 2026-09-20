@@ -37,3 +37,5 @@ export function fiyat(n: number): string {
 
 export const whatsappUrl = (metin?: string) =>
   `https://wa.me/${site.whatsapp}` + (metin ? `?text=${encodeURIComponent(metin)}` : '');
+
+export const stokSor = (ad: string) => whatsappUrl(`Merhaba, ${ad} şu an rafta yok görünüyor. Gelince haber verir misiniz?`);

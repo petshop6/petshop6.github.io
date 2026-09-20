@@ -27,7 +27,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-sterilised-somon",
     "oneCikan": true,
-    "gorsel": "pro-plan-sterilised-somonlu.png"
+    "stok": true,
+    "gorsel": "pro-plan-sterilised-somonlu.png",
+    "id": "pro-plan-sterilised-somonlu"
   },
   {
     "slug": "pro-plan-sterilised-hindili",
@@ -57,7 +59,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-sterilised-hindi",
     "oneCikan": false,
-    "gorsel": "pro-plan-sterilised-hindili.png"
+    "stok": true,
+    "gorsel": "pro-plan-sterilised-hindili.png",
+    "id": "pro-plan-sterilised-hindili"
   },
   {
     "slug": "pro-plan-kitten-tavuklu",
@@ -82,7 +86,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-kitten-tavuk",
     "oneCikan": true,
-    "gorsel": "pro-plan-kitten-tavuklu.png"
+    "stok": true,
+    "gorsel": "pro-plan-kitten-tavuklu.png",
+    "id": "pro-plan-kitten-tavuklu"
   },
   {
     "slug": "pro-plan-delicate-kuzulu",
@@ -108,7 +114,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-delicate-kuzu",
     "oneCikan": false,
-    "gorsel": "pro-plan-delicate-kuzulu.png"
+    "stok": true,
+    "gorsel": "pro-plan-delicate-kuzulu.png",
+    "id": "pro-plan-delicate-kuzulu"
   },
   {
     "slug": "pro-plan-derma-care-somonlu",
@@ -134,7 +142,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-derma-care-somon",
     "oneCikan": false,
-    "gorsel": "pro-plan-derma-care-somonlu.png"
+    "stok": true,
+    "gorsel": "pro-plan-derma-care-somonlu.png",
+    "id": "pro-plan-derma-care-somonlu"
   },
   {
     "slug": "reflex-plus-longevity-kisirlastirilmis",
@@ -159,7 +169,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-kisirlastirilmis-yetiskin-kedi-mamasi",
     "oneCikan": true,
-    "gorsel": "reflex-plus-longevity-kisirlastirilmis.png"
+    "stok": true,
+    "gorsel": "reflex-plus-longevity-kisirlastirilmis.png",
+    "id": "reflex-plus-longevity-kisirlastirilmis"
   },
   {
     "slug": "reflex-plus-longevity-yetiskin",
@@ -183,7 +195,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-yetiskin-kedi-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-plus-longevity-yetiskin.png"
+    "stok": true,
+    "gorsel": "reflex-plus-longevity-yetiskin.png",
+    "id": "reflex-plus-longevity-yetiskin"
   },
   {
     "slug": "reflex-plus-longevity-yavru",
@@ -203,7 +217,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-yavru-kedi-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-plus-longevity-yavru.png"
+    "stok": true,
+    "gorsel": "reflex-plus-longevity-yavru.png",
+    "id": "reflex-plus-longevity-yavru"
   },
   {
     "slug": "reflex-crunchy-bubble-kisirlastirilmis-somonlu",
@@ -224,12 +240,15 @@
       },
       {
         "boy": "15 kg",
-        "fiyat": 2390
+        "fiyat": 2190,
+        "eskiFiyat": 2390
       }
     ],
     "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-sterilized-salmon",
     "oneCikan": false,
-    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-somonlu.png"
+    "stok": true,
+    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-somonlu.png",
+    "id": "reflex-crunchy-bubble-kisirlastirilmis-somonlu"
   },
   {
     "slug": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu",
@@ -255,7 +274,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/eflex-crunchy-bubble-adult-cat-sterilized-chicken",
     "oneCikan": false,
-    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu.png"
+    "stok": true,
+    "gorsel": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu.png",
+    "id": "reflex-crunchy-bubble-kisirlastirilmis-tavuklu"
   },
   {
     "slug": "reflex-crunchy-bubble-yetiskin-tavuklu",
@@ -280,7 +301,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-chicken",
     "oneCikan": false,
-    "gorsel": "reflex-crunchy-bubble-yetiskin-tavuklu.png"
+    "stok": true,
+    "gorsel": "reflex-crunchy-bubble-yetiskin-tavuklu.png",
+    "id": "reflex-crunchy-bubble-yetiskin-tavuklu"
   },
   {
     "slug": "reflex-crunchy-bubble-urinary-tavuklu",
@@ -302,7 +325,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-crunchy-bubble-adult-cat-urinary-chicken",
     "oneCikan": false,
-    "gorsel": "reflex-crunchy-bubble-urinary-tavuklu.png"
+    "stok": true,
+    "gorsel": "reflex-crunchy-bubble-urinary-tavuklu.png",
+    "id": "reflex-crunchy-bubble-urinary-tavuklu"
   },
   {
     "slug": "reflex-somonlu-hamsili",
@@ -327,7 +352,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-somonlu-ve-hamsili-yetiskin-kedi-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-somonlu-hamsili.png"
+    "stok": true,
+    "gorsel": "reflex-somonlu-hamsili.png",
+    "id": "reflex-somonlu-hamsili"
   },
   {
     "slug": "advance-adult-tavuklu",
@@ -352,7 +379,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/adult-1000379.html",
     "oneCikan": false,
-    "gorsel": "advance-adult-tavuklu.png"
+    "stok": true,
+    "gorsel": "advance-adult-tavuklu.png",
+    "id": "advance-adult-tavuklu"
   },
   {
     "slug": "advance-kitten",
@@ -377,7 +406,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/kitten-1000382.html",
     "oneCikan": false,
-    "gorsel": "advance-kitten.png"
+    "stok": true,
+    "gorsel": "advance-kitten.png",
+    "id": "advance-kitten"
   },
   {
     "slug": "advance-sensitive-care-somonlu",
@@ -403,7 +434,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/sensitive-1000380.html",
     "oneCikan": false,
-    "gorsel": "advance-sensitive-care-somonlu.png"
+    "stok": true,
+    "gorsel": "advance-sensitive-care-somonlu.png",
+    "id": "advance-sensitive-care-somonlu"
   },
   {
     "slug": "reflex-plus-pramy-somonlu-tavuklu",
@@ -429,7 +462,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-somonlu-ve-tavuklu",
     "oneCikan": true,
-    "gorsel": "reflex-plus-pramy-somonlu-tavuklu.png"
+    "stok": true,
+    "gorsel": "reflex-plus-pramy-somonlu-tavuklu.png",
+    "id": "reflex-plus-pramy-somonlu-tavuklu"
   },
   {
     "slug": "reflex-plus-pramy-ton-balikli-tavuklu",
@@ -455,7 +490,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-ton-balikli-ve-tavuklu",
     "oneCikan": false,
-    "gorsel": "reflex-plus-pramy-ton-balikli-tavuklu.png"
+    "stok": true,
+    "gorsel": "reflex-plus-pramy-ton-balikli-tavuklu.png",
+    "id": "reflex-plus-pramy-ton-balikli-tavuklu"
   },
   {
     "slug": "reflex-plus-pramy-yagsiz-ton-balikli",
@@ -481,7 +518,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-jole-icinde-yagsiz-ton-balikli",
     "oneCikan": false,
-    "gorsel": "reflex-plus-pramy-yagsiz-ton-balikli.png"
+    "stok": true,
+    "gorsel": "reflex-plus-pramy-yagsiz-ton-balikli.png",
+    "id": "reflex-plus-pramy-yagsiz-ton-balikli"
   },
   {
     "slug": "reflex-plus-pramy-sos-tavuklu-balkabakli",
@@ -507,7 +546,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-sos-icinde-tavuklu-bal-kabakli-ve-havuclu",
     "oneCikan": false,
-    "gorsel": "reflex-plus-pramy-sos-tavuklu-balkabakli.png"
+    "stok": true,
+    "gorsel": "reflex-plus-pramy-sos-tavuklu-balkabakli.png",
+    "id": "reflex-plus-pramy-sos-tavuklu-balkabakli"
   },
   {
     "slug": "reflex-plus-pramy-yavru-somonlu-mousse",
@@ -528,7 +569,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-pramy-yavru-kediler-icin-somonlu-mousse",
     "oneCikan": false,
-    "gorsel": "reflex-plus-pramy-yavru-somonlu-mousse.png"
+    "stok": true,
+    "gorsel": "reflex-plus-pramy-yavru-somonlu-mousse.png",
+    "id": "reflex-plus-pramy-yavru-somonlu-mousse"
   },
   {
     "slug": "reflex-essential-tavuk-goguslu",
@@ -549,7 +592,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/essential-/-et-suyu-icinde-tavuk-goguslu-yetiskin-kedi-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-essential-tavuk-goguslu.png"
+    "stok": true,
+    "gorsel": "reflex-essential-tavuk-goguslu.png",
+    "id": "reflex-essential-tavuk-goguslu"
   },
   {
     "slug": "reflex-essentials-yavru-ton-somon",
@@ -571,7 +616,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/essentials-/-et-suyu-icinde-ton-balikli-ve-somonlu-yavru-kedi-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-essentials-yavru-ton-somon.png"
+    "stok": true,
+    "gorsel": "reflex-essentials-yavru-ton-somon.png",
+    "id": "reflex-essentials-yavru-ton-somon"
   },
   {
     "slug": "pro-plan-adult-7-ton-balikli",
@@ -593,7 +640,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kedi/kedi-mamasi/urun-proplan-adult-ton-balikli",
     "oneCikan": false,
-    "gorsel": "pro-plan-adult-7-ton-balikli.png"
+    "stok": true,
+    "gorsel": "pro-plan-adult-7-ton-balikli.png",
+    "id": "pro-plan-adult-7-ton-balikli"
   },
   {
     "slug": "advance-adult-chicken-yas",
@@ -615,7 +664,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/adult-chicken-1000393.html",
     "oneCikan": false,
-    "gorsel": "advance-adult-chicken-yas.png"
+    "stok": true,
+    "gorsel": "advance-adult-chicken-yas.png",
+    "id": "advance-adult-chicken-yas"
   },
   {
     "slug": "advance-kitten-chicken-yas",
@@ -637,7 +688,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/kedi/yemek-kedi/kitten-chicken-1000394.html",
     "oneCikan": false,
-    "gorsel": "advance-kitten-chicken-yas.png"
+    "stok": true,
+    "gorsel": "advance-kitten-chicken-yas.png",
+    "id": "advance-kitten-chicken-yas"
   },
   {
     "slug": "reflex-happy-hour-kisirlastirilmis",
@@ -658,7 +711,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/happy-hour-/-kisirlastirilmis-kediler-icin-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-happy-hour-kisirlastirilmis.png"
+    "stok": true,
+    "gorsel": "reflex-happy-hour-kisirlastirilmis.png",
+    "id": "reflex-happy-hour-kisirlastirilmis"
   },
   {
     "slug": "reflex-pocket-treats-tuy-yumagi",
@@ -679,7 +734,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/pocket-treats-/-tuy-yumagi-kontrolu-icin-kedi-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-pocket-treats-tuy-yumagi.png"
+    "stok": true,
+    "gorsel": "reflex-pocket-treats-tuy-yumagi.png",
+    "id": "reflex-pocket-treats-tuy-yumagi"
   },
   {
     "slug": "reflex-pocket-treats-agiz-dis",
@@ -700,7 +757,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/pocket-treats-agiz-ve-dis-sagligi",
     "oneCikan": false,
-    "gorsel": "reflex-pocket-treats-agiz-dis.png"
+    "stok": true,
+    "gorsel": "reflex-pocket-treats-agiz-dis.png",
+    "id": "reflex-pocket-treats-agiz-dis"
   },
   {
     "slug": "reflex-meaty-sticks-somonlu",
@@ -722,7 +781,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/meaty-sticks-/-somonlu-cubuk-2",
     "oneCikan": true,
-    "gorsel": "reflex-meaty-sticks-somonlu.png"
+    "stok": true,
+    "gorsel": "reflex-meaty-sticks-somonlu.png",
+    "id": "reflex-meaty-sticks-somonlu"
   },
   {
     "slug": "reflex-meaty-sticks-yavru-hindi",
@@ -744,7 +805,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/meaty-sticks-/-yavru-kediler-icin-hindi-etli-cubuk",
     "oneCikan": false,
-    "gorsel": "reflex-meaty-sticks-yavru-hindi.png"
+    "stok": true,
+    "gorsel": "reflex-meaty-sticks-yavru-hindi.png",
+    "id": "reflex-meaty-sticks-yavru-hindi"
   },
   {
     "slug": "reflex-meat-fillet-tavuk",
@@ -765,7 +828,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/meat-fillet-/-tavuk-fileto",
     "oneCikan": false,
-    "gorsel": "reflex-meat-fillet-tavuk.png"
+    "stok": true,
+    "gorsel": "reflex-meat-fillet-tavuk.png",
+    "id": "reflex-meat-fillet-tavuk"
   },
   {
     "slug": "reflex-aktif-karbonlu-kedi-kumu",
@@ -781,16 +846,20 @@
     "secenekler": [
       {
         "boy": "10 L",
-        "fiyat": 290
+        "fiyat": 260,
+        "eskiFiyat": 290
       },
       {
         "boy": "20 L",
-        "fiyat": 540
+        "fiyat": 490,
+        "eskiFiyat": 540
       }
     ],
     "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
     "oneCikan": true,
-    "gorsel": "reflex-aktif-karbonlu-kedi-kumu.png"
+    "stok": true,
+    "gorsel": "reflex-aktif-karbonlu-kedi-kumu.png",
+    "id": "reflex-aktif-karbonlu-kedi-kumu"
   },
   {
     "slug": "reflex-aktif-karbon-granullu-kedi-kumu",
@@ -815,7 +884,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
     "oneCikan": false,
-    "gorsel": "reflex-aktif-karbon-granullu-kedi-kumu.png"
+    "stok": true,
+    "gorsel": "reflex-aktif-karbon-granullu-kedi-kumu.png",
+    "id": "reflex-aktif-karbon-granullu-kedi-kumu"
   },
   {
     "slug": "reflex-klinik-kedi-kumu",
@@ -840,7 +911,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
     "oneCikan": false,
-    "gorsel": "reflex-klinik-kedi-kumu.png"
+    "stok": true,
+    "gorsel": "reflex-klinik-kedi-kumu.png",
+    "id": "reflex-klinik-kedi-kumu"
   },
   {
     "slug": "reflex-parfumsuz-kedi-kumu",
@@ -865,7 +938,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-kedi-kumlari",
     "oneCikan": false,
-    "gorsel": "reflex-parfumsuz-kedi-kumu.png"
+    "stok": true,
+    "gorsel": "reflex-parfumsuz-kedi-kumu.png",
+    "id": "reflex-parfumsuz-kedi-kumu"
   },
   {
     "slug": "pro-plan-medium-adult-somonlu",
@@ -892,7 +967,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-medium-adult-somon",
     "oneCikan": true,
-    "gorsel": "pro-plan-medium-adult-somonlu.png"
+    "stok": true,
+    "gorsel": "pro-plan-medium-adult-somonlu.png",
+    "id": "pro-plan-medium-adult-somonlu"
   },
   {
     "slug": "pro-plan-medium-puppy-kuzulu",
@@ -918,7 +995,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-medium-puppy-kuzueti",
     "oneCikan": false,
-    "gorsel": "pro-plan-medium-puppy-kuzulu.png"
+    "stok": true,
+    "gorsel": "pro-plan-medium-puppy-kuzulu.png",
+    "id": "pro-plan-medium-puppy-kuzulu"
   },
   {
     "slug": "pro-plan-small-mini-adult-somonlu",
@@ -940,7 +1019,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-small-mini-adult-somon",
     "oneCikan": false,
-    "gorsel": "pro-plan-small-mini-adult-somonlu.png"
+    "stok": true,
+    "gorsel": "pro-plan-small-mini-adult-somonlu.png",
+    "id": "pro-plan-small-mini-adult-somonlu"
   },
   {
     "slug": "pro-plan-large-athletic-somonlu",
@@ -962,7 +1043,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-large-athletic-somon",
     "oneCikan": false,
-    "gorsel": "pro-plan-large-athletic-somonlu.png"
+    "stok": true,
+    "gorsel": "pro-plan-large-athletic-somonlu.png",
+    "id": "pro-plan-large-athletic-somonlu"
   },
   {
     "slug": "pro-plan-all-size-light",
@@ -984,7 +1067,9 @@
     ],
     "kaynak": "https://www.purina.com.tr/kopek/kopek-mamasi/urun-proplan-allsize-tavuk",
     "oneCikan": false,
-    "gorsel": "pro-plan-all-size-light.png"
+    "stok": true,
+    "gorsel": "pro-plan-all-size-light.png",
+    "id": "pro-plan-all-size-light"
   },
   {
     "slug": "reflex-plus-longevity-orta-buyuk-yetiskin",
@@ -1010,7 +1095,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-orta-ve-buyuk-irk-yetiskin-kopek-mamasi",
     "oneCikan": true,
-    "gorsel": "reflex-plus-longevity-orta-buyuk-yetiskin.png"
+    "stok": true,
+    "gorsel": "reflex-plus-longevity-orta-buyuk-yetiskin.png",
+    "id": "reflex-plus-longevity-orta-buyuk-yetiskin"
   },
   {
     "slug": "reflex-plus-longevity-mini-kucuk-yetiskin",
@@ -1031,7 +1118,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-longevity-mini-ve-kucuk-irk-yetiskin-kopek-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-plus-longevity-mini-kucuk-yetiskin.png"
+    "stok": true,
+    "gorsel": "reflex-plus-longevity-mini-kucuk-yetiskin.png",
+    "id": "reflex-plus-longevity-mini-kucuk-yetiskin"
   },
   {
     "slug": "reflex-plus-kuzu-orta-buyuk-yavru",
@@ -1058,7 +1147,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-kuzu-etli-orta-ve-buyuk-irk-yavru-kopek-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-plus-kuzu-orta-buyuk-yavru.png"
+    "stok": true,
+    "gorsel": "reflex-plus-kuzu-orta-buyuk-yavru.png",
+    "id": "reflex-plus-kuzu-orta-buyuk-yavru"
   },
   {
     "slug": "reflex-plus-tavuklu-orta-buyuk-yetiskin",
@@ -1085,7 +1176,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-tavuklu-orta-ve-buyuk-irk-yetiskin-kopek-mamasi-2",
     "oneCikan": false,
-    "gorsel": "reflex-plus-tavuklu-orta-buyuk-yetiskin.png"
+    "stok": true,
+    "gorsel": "reflex-plus-tavuklu-orta-buyuk-yetiskin.png",
+    "id": "reflex-plus-tavuklu-orta-buyuk-yetiskin"
   },
   {
     "slug": "reflex-plus-tavuklu-mini-kucuk-yavru",
@@ -1107,7 +1200,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-plus-tavuklu-mini-ve-kucuk-irk-yavru-kopek-mamasi-2",
     "oneCikan": false,
-    "gorsel": "reflex-plus-tavuklu-mini-kucuk-yavru.png"
+    "stok": false,
+    "gorsel": "reflex-plus-tavuklu-mini-kucuk-yavru.png",
+    "id": "reflex-plus-tavuklu-mini-kucuk-yavru"
   },
   {
     "slug": "reflex-somonlu-kuzulu-yetiskin-kopek",
@@ -1133,7 +1228,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/reflex-somonlu-ve-kuzu-etli-yetiskin-kopek-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-somonlu-kuzulu-yetiskin-kopek.png"
+    "stok": true,
+    "gorsel": "reflex-somonlu-kuzulu-yetiskin-kopek.png",
+    "id": "reflex-somonlu-kuzulu-yetiskin-kopek"
   },
   {
     "slug": "advance-adult-medium",
@@ -1159,7 +1256,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-medium-1000414.html",
     "oneCikan": false,
-    "gorsel": "advance-adult-medium.png"
+    "stok": true,
+    "gorsel": "advance-adult-medium.png",
+    "id": "advance-adult-medium"
   },
   {
     "slug": "advance-adult-mini",
@@ -1185,7 +1284,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-mini-1000404.html",
     "oneCikan": false,
-    "gorsel": "advance-adult-mini.png"
+    "stok": true,
+    "gorsel": "advance-adult-mini.png",
+    "id": "advance-adult-mini"
   },
   {
     "slug": "advance-adult-maxi",
@@ -1207,7 +1308,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-maxi-1000419.html",
     "oneCikan": false,
-    "gorsel": "advance-adult-maxi.png"
+    "stok": true,
+    "gorsel": "advance-adult-maxi.png",
+    "id": "advance-adult-maxi"
   },
   {
     "slug": "advance-sensitive-care-kuzulu",
@@ -1233,7 +1336,9 @@
     ],
     "kaynak": "https://www.advance-affinity.com/tr/k%C3%B6pek/yemek-k%C3%B6pek/adult-sensitive-care-lamb-1000428.html",
     "oneCikan": false,
-    "gorsel": "advance-sensitive-care-kuzulu.png"
+    "stok": true,
+    "gorsel": "advance-sensitive-care-kuzulu.png",
+    "id": "advance-sensitive-care-kuzulu"
   },
   {
     "slug": "reflex-dentastar-mini-kucuk",
@@ -1255,7 +1360,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/dentastar-/-cignemelik-dis-cubuklari-mini-ve-kucuk-irk-yetiskin-kopek-odul-mamasi",
     "oneCikan": true,
-    "gorsel": "reflex-dentastar-mini-kucuk.png"
+    "stok": true,
+    "gorsel": "reflex-dentastar-mini-kucuk.png",
+    "id": "reflex-dentastar-mini-kucuk"
   },
   {
     "slug": "reflex-dentastar-buyuk",
@@ -1277,7 +1384,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/dentastar-/-cignemelik-dis-cubuklari-buyuk-irk-yetiskin-kopek-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-dentastar-buyuk.png"
+    "stok": true,
+    "gorsel": "reflex-dentastar-buyuk.png",
+    "id": "reflex-dentastar-buyuk"
   },
   {
     "slug": "reflex-cookie-bites-mini-bones",
@@ -1298,7 +1407,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/cookie-bites-/-mini-bones",
     "oneCikan": false,
-    "gorsel": "reflex-cookie-bites-mini-bones.png"
+    "stok": true,
+    "gorsel": "reflex-cookie-bites-mini-bones.png",
+    "id": "reflex-cookie-bites-mini-bones"
   },
   {
     "slug": "reflex-twix-tavuklu-biftekli",
@@ -1319,7 +1430,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/twix-/-tavuklu-biftekli-cigneme-cubuklari-yetiskin-kopek-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-twix-tavuklu-biftekli.png"
+    "stok": true,
+    "gorsel": "reflex-twix-tavuklu-biftekli.png",
+    "id": "reflex-twix-tavuklu-biftekli"
   },
   {
     "slug": "reflex-bacon-chips",
@@ -1340,7 +1453,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/bacon-chips-/-cignemelik-jambon-dilimleri-yetiskin-kopek-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-bacon-chips.png"
+    "stok": true,
+    "gorsel": "reflex-bacon-chips.png",
+    "id": "reflex-bacon-chips"
   },
   {
     "slug": "reflex-pocket-treats-eklem",
@@ -1361,7 +1476,9 @@
     ],
     "kaynak": "https://www.reflexmama.com/pocket-treats-/-eklem-sagligi-icin-kopek-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-pocket-treats-eklem.png"
+    "stok": true,
+    "gorsel": "reflex-pocket-treats-eklem.png",
+    "id": "reflex-pocket-treats-eklem"
   },
   {
     "slug": "reflex-semi-moist-peynirli",
@@ -1382,6 +1499,8 @@
     ],
     "kaynak": "https://www.reflexmama.com/semi-moist-peynirli-kopek-odul-mamasi",
     "oneCikan": false,
-    "gorsel": "reflex-semi-moist-peynirli.png"
+    "stok": true,
+    "gorsel": "reflex-semi-moist-peynirli.png",
+    "id": "reflex-semi-moist-peynirli"
   }
 ]

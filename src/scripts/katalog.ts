@@ -17,7 +17,7 @@ export function baslat() {
   const sira0 = kartlar.slice();
 
   // restore state from URL (?tur=kedi&marka=reflex,advance&sirala=fiyat-artan)
-  for (const alan of ['tur', 'kategori', 'marka', 'etiket']) {
+  for (const alan of ['tur', 'kategori', 'marka', 'etiket', 'kampanya']) {
     const v = url.searchParams.get(alan);
     if (!v) continue;
     v.split(',').forEach((deger) => {
@@ -32,14 +32,15 @@ export function baslat() {
     return Array.from(form.querySelectorAll<HTMLInputElement>(`input[name="${alan}"]:checked`)).map((i) => i.value);
   }
   function uygula() {
-    const f = { tur: secili('tur'), kategori: secili('kategori'), marka: secili('marka'), etiket: secili('etiket') };
+    const f = { tur: secili('tur'), kategori: secili('kategori'), marka: secili('marka'), etiket: secili('etiket'), kampanya: secili('kampanya') };
     let n = 0;
     kartlar.forEach((k) => {
       const et = (k.dataset.etiket || '').split('|');
       let ok = (!f.tur.length || f.tur.includes(k.dataset.tur!))
         && (!f.kategori.length || f.kategori.includes(k.dataset.kategori!))
         && (!f.marka.length || f.marka.includes(k.dataset.marka!))
-        && (!f.etiket.length || f.etiket.every((e) => et.includes(e)));
+        && (!f.etiket.length || f.etiket.every((e) => et.includes(e)))
+        && (!f.kampanya.length || k.dataset.kampanya === '1');
       if (ok && q) {
         ok = eslesir({ slug: '', ad: k.dataset.ad || '', marka: k.dataset.marka || '', tur: k.dataset.tur || '', kategori: k.dataset.kategori || '', etiketler: et, baslangic: 0, gorsel: '' }, q);
       }
@@ -59,7 +60,7 @@ export function baslat() {
 
     // url
     const u = new URL(location.href);
-    for (const alan of ['tur', 'kategori', 'marka', 'etiket'] as const) {
+    for (const alan of ['tur', 'kategori', 'marka', 'etiket', 'kampanya'] as const) {
       if (f[alan].length) u.searchParams.set(alan, f[alan].join(',')); else u.searchParams.delete(alan);
     }
     if (sirala.value !== 'onerilen') u.searchParams.set('sirala', sirala.value); else u.searchParams.delete('sirala');

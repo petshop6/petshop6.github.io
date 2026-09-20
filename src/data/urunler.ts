@@ -2,7 +2,7 @@ import type { ImageMetadata } from 'astro';
 import ham from '../content/urunler.json';
 import { markaSlug, type Kategori, type MarkaSlug, type Tur } from './site';
 
-export interface Secenek { boy: string; fiyat: number }
+export interface Secenek { boy: string; fiyat: number; eskiFiyat?: number }
 export interface Urun {
   slug: string;
   ad: string;
@@ -16,6 +16,10 @@ export interface Urun {
   gorsel: ImageMetadata;
   kaynak: string;
   oneCikan: boolean;
+  /** false = "rafta yok": no add button, WhatsApp ask instead */
+  stok: boolean;
+  /** any size carries an eskiFiyat */
+  kampanya: boolean;
   /** lowest price across sizes */
   baslangic: number;
 }
@@ -41,8 +45,11 @@ export const urunler: Urun[] = (ham as any[]).map((u) => ({
   gorsel: gorselBul(u.gorsel),
   kaynak: u.kaynak,
   oneCikan: !!u.oneCikan,
+  stok: u.stok !== false,
+  kampanya: u.secenekler.some((s: Secenek) => s.eskiFiyat && s.eskiFiyat > s.fiyat),
   baslangic: Math.min(...u.secenekler.map((s: Secenek) => s.fiyat)),
 }));
 
 export const urunBul = (slug: string) => urunler.find((u) => u.slug === slug);
 export const oneCikanlar = urunler.filter((u) => u.oneCikan);
+export const kampanyalilar = urunler.filter((u) => u.kampanya && u.stok);
