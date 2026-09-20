@@ -163,7 +163,7 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
   @media (min-width: 900px) and (max-width: 1279px) { .katalog__liste :global(.izgara) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (min-width: 900px) {
     .katalog__govde { grid-template-columns: 220px 1fr; gap: 36px; }
-    .filtre { display: block; position: sticky; top: calc(var(--ust) + 32px + 16px); align-self: start; max-height: calc(100dvh - var(--ust) - 60px); overflow: auto; }
+    .filtre { display: block; position: sticky; top: calc(var(--ust) + 16px); align-self: start; max-height: calc(100dvh - var(--ust) - 60px); overflow: auto; }
     .filtre__bas, .filtre__uygula { display: none; }
     .katalog__filtre-btn { display: none; }
     .katalog__sirala span { display: inline; color: var(--gri-700); }

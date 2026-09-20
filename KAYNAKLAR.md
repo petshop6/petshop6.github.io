@@ -16,4 +16,9 @@ görselleri şeffaf PNG'ye çevirir; `tools/og.py` paylaşım kartlarını (`pub
 Mağaza fotoğrafları (`src/assets/dukkan/`): Yandex Haritalar'daki işletme fotoğrafları, 2024. Mağaza
 kendi fotoğraflarını gönderdiğinde değiştirilecek.
 
+Hayvan fotoğrafları (`src/assets/foto/`): Pexels, ücretsiz lisans (atıf gerekmez). Kesik (`*-kesik.png`)
+sürümler rembg ile arka planı kaldırılmış hâlleri; afiş ve menülerde kullanılıyor. Pexels foto no:
+6982643 (masadaki kızıl kedi), 24843368 (gri kedi), 28377643 (Jack Russell), 16260958 (yavru kedi),
+32949053 (yavru köpek), 27017415 (stüdyo kedi), 4587965 (bulldog, kullanılmadı).
+
 İkonlar: Phosphor Icons (MIT). Yazı tipleri: Archivo (OFL), Hanken Grotesk (OFL), Fontsource paketleri.

@@ -1,0 +1,55 @@
+---
+/** Horizontal product rail with prev/next on desktop; plain swipe on phones. */
+import Icon from './Icon.astro';
+import ProductCard from './ProductCard.astro';
+import type { Urun } from '../data/urunler';
+interface Props { baslik: string; href: string; hrefAd?: string; urunler: Urun[]; oncelik?: boolean }
+const { baslik, href, hrefAd = 'Tümü', urunler, oncelik = false } = Astro.props;
+---
+<section class="ray-bolum" data-ray>
+  <div class="kap">
+    <div class="bolum-baslik ray-bolum__bas">
+      <h2>{baslik}</h2>
+      <div class="ray-bolum__sag">
+        <a class="baglanti" href={href}>{hrefAd}</a>
+        <span class="ray-bolum__oklar">
+          <button type="button" class="ray-bolum__ok" data-ray-geri aria-label="Geri"><Icon ad="arrow-left" agirlik="bold" boyut={18} /></button>
+          <button type="button" class="ray-bolum__ok" data-ray-ileri aria-label="İleri"><Icon ad="arrow-right" agirlik="bold" boyut={18} /></button>
+        </span>
+      </div>
+    </div>
+    <div class="ray ray-bolum__ray" data-ray-kutu>
+      {urunler.map((u, i) => <div class="ray-bolum__kart"><ProductCard urun={u} oncelik={oncelik && i < 4} /></div>)}
+    </div>
+  </div>
+</section>
+<style>
+  .ray-bolum { padding-block: clamp(22px, 3.5vw, 40px); }
+  .ray-bolum__bas { margin-bottom: 14px; }
+  .ray-bolum__sag { display: flex; align-items: center; gap: 14px; }
+  .ray-bolum__oklar { display: none; gap: 6px; }
+  .ray-bolum__ok { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--gri-300); border-radius: 50%; background: #fff; color: var(--murekkep); transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease); }
+  .ray-bolum__ok:hover { background: var(--gri-100); border-color: var(--gri-500); }
+  .ray-bolum__ok[disabled] { opacity: 0.35; cursor: default; }
+  .ray-bolum__ray { gap: 14px; scroll-snap-type: x mandatory; }
+  .ray-bolum__kart { width: clamp(168px, 44vw, 240px); }
+  @media (min-width: 900px) { .ray-bolum__oklar { display: inline-flex; } .ray-bolum__kart { width: 236px; } .ray-bolum__ray { gap: 16px; } }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ray]:not([data-init])').forEach((kok) => {
+    kok.dataset.init = '1';
+    const kutu = kok.querySelector<HTMLElement>('[data-ray-kutu]')!;
+    const geri = kok.querySelector<HTMLButtonElement>('[data-ray-geri]')!;
+    const ileri = kok.querySelector<HTMLButtonElement>('[data-ray-ileri]')!;
+    const adim = () => Math.max(200, kutu.clientWidth * 0.8);
+    const guncelle = () => {
+      geri.disabled = kutu.scrollLeft <= 2;
+      ileri.disabled = kutu.scrollLeft + kutu.clientWidth >= kutu.scrollWidth - 2;
+    };
+    geri.addEventListener('click', () => kutu.scrollBy({ left: -adim(), behavior: 'smooth' }));
+    ileri.addEventListener('click', () => kutu.scrollBy({ left: adim(), behavior: 'smooth' }));
+    kutu.addEventListener('scroll', guncelle, { passive: true });
+    window.addEventListener('resize', guncelle);
+    guncelle();
+  });
+</script>

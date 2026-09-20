@@ -3,11 +3,12 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
-import MiniUrun from '../components/MiniUrun.astro';
+import UrunRayi from '../components/UrunRayi.astro';
 import { fiyat, site, whatsappUrl } from '../data/site';
 import { kampanyalilar, oneCikanlar, urunBul, urunler } from '../data/urunler';
 import dukkan from '../assets/dukkan/vitrin.jpg';
-import heroFoto from '../assets/foto/kedi-masa.jpg';
+import kopekKesik from '../assets/foto/kopek-kesik.png';
+import kediKesik from '../assets/foto/kedi-masa-kesik.png';
 import kediFoto from '../assets/foto/kedi.jpg';
 import kopekFoto from '../assets/foto/kopek.jpg';
 import yavruKedi from '../assets/foto/yavru-kedi.jpg';
@@ -30,30 +31,42 @@ const kategoriTile = [
   { href: '/urunler?kategori=odul', ad: 'Ödül maması', img: urunBul('reflex-dentastar-mini-kucuk')!, n: say((u) => u.kategori === 'odul') },
 ];
 const secme = oneCikanlar.slice(0, 8);
-const kisirlar = ['pro-plan-sterilised-somonlu', 'reflex-plus-longevity-kisirlastirilmis', 'reflex-crunchy-bubble-kisirlastirilmis-tavuklu'].map((s) => urunBul(s)!);
-const buyukIrk = ['reflex-plus-longevity-orta-buyuk-yetiskin', 'pro-plan-large-athletic-somonlu', 'advance-adult-maxi'].map((s) => urunBul(s)!);
+const kumlar = urunler.filter((u) => u.kategori === 'kedi-kumu');
+const kisirlar = urunler.filter((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama' && u.etiketler.includes('kısırlaştırılmış'));
+const kopekOdul = urunler.filter((u) => u.tur === 'kopek' && u.kategori === 'odul');
+const yasMama = urunler.filter((u) => u.kategori === 'yas-mama');
+const buyukIrk = urunler.filter((u) => u.tur === 'kopek' && u.etiketler.includes('büyük ırk'));
 const ornek = [urunBul('reflex-plus-longevity-kisirlastirilmis')!, urunBul('reflex-aktif-karbonlu-kedi-kumu')!];
 const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat * 2;
 ---
 <Base baslik={site.ad}>
-  <section class="hero">
-    <div class="kap hero__ic">
-      <div class="hero__yazi">
-        <h1>Kedi ve köpek maması, kapınıza.</h1>
-        <p class="hero__alt">Sepetinizi doldurun, WhatsApp'tan onaylayın. {site.teslimat.bolge} teslimat ücretsiz, ödeme kapıda.</p>
-        <div class="hero__btn">
-          <a class="btn" href="/urunler">Ürünlere bak</a>
-          <a class="btn btn--ikinci" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
+  <section class="afis-bolum">
+    <div class="kap">
+      <div class="afis">
+        <div class="afis__yazi">
+          <h1>Kedi ve köpek maması, kapınıza.</h1>
+          <p class="afis__alt">Sepetinizi doldurun, WhatsApp'tan onaylayın. {site.teslimat.bolge} teslimat ücretsiz, ödeme kapıda.</p>
+          <div class="afis__btn">
+            <a class="btn" href="/urunler">Ürünlere bak</a>
+            <a class="btn btn--ikinci" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
+          </div>
+          <div class="afis__son" data-son-siparis hidden>
+            <span>Geçen sefer: <b data-son-ozet></b></span>
+            <button type="button" class="baglanti" data-son-tekrar>Aynısını sepete ekle</button>
+            <a class="afis__son-tum" href="/siparislerim">Siparişlerim</a>
+          </div>
         </div>
-        <div class="hero__son" data-son-siparis hidden>
-          <span>Geçen sefer: <b data-son-ozet></b></span>
-          <button type="button" class="baglanti" data-son-tekrar>Aynısını sepete ekle</button>
-          <a class="hero__son-tum" href="/siparislerim">Siparişlerim</a>
+        <div class="afis__hayvanlar" aria-hidden="true">
+          <Image class="afis__kopek" src={kopekKesik} alt="" width={700} height={750} loading="eager" fetchpriority="high" />
+          <Image class="afis__kedi" src={kediKesik} alt="" width={900} height={508} loading="eager" fetchpriority="high" />
         </div>
       </div>
-      <div class="hero__foto">
-        <Image src={heroFoto} alt="Masanın kenarından bakan kızıl kedi" width={1400} height={938} loading="eager" fetchpriority="high" widths={[700, 1000, 1400]} sizes="(min-width: 900px) 56vw, 100vw" />
-      </div>
+      <ul class="sozler">
+        <li><Icon ad="truck" boyut={20} /> {site.teslimat.bolge} ücretsiz teslimat</li>
+        <li><Icon ad="receipt" boyut={20} /> Kapıda nakit veya kart</li>
+        <li><Icon ad="whatsapp-logo" boyut={20} /> Üyelik yok, sipariş WhatsApp'tan</li>
+        <li><Icon ad="phone" boyut={20} /> Alo Mama <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a></li>
+      </ul>
     </div>
   </section>
 
@@ -92,36 +105,12 @@ const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat 
     </section>
   )}
 
-  <section class="bolum">
-    <div class="kap">
-      <div class="bolum-baslik">
-        <h2>Seçtiklerimiz</h2>
-        <a class="baglanti" href="/urunler">Tüm ürünler</a>
-      </div>
-      <div class="izgara">{secme.map((u, i) => <ProductCard urun={u} oncelik={i < 4} />)}</div>
-    </div>
-  </section>
-
-  <section class="bolum bolum--dar">
-    <div class="kap sik">
-      <div class="sik__tile">
-        <div class="sik__bas">
-          <h2>Kısırlaştırılmış kediler için</h2>
-          <a class="baglanti" href="/kedi?etiket=k%C4%B1s%C4%B1rla%C5%9Ft%C4%B1r%C4%B1lm%C4%B1%C5%9F">Hepsi</a>
-        </div>
-        <p>Raftaki üç seçenek. Tek dokunuşla küçük boyu sepete ekleyin; boyu ürün sayfasından değiştirebilirsiniz.</p>
-        <div class="sik__liste">{kisirlar.map((u) => <MiniUrun urun={u} />)}</div>
-      </div>
-      <div class="sik__tile">
-        <div class="sik__bas">
-          <h2>Büyük ırk köpekler için</h2>
-          <a class="baglanti" href="/kopek?etiket=b%C3%BCy%C3%BCk%20%C4%B1rk">Hepsi</a>
-        </div>
-        <p>14-15 kg'lık büyük paketler. Taşımayın, biz getirelim.</p>
-        <div class="sik__liste">{buyukIrk.map((u) => <MiniUrun urun={u} />)}</div>
-      </div>
-    </div>
-  </section>
+  <UrunRayi baslik="Seçtiklerimiz" href="/urunler" hrefAd="Tüm ürünler" urunler={secme} oncelik />
+  <UrunRayi baslik="Kısırlaştırılmış kediler için" href="/kedi?etiket=k%C4%B1s%C4%B1rla%C5%9Ft%C4%B1r%C4%B1lm%C4%B1%C5%9F" urunler={kisirlar} />
+  <UrunRayi baslik="Kedi kumu" href="/kedi/kedi-kumu" urunler={kumlar} />
+  <UrunRayi baslik="Köpek ödülleri" href="/kopek/odul" urunler={kopekOdul} />
+  <UrunRayi baslik="Yaş mama" href="/kedi/yas-mama" urunler={yasMama} />
+  <UrunRayi baslik="Büyük ırk köpekler için" href="/kopek?etiket=b%C3%BCy%C3%BCk%20%C4%B1rk" urunler={buyukIrk} />
 
   <section class="nasil">
     <div class="kap nasil__ic">
@@ -175,27 +164,41 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
 </Base>
 
 <style>
-  /* Hero: copy + the cat at the table edge */
-  .hero { background: var(--gri-100); }
-  .hero__ic { display: grid; gap: 24px; padding-block: clamp(20px, 3vw, 36px) clamp(28px, 4vw, 48px); }
-  .hero__yazi { display: grid; gap: 18px; align-content: center; }
-  .hero__alt { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--gri-700); max-width: 44ch; }
-  .hero__btn { display: flex; flex-wrap: wrap; gap: 10px; }
-  .hero__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 12px 14px; border-radius: var(--radius-lg); background: #fff; font-size: 0.92rem; width: fit-content; }
-  .hero__son .baglanti { border: 0; background: transparent; padding: 0; color: var(--kirmizi); }
-  .hero__son-tum { color: var(--gri-700); font-size: 0.88rem; }
-  .hero__foto { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #e9e9e6; }
-  .hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  /* Banner hero: promo copy + the pets on a soft tint */
+  .afis-bolum { padding-top: clamp(12px, 2vw, 20px); }
+  .afis { position: relative; display: grid; gap: 12px; min-height: 380px; padding: clamp(22px, 3.5vw, 44px); background: var(--kirmizi-acik); border-radius: 16px; overflow: hidden; }
+  .afis__yazi { position: relative; z-index: 2; display: grid; gap: 16px; align-content: center; max-width: 34rem; }
+  .afis__alt { font-size: clamp(1.02rem, 1.4vw, 1.18rem); color: var(--gri-900); max-width: 40ch; }
+  .afis__btn { display: flex; flex-wrap: wrap; gap: 10px; }
+  .afis__btn .btn--ikinci { background: #fff; border-color: #fff; }
+  .afis__btn .btn--ikinci:hover { background: var(--gri-50); }
+  .afis__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 10px 14px; border-radius: var(--radius-lg); background: #fff; font-size: 0.92rem; width: fit-content; }
+  .afis__son .baglanti { border: 0; background: transparent; padding: 0; color: var(--kirmizi); }
+  .afis__son-tum { color: var(--gri-700); font-size: 0.88rem; }
+  .afis__hayvanlar { position: relative; height: 200px; margin: 0 calc(-1 * clamp(22px, 3.5vw, 44px)) calc(-1 * clamp(22px, 3.5vw, 44px)); }
+  .afis__kopek, .afis__kedi { position: absolute; bottom: 0; width: auto; }
+  .afis__kopek { right: 44%; height: 100%; }
+  .afis__kedi { right: 4%; height: 58%; }
   @media (min-width: 900px) {
-    .hero__ic { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
-    .hero__foto { aspect-ratio: 3 / 2; }
+    .afis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 420px; }
+    .afis__hayvanlar { position: absolute; inset: 0 0 0 auto; width: 52%; height: auto; margin: 0; }
+    .afis__kopek { right: 40%; height: 96%; }
+    .afis__kedi { right: 2%; height: 56%; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    .hero__yazi > * { animation: gir-yukari 600ms var(--ease) both; }
-    .hero__yazi > *:nth-child(2) { animation-delay: 70ms; }
-    .hero__yazi > *:nth-child(3) { animation-delay: 140ms; }
-    .hero__foto { animation: gir-buyu 700ms var(--ease) both; animation-delay: 80ms; }
+    .afis__yazi > * { animation: gir-yukari 600ms var(--ease) both; }
+    .afis__yazi > *:nth-child(2) { animation-delay: 70ms; }
+    .afis__yazi > *:nth-child(3) { animation-delay: 140ms; }
+    .afis__kopek { animation: afis-cik 700ms var(--ease) both 120ms; }
+    .afis__kedi { animation: afis-cik 700ms var(--ease) both 260ms; }
+    @keyframes afis-cik { from { translate: 0 12%; opacity: 0; } to { translate: 0 0; opacity: 1; } }
   }
+  .sozler { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: 0.9rem; color: var(--gri-900); }
+  .sozler li { display: flex; align-items: center; gap: 8px; }
+  .sozler .ikon { color: var(--kirmizi); }
+  .sozler a { font-weight: 600; text-decoration: none; }
+  .sozler a:hover { text-decoration: underline; }
+  @media (min-width: 900px) { .sozler { grid-template-columns: repeat(4, auto); justify-content: space-between; padding: 0 8px; } }
 
   /* Who are you buying for: circular rail */
   .kimin__baslik { margin-bottom: 18px; }
@@ -215,14 +218,6 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .kampanya__bas .baglanti { color: #fff; justify-self: start; }
   .kampanya__liste { padding: 16px; background: #fff; border-radius: 12px; color: var(--murekkep); }
   @media (min-width: 900px) { .kampanya { grid-template-columns: 220px 1fr; gap: 32px; } }
-
-  /* Frequently asked for: two dense tiles */
-  .sik { display: grid; gap: 16px; }
-  .sik__tile { padding: clamp(18px, 2.5vw, 28px); background: #fff; border-radius: 16px; }
-  .sik__bas { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
-  .sik__bas h2 { font-size: 1.35rem; }
-  .sik__tile > p { color: var(--gri-700); font-size: 0.95rem; margin-bottom: 12px; max-width: 48ch; }
-  @media (min-width: 900px) { .sik { grid-template-columns: 1fr 1fr; gap: 24px; } }
 
   /* How it works: steps + the real message the site produces */
   .nasil { background: var(--murekkep); color: #fff; padding-block: clamp(40px, 6vw, 72px); }
