@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { urunler } from '../../data/urunler';
+import { whatsappUrl } from '../../data/site';
+
+export async function getStaticPaths() {
+  const yazilar = await getCollection('rehber');
+  return yazilar.map((y) => ({ params: { slug: y.id }, props: { y } }));
+}
+const { y } = Astro.props;
+const { Content } = await render(y);
+const digerleri = (await getCollection('rehber')).filter((d) => d.id !== y.id).sort((a, b) => b.data.tarih.getTime() - a.data.tarih.getTime()).slice(0, 3);
+const tarih = y.data.tarih.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+// a few relevant products under the piece
+const ilgili = (y.data.etiket === 'kedi'
+  ? (y.id.includes('yavru') ? urunler.filter((u) => u.tur === 'kedi' && u.etiketler.includes('yavru')) : y.id.includes('su') ? urunler.filter((u) => u.kategori === 'yas-mama') : urunler.filter((u) => u.tur === 'kedi' && u.kategori === 'kuru-mama'))
+  : urunler.filter((u) => u.kategori === 'kuru-mama' && u.secenekler.some((s) => s.boy.includes('15 kg')))
+).filter((u) => u.stok).slice(0, 4);
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: y.data.baslik, description: y.data.ozet,
+  datePublished: y.data.tarih.toISOString().slice(0, 10), author: { '@type': 'Organization', name: 'Pet Shop 6 Bahçelievler' },
+  image: new URL(`/og.jpg`, Astro.site).toString(),
+};
+---
+<Base baslik={y.data.baslik} aciklama={y.data.ozet} jsonLd={jsonLd}>
+  <article class="yazi">
+    <div class="kap yazi__ic">
+      <nav class="kirinti" aria-label="Konum"><a href="/">Ana sayfa</a><span aria-hidden="true">/</span><a href="/rehber">Rehber</a></nav>
+      <h1>{y.data.baslik}</h1>
+      <p class="yazi__meta">{tarih} · <a href={y.data.kaynak} target="_blank" rel="noopener">Instagram paylaşımımızdan</a>{y.data.kaynakNot && <span>, {y.data.kaynakNot}</span>}</p>
+      <div class="yazi__foto"><Image src={y.data.gorsel} alt={y.data.gorselAlt} width={1200} height={720} loading="eager" /></div>
+      <div class="metin yazi__metin"><Content /></div>
+      <p class="yazi__not">Bu yazı mağazamızın kendi notudur, veteriner tavsiyesi değildir. Kediniz veya köpeğiniz iştahsızsa, kilo kaybediyorsa ya da su içmiyorsa veterinerinize gidin. Mama seçiminde takıldığınız yerde <a href={whatsappUrl('Merhaba, mama seçimi için yardım istiyorum: ')} target="_blank" rel="noopener">WhatsApp'tan yazın</a>, raftakileri fiyatlarıyla söyleyelim.</p>
+    </div>
+  </article>
+
+  {ilgili.length > 0 && (
+    <section class="bolum bolum--dar">
+      <div class="kap">
+        <div class="bolum-baslik"><h2>Rafta</h2><a class="baglanti" href="/urunler">Tüm ürünler</a></div>
+        <div class="izgara">{ilgili.map((u) => <ProductCard urun={u} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <section class="bolum bolum--dar">
+    <div class="kap">
+      <div class="bolum-baslik"><h2>Diğer yazılar</h2><a class="baglanti" href="/rehber">Rehber</a></div>
+      <ul class="diger">
+        {digerleri.map((d) => <li><a href={`/rehber/${d.id}`}><Icon ad="arrow-right" boyut={16} /> {d.data.baslik}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .yazi { padding-top: clamp(16px, 2.5vw, 28px); }
+  .yazi__ic { max-width: 760px; }
+  .kirinti { display: flex; gap: 8px; font-size: 0.85rem; color: var(--gri-500); margin-bottom: 14px; }
+  .kirinti a { color: var(--gri-700); text-decoration: none; }
+  .yazi h1 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+  .yazi__meta { margin: 10px 0 20px; color: var(--gri-500); font-size: 0.9rem; }
+  .yazi__meta a { color: var(--gri-700); }
+  .yazi__foto { border-radius: 16px; overflow: hidden; aspect-ratio: 5 / 3; margin-bottom: 24px; background: var(--gri-100); }
+  .yazi__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .yazi__metin { font-size: 1.05rem; line-height: 1.65; }
+  .yazi__metin :global(h2) { font-size: 1.3rem; }
+  .yazi__metin :global(li + li) { margin-top: 0.5em; }
+  .yazi__not { margin-top: 28px; padding: 16px 18px; background: #fff; border-radius: var(--radius-lg); font-size: 0.92rem; color: var(--gri-700); }
+  .yazi__not a { font-weight: 600; color: var(--murekkep); }
+  .diger { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .diger a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; }
+  .diger a:hover { color: var(--kirmizi); }
+</style>

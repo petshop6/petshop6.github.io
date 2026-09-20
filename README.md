@@ -59,6 +59,20 @@ Görsel `src/assets/urunler/` altına konur (şeffaf PNG tercih). Yeni marka iç
 `src/data/site.ts` → `markalar`. `tools/katalog.py` bu dosyayı sıfırdan üretir; elle düzenlenen
 listeyi ezmemek için önce oradaki listeyi güncelleyin.
 
+## Rehber
+
+`src/content/rehber/*.md`: mağazanın kendi Instagram paylaşımlarından dört bakım yazısı (2017), metin
+aynen, yalnızca yazım düzeltmeleriyle; her yazının altında kaynak bağlantısı ve "veteriner tavsiyesi
+değildir" notu var. Yeni yazı için aynı ön bilgi alanlarıyla (baslik, ozet, tarih, kaynak, gorsel,
+gorselAlt, etiket) bir `.md` dosyası eklemek yeterli. "Hayvan beslemenin faydaları" gönderisi sağlık
+iddiaları içerdiği için alınmadı.
+
+## Arama
+
+`src/scripts/ara.ts` Türkçe harfleri katlar (kopek = köpek, kisir = kısır), eş anlamlıları açar
+(proplan, sterilised, kitten, kum, indirim …), çoğul eklerini atar ve "için/ve/mama" gibi dolgu
+sözcüklerini yok sayar. Katalog sayfasındaki `?q=` de aynı eşleştirmeyi kullanır.
+
 ## Yapı
 
 - `src/pages/` sayfalar: `/`, `/urunler`, `/kedi`, `/kopek`, `/kedi/<kategori>`, `/kopek/<kategori>`,

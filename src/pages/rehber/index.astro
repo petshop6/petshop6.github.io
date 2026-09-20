@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+const yazilar = (await getCollection('rehber')).sort((a, b) => b.data.tarih.getTime() - a.data.tarih.getTime());
+const tarih = (d: Date) => d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+const etiketAd = { kedi: 'Kedi', kopek: 'Köpek', sokak: 'Sokak hayvanları' } as const;
+---
+<Base baslik="Rehber" aciklama="Pet Shop 6'dan kısa bakım yazıları: yavru kedi beslenmesi, su, mama seçimi, kışın sokak hayvanları.">
+  <section class="rehber">
+    <div class="kap">
+      <h1>Rehber</h1>
+      <p class="rehber__alt">Tezgâhta en çok sorulanları yazdık. Kısa, pratik, kendi sözlerimizle. Sağlık sorunlarında önce veterinerinize danışın.</p>
+      <div class="rehber__liste">
+        {yazilar.map((y) => (
+          <a class="yazi" href={`/rehber/${y.id}`}>
+            <span class="yazi__foto"><Image src={y.data.gorsel} alt="" width={640} height={480} loading="lazy" /></span>
+            <span class="yazi__govde">
+              <small>{etiketAd[y.data.etiket]} · {tarih(y.data.tarih)}</small>
+              <strong>{y.data.baslik}</strong>
+              <span>{y.data.ozet}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .rehber { padding-block: clamp(20px, 3vw, 36px) 0; }
+  .rehber h1 { margin-bottom: 8px; }
+  .rehber__alt { color: var(--gri-700); max-width: 58ch; margin-bottom: 28px; }
+  .rehber__liste { display: grid; gap: 20px; }
+  .yazi { display: grid; grid-template-columns: 120px 1fr; gap: 16px; text-decoration: none; align-items: start; }
+  .yazi__foto { display: block; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden; background: var(--gri-100); }
+  .yazi__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
+  .yazi:hover .yazi__foto img { transform: scale(1.04); }
+  .yazi__govde { display: grid; gap: 4px; }
+  .yazi__govde small { color: var(--gri-500); font-size: 0.82rem; }
+  .yazi__govde strong { font-family: var(--font-baslik); font-weight: 800; font-stretch: 104%; letter-spacing: -0.01em; font-size: 1.25rem; line-height: 1.15; }
+  .yazi:hover .yazi__govde strong { color: var(--kirmizi); }
+  .yazi__govde > span { color: var(--gri-700); font-size: 0.95rem; max-width: 60ch; }
+  @media (min-width: 720px) { .rehber__liste { grid-template-columns: 1fr 1fr; gap: 28px; } .yazi { grid-template-columns: 1fr; gap: 12px; } .yazi__foto { aspect-ratio: 3 / 2; } }
+</style>

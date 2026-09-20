@@ -18,6 +18,7 @@ const nav = [
   { href: '/urunler?kategori=odul', ad: 'Ödül' },
   ...(urunler.some((u) => u.kampanya && u.stok) ? [{ href: '/urunler?kampanya=1', ad: 'Kampanya' }] : []),
   { href: '/urunler', ad: 'Tüm Ürünler' },
+  { href: '/rehber', ad: 'Rehber' },
   { href: '/magaza', ad: 'Mağaza' },
   { href: '/siparislerim', ad: 'Siparişlerim' },
 ];
@@ -98,6 +99,7 @@ import type { ImageMetadata } from 'astro';
       <a href="/kopek">Köpek <small>mama, ödül</small></a>
       <a href="/kedi/kedi-kumu">Kedi Kumu</a>
       <a href="/urunler">Tüm Ürünler</a>
+      <a href="/rehber">Rehber <small>bakım yazıları</small></a>
       <a href="/magaza">Mağaza</a>
       <a href="/siparislerim">Siparişlerim</a>
       <a href="/teslimat">Sipariş ve Teslimat</a>
