@@ -8,3 +8,5 @@ dist/
 # logo çalışma dosyaları yerelde kalır; yalnızca kullanılan logo paketi depoda
 brand/*
 !brand/logo-yeni/
+!brand/urun-uygulamalari/
+brand/urun-uygulamalari/anahtarlik.png
