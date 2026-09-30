@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 import { kategoriler, markalar, site, whatsappUrl, type Kategori, type MarkaSlug, type Tur } from '../data/site';
 import { urunler } from '../data/urunler';
 import kediFoto from '../assets/foto/kedi.jpg';
@@ -29,7 +29,7 @@ import type { ImageMetadata } from 'astro';
   <div class="ust__ana">
     <div class="kap ust__ic">
       <button type="button" class="ust__menu" data-menu-ac aria-label="Menü"><Icon ad="list" boyut={26} /></button>
-      <a href="/" class="ust__logo" aria-label="Pet Shop 6 ana sayfa"><Wordmark ters /></a>
+      <a href="/" class="ust__logo" aria-label="Pet Shop 6 ana sayfa"><Logo tip="amblem" yukseklik={52} oncelik /></a>
       <form class="ara" role="search" action="/urunler" method="get" data-ara>
         <label for="ara-giris" class="sr">Ürün ara</label>
         <input id="ara-giris" class="ara__giris" type="search" name="q" placeholder="Mama, kum, marka ara" autocomplete="off" />
@@ -86,7 +86,7 @@ import type { ImageMetadata } from 'astro';
 <dialog id="menu" class="menu" aria-label="Menü">
   <div class="menu__ic">
     <div class="menu__bas">
-      <Wordmark />
+      <Logo tip="tam" genislik={132} />
       <button type="button" class="menu__kapat" data-menu-kapat aria-label="Kapat"><Icon ad="x" boyut={22} /></button>
     </div>
     <form class="ara ara--menu" role="search" action="/urunler" method="get">
@@ -114,9 +114,10 @@ import type { ImageMetadata } from 'astro';
 
 <style>
   /* Red bar (sticky) + white category row, like a real retailer header */
-  .ust__ana { position: sticky; top: 0; z-index: 40; background: var(--kirmizi); color: #fff; }
+  .ust__ana { position: sticky; top: 0; z-index: 40; background: var(--murekkep); color: #fff; }
   .ust__ic { display: flex; align-items: center; gap: 10px; min-height: var(--ust); flex-wrap: wrap; padding-block: 8px; }
-  .ust__logo { text-decoration: none; font-size: 1.2rem; margin-right: 4px; }
+  .ust__logo { display: flex; align-items: center; text-decoration: none; margin-right: 4px; }
+  .ust__logo :global(.logo) { height: 44px; }
   .ust__menu { display: inline-grid; place-items: center; width: 42px; height: 42px; border: 0; background: transparent; color: #fff; border-radius: var(--radius); }
   .ust__menu:hover { background: rgb(255 255 255 / 0.14); }
   .ara { position: relative; display: flex; flex: 1 1 100%; order: 10; min-width: 0; }
@@ -164,7 +165,7 @@ import type { ImageMetadata } from 'astro';
     .ust__rozet { position: static; margin-left: -2px; }
     .ust__aksiyon { margin-left: 0; }
   }
-  @media (min-width: 1040px) { .ust__alt { display: block; } .ust__menu { display: none; } .ust__logo { font-size: 1.35rem; } }
+  @media (min-width: 1040px) { .ust__alt { display: block; } .ust__menu { display: none; } .ust__logo :global(.logo) { height: 52px; } }
   @media (max-width: 1239px) { .ust__soz { display: none; } }
 
   /* Mobile menu */
@@ -175,8 +176,9 @@ import type { ImageMetadata } from 'astro';
   @keyframes menu-gir { from { translate: -100% 0; } to { translate: 0 0; } }
   @keyframes menu-cik { to { translate: -100% 0; } }
   .menu__ic { display: flex; flex-direction: column; height: 100%; padding: 16px; gap: 18px; }
-  .menu__bas { display: flex; align-items: center; justify-content: space-between; font-size: 1.15rem; }
-  .menu__kapat { display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: var(--gri-100); border-radius: var(--radius); }
+  .menu__bas { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -16px -16px 0; padding: 12px 16px; background: var(--murekkep); }
+  .menu__bas :global(.logo) { width: 132px; }
+  .menu__kapat { display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: rgb(255 255 255 / 0.12); color: #fff; border-radius: var(--radius); }
   .ara--menu { display: flex; max-width: none; margin: 0; }
   .ara--menu .ara__giris { background: var(--gri-100); }
   .menu__nav { display: grid; }

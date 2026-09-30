@@ -1,0 +1,27 @@
+---
+/** Pet Shop 6 logosu. Görsel mağazanın verdiği dosyadan gelir; oranları değiştirilmez.
+    tip="amblem" → yazısız işaret (üst bar, dar yerler)
+    tip="tam"    → işaret + PET SHOP 6 yazısı (altbilgi, menü) */
+import { Image } from 'astro:assets';
+import amblem from '../assets/logo/amblem.png';
+import tamLogo from '../assets/logo/logo.png';
+
+interface Props { tip?: 'amblem' | 'tam'; yukseklik?: number; genislik?: number; class?: string; oncelik?: boolean }
+const { tip = 'amblem', yukseklik, genislik, class: cls = '', oncelik = false } = Astro.props;
+const kaynak = tip === 'amblem' ? amblem : tamLogo;
+const oran = kaynak.width / kaynak.height;
+const h = yukseklik ?? (genislik ? Math.round(genislik / oran) : 56);
+const w = genislik ?? Math.round(h * oran);
+---
+<Image
+  src={kaynak}
+  alt="Pet Shop 6"
+  width={w}
+  height={h}
+  densities={[1, 2]}
+  loading={oncelik ? 'eager' : 'lazy'}
+  class={`logo ${cls}`.trim()}
+/>
+<style>
+  .logo { display: block; width: auto; height: auto; max-width: 100%; }
+</style>

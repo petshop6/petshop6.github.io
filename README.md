@@ -63,6 +63,15 @@ Görsel `src/assets/urunler/` altına konur (şeffaf PNG tercih). Yeni marka iç
 `src/data/site.ts` → `markalar`. `tools/katalog.py` bu dosyayı sıfırdan üretir; elle düzenlenen
 listeyi ezmemek için önce oradaki listeyi güncelleyin.
 
+## Logo
+
+Mağazanın 30 Eylül 2026'da verdiği altın logo kullanılıyor. Baskıya hazır dosyalar ve ne yapıldığı:
+`brand/logo-yeni/` (bkz. `OKUBENI.md`). Sitedeki kaynaklar `src/assets/logo/amblem.png` (üst bar) ve
+`logo.png` (altbilgi, mobil menü); ikisi de şeffaf zeminli, **koyu zemin için**. Bu yüzden üst bar ve
+mobil menü başlığı siyah (`--murekkep`); kırmızı vurgu rengi olarak kaldı (butonlar, sepet rozeti,
+Kampanya bağlantısı). Favicon ve uygulama simgesi `public/favicon-32.png`, `favicon-192.png`,
+`apple-touch-icon.png` — amblemden, siyah zeminli üretildi.
+
 ## Rehber
 
 `src/content/rehber/*.md`: mağazanın kendi Instagram paylaşımlarından dört bakım yazısı (2017), metin

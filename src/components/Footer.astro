@@ -1,13 +1,13 @@
 ---
 import Icon from './Icon.astro';
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 import { site, whatsappUrl } from '../data/site';
 const yil = new Date().getFullYear();
 ---
 <footer class="alt">
   <div class="kap alt__ic">
     <div class="alt__marka">
-      <Wordmark ters />
+      <Logo tip="tam" genislik={196} />
       <p>{site.adres.satir1}<br />{site.adres.satir2}</p>
       <p class="alt__saat">{site.saatler.map((s) => <span>{s.gun}: {s.saat}</span>)}</p>
     </div>
@@ -44,7 +44,7 @@ const yil = new Date().getFullYear();
 <style>
   .alt { background: var(--murekkep); color: #d9d9d6; margin-top: clamp(40px, 6vw, 80px); }
   .alt__ic { display: grid; gap: 28px; padding-block: clamp(36px, 5vw, 56px) 28px; }
-  .alt__marka { display: grid; gap: 12px; font-size: 1.4rem; }
+  .alt__marka { display: grid; justify-items: start; gap: 14px; }
   .alt__marka p { font-size: 0.95rem; line-height: 1.5; }
   .alt__saat { display: grid; gap: 2px; font-size: 0.9rem; color: #b9b9b5; }
   .alt__kol { display: grid; gap: 8px; align-content: start; }

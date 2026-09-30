@@ -4,3 +4,7 @@ dist/
 .DS_Store
 *.log
 .env
+
+# logo çalışma dosyaları yerelde kalır; yalnızca kullanılan logo paketi depoda
+brand/*
+!brand/logo-yeni/
