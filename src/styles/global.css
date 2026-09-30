@@ -57,6 +57,8 @@
   --altin-koyu: #a07f33;
   --altin-sis: rgb(201 162 77 / 0.12);
   --buton-yazi: #17150f;
+  --altin-detay: #c9a24d;       /* çizgi, ikon, aktif durum */
+  --altin-detay-yazi: #e6cb87;  /* küçük vurgu yazısı */
 
   /* temaya göre değişen kabuklar */
   --ust-zemin: rgb(14 13 11 / 0.94);
@@ -121,6 +123,9 @@
   --altin-yazi: #101010;       /* fiyat ve bağlantı: siyah */
   --altin-sis: #f2f1ef;
   --buton-yazi: #ffffff;
+  --altin-detay: #c9a24d;
+  --altin-detay-yazi: #8a6a22;  /* beyaz üstünde okunur altın */
+  --cizgi-altin: rgb(201 162 77 / 0.45);
 
   --golge: 0 1px 2px rgb(16 16 16 / 0.06), 0 18px 40px -24px rgb(16 16 16 / 0.26);
 
@@ -167,7 +172,7 @@ h3 { font-size: clamp(1.1rem, 1.5vw, 1.3rem); font-weight: 500; letter-spacing: 
 /* küçük, harf aralıklı kapitaller: logodaki yazının akrabası */
 .kapital { font-family: var(--font-baslik); font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.74rem; color: var(--metin-3); }
 p { margin: 0; }
-:focus-visible { outline: 2px solid var(--altin); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--altin-detay); outline-offset: 2px; }
 ::selection { background: var(--altin); color: var(--buton-yazi); }
 
 .kap { width: min(100% - 2 * var(--kenar), var(--kap)); margin-inline: auto; }
@@ -186,7 +191,7 @@ p { margin: 0; }
 .btn:hover { background: var(--altin-hover); border-color: var(--altin-hover); color: var(--buton-yazi); }
 .btn:active { transform: translateY(1px); }
 .btn--ikinci { background: transparent; color: var(--metin); border-color: var(--cizgi); }
-.btn--ikinci:hover { background: transparent; border-color: var(--altin); color: var(--altin-yazi); }
+.btn--ikinci:hover { background: transparent; border-color: var(--altin-detay); color: var(--metin); }
 .btn--wa { background: var(--wa); border-color: var(--wa); }
 .btn--wa:hover { background: var(--wa-koyu); border-color: var(--wa-koyu); }
 .btn--kucuk { min-height: 38px; padding: 0 14px; font-size: 0.9rem; }
@@ -249,7 +254,7 @@ select.giris { appearance: none; padding-right: 36px; background: var(--yuzey-2)
 .ara__satir span { display: grid; line-height: 1.25; }
 .ara__satir small { color: var(--gri-500); font-size: 0.78rem; }
 .ara__satir b { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }
-.ara__tum { display: block; padding: 10px 12px; border-top: 1px solid var(--cizgi); font-weight: 500; font-size: 0.9rem; text-decoration: none; color: var(--altin-yazi); }
+.ara__tum { display: block; padding: 10px 12px; border-top: 1px solid var(--cizgi); font-weight: 500; font-size: 0.9rem; text-decoration: none; color: var(--altin-detay-yazi); }
 .ara__yok { padding: 12px; font-size: 0.9rem; color: var(--gri-700); }
 
 .kalem { display: grid; grid-template-columns: 72px 1fr; gap: 12px 14px; padding: 14px 0; border-bottom: 1px solid var(--gri-200); }
@@ -280,9 +285,10 @@ html.kilit { overflow: hidden; }
 /* ---- v2 primitives: size chips, rails, toast, badge bump ---- */
 .cipler { display: flex; flex-wrap: wrap; gap: 6px; }
 .cip { position: relative; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 12px; border-radius: var(--radius); border: 1px solid var(--cizgi); background: transparent; font-size: 0.84rem; font-weight: 500; color: var(--metin-2); cursor: pointer; user-select: none; transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease), color var(--hiz) var(--ease); }
-.cip:hover { border-color: var(--altin); color: var(--metin); }
+.cip:hover { border-color: var(--altin-detay); color: var(--metin); }
 .cip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
-.cip:has(input:checked), .cip.aktif { background: var(--altin-sis); border-color: var(--altin); color: var(--altin-yazi); }
+.cip:has(input:checked), .cip.aktif { background: var(--altin-sis); border-color: var(--altin-detay); color: var(--altin-detay-yazi); }
+:root[data-tema="acik"] .cip:has(input:checked), :root[data-tema="acik"] .cip.aktif { background: #101010; border-color: #101010; color: var(--altin-detay); }
 .cip:has(input:focus-visible) { outline: 2px solid var(--altin); outline-offset: 2px; }
 .cip--baglanti { text-decoration: none; }
 .cip--baglanti:hover { background: var(--yuzey-2); }
@@ -294,8 +300,8 @@ html.kilit { overflow: hidden; }
 
 .tost { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); translate: -50% 0; z-index: 70; display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 16px; border-radius: var(--radius); border: 1px solid var(--cizgi-altin); background: var(--yuzey); color: var(--metin); box-shadow: 0 10px 30px -10px rgb(0 0 0 / 0.5); font-size: 0.92rem; white-space: nowrap; opacity: 0; translate: -50% 12px; transition: opacity 220ms var(--ease), translate 320ms var(--ease); pointer-events: none; }
 .tost.acik { opacity: 1; translate: -50% 0; pointer-events: auto; }
-.tost .ikon { width: 20px; height: 20px; color: var(--altin); }
-.tost a { color: var(--altin-yazi); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.tost .ikon { width: 20px; height: 20px; color: var(--altin-detay); }
+.tost a { color: var(--altin-detay-yazi); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) .tost { bottom: calc(84px + env(safe-area-inset-bottom)); } }
 
 @keyframes rozet-zipla { 0% { scale: 1; } 40% { scale: 1.35; } 100% { scale: 1; } }

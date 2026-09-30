@@ -29,7 +29,7 @@ const { baslik, href, hrefAd = 'Tümü', urunler, oncelik = false } = Astro.prop
   .ray-bolum__sag { display: flex; align-items: center; gap: 14px; }
   .ray-bolum__oklar { display: none; gap: 6px; }
   .ray-bolum__ok { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--cizgi); border-radius: 50%; background: transparent; color: var(--metin); transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease); }
-  .ray-bolum__ok:hover { background: var(--yuzey); border-color: var(--altin); color: var(--altin); }
+  .ray-bolum__ok:hover { background: var(--yuzey); border-color: var(--altin-detay); color: var(--altin-detay-yazi); }
   .ray-bolum__ok[disabled] { opacity: 0.35; cursor: default; }
   .ray-bolum__ray { gap: 14px; scroll-snap-type: x mandatory; }
   .ray-bolum__kart { width: clamp(168px, 44vw, 240px); }

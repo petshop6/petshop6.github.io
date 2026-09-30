@@ -191,7 +191,7 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .afis__btn { display: flex; flex-wrap: wrap; gap: 10px; }
   .afis__btn .btn--ikinci { background: transparent; border-color: var(--cizgi); }
   .afis__btn .btn--ikinci:hover { border-color: var(--altin); }
-  .afis__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 11px 15px; border-radius: var(--radius); background: var(--zemin); border: 1px solid var(--cizgi); font-size: 0.9rem; width: fit-content; }
+  .afis__son { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 11px 15px; border-radius: var(--radius); background: var(--zemin); border: 1px solid var(--cizgi-altin); font-size: 0.9rem; width: fit-content; }
   .afis__son .baglanti { border: 0; background: transparent; padding: 0; }
   .afis__son-tum { color: var(--metin-3); font-size: 0.86rem; }
   /* the scene: red disc clipped inside the banner; pets on top and allowed to break out of the box */
@@ -225,9 +225,9 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
     @keyframes afis-mama { from { translate: -30% 6%; opacity: 0; rotate: -14deg; } to { translate: 0 0; opacity: 1; rotate: -7deg; } }
     @keyframes afis-nefes { 0%, 100% { margin-bottom: 0; } 50% { margin-bottom: 6px; } }
   }
-  .sozler { list-style: none; margin: 18px 0 0; padding: 18px 0 0; border-top: 1px solid var(--cizgi); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 0.86rem; color: var(--metin-2); }
+  .sozler { list-style: none; margin: 18px 0 0; padding: 18px 0 0; border-top: 1px solid var(--cizgi-altin); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 0.86rem; color: var(--metin-2); }
   .sozler li { display: flex; align-items: center; gap: 8px; }
-  .sozler .ikon { color: var(--altin); }
+  .sozler .ikon { color: var(--altin-detay); }
   .sozler a { font-weight: 600; text-decoration: none; white-space: nowrap; }
   @media (max-width: 899px) { .sozler li:last-child { grid-column: span 2; } }
   .sozler a:hover { text-decoration: underline; }
@@ -240,16 +240,16 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .kimin__foto { display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--yuzey); border: 1px solid var(--cizgi); transition: border-color var(--hiz) var(--ease); }
   .kimin__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
   .kimin__foto--urun img { object-fit: contain; padding: 16%; }
-  .kimin__tile:hover .kimin__foto { border-color: var(--cizgi-altin); }
+  .kimin__tile:hover .kimin__foto { border-color: var(--altin-detay); }
   .kimin__tile:hover .kimin__foto img { transform: scale(1.06); }
-  .kimin__tile:hover strong { color: var(--altin); }
+  .kimin__tile:hover strong { color: var(--altin-detay-yazi); }
   .kimin__tile strong { margin-top: 8px; font-family: var(--font-baslik); font-weight: 400; font-size: 0.95rem; line-height: 1.2; transition: color var(--hiz) var(--ease); }
   .kimin__tile small { color: var(--metin-3); font-size: 0.78rem; }
 
   /* Campaign strip */
   .kampanya { display: grid; gap: 24px; padding: clamp(20px, 3vw, 34px); background: var(--yuzey); border: 1px solid var(--cizgi-altin); border-radius: var(--radius-lg); }
   .kampanya__bas { display: grid; gap: 10px; align-content: center; }
-  .kampanya__bas h2 { color: var(--altin-yazi); }
+  .kampanya__bas h2 { color: var(--altin-detay-yazi); }
   .kampanya__bas p { color: var(--metin-2); max-width: 34ch; }
   .kampanya__bas .baglanti { justify-self: start; }
   .kampanya__liste { padding: 0; }
@@ -261,10 +261,10 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .nasil__yazi { display: grid; gap: 22px; align-content: center; }
   .adimlar { margin: 0; padding: 0; list-style: none; counter-reset: adim; display: grid; gap: 16px; }
   .adimlar li { counter-increment: adim; display: grid; grid-template-columns: 44px 1fr; gap: 16px; color: var(--metin-2); line-height: 1.6; }
-  .adimlar li::before { content: counter(adim); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--cizgi-altin); background: var(--altin-sis); color: var(--altin-yazi); font-family: var(--font-baslik); font-weight: 400; font-size: 1.05rem; }
+  .adimlar li::before { content: counter(adim); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--altin-detay); background: transparent; color: var(--altin-detay-yazi); font-family: var(--font-baslik); font-weight: 400; font-size: 1.05rem; }
   .adimlar strong { color: var(--metin); font-weight: 600; }
   .nasil__alt { color: var(--metin-3); font-size: 0.93rem; }
-  .nasil__alt a { color: var(--altin); font-weight: 500; }
+  .nasil__alt a { color: var(--altin-detay-yazi); font-weight: 500; }
   .sohbet { background: #0b141a; border: 1px solid var(--cizgi); border-radius: var(--radius-lg); padding: 14px; display: grid; gap: 10px; align-content: start; color: #e9edef; max-width: 440px; width: 100%; justify-self: center; }
   .sohbet__bas { display: flex; align-items: center; gap: 8px; font-weight: 600; padding: 2px 4px 10px; border-bottom: 1px solid rgb(255 255 255 / 0.08); }
   .sohbet__bas .ikon { color: var(--wa); }
@@ -285,7 +285,7 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .rehber-ev__foto img { width: 100%; height: 100%; object-fit: cover; }
   .rehber-ev__govde { display: grid; gap: 2px; }
   .rehber-ev__govde strong { font-size: 1rem; line-height: 1.25; }
-  .rehber-ev__yazi:hover strong { color: var(--altin); }
+  .rehber-ev__yazi:hover strong { color: var(--altin-detay-yazi); }
   .rehber-ev__govde span { color: var(--metin-3); font-size: 0.86rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   @media (min-width: 720px) { .rehber-ev { grid-template-columns: 1fr 1fr; gap: 16px 32px; } }
 
@@ -301,7 +301,7 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .saatler tr + tr th, .saatler tr + tr td { border-top: 1px solid var(--cizgi); }
   .dukkan__btn { display: flex; flex-wrap: wrap; gap: 10px; }
   .dukkan__rafta { margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--cizgi); font-size: 0.9rem; color: var(--metin-2); max-width: 54ch; }
-  .dukkan__rafta a { font-weight: 500; color: var(--altin); }
+  .dukkan__rafta a { font-weight: 500; color: var(--altin-detay-yazi); }
   @media (min-width: 900px) { .dukkan { grid-template-columns: 1.2fr 1fr; gap: 48px; } }
 </style>
 <script>

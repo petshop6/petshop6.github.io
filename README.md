@@ -80,7 +80,10 @@ Açık tema `:root[data-tema="acik"]` altında sadece jetonları değiştirir ve
 sayfa, siyah üst bar (kategori satırı dahil), siyah yazı, siyah butonlar; altın yalnızca logoda kalır.
 Üst barın kendi jetonları var (`--ust-zemin`, `--ust-metin`, `--ust-metin-2`, `--ust-cizgi`, `--ust-vurgu`),
 böylece bar sayfadan bağımsız koyu kalabiliyor. Roller ayrı tutulur: `--altin` dolgu, `--altin-hover` dolgu vurgusu, `--altin-yazi` yazı
-olarak altın; açık temada üçü de siyaha döner. Logo altın-siyah olduğu için koyu
+olarak altın; açık temada üçü de siyaha döner. Bunların dışında **iki temada da altın kalan** iki jeton var:
+`--altin-detay` (siyah barın altındaki ince çizgi, sepet rozeti, aktif menü, ikonlar, seçili beden, odak halkası)
+ve `--altin-detay-yazi` (Kampanya etiketi, indirimli fiyat, küçük vurgu bağlantıları; açık temada `#8a6a22`).
+Böylece taban siyah-beyaz kalırken logo sayfada yankılanıyor. Logo altın-siyah olduğu için koyu
 zemine ihtiyaç duyar: üst bar ve altbilgi her iki temada da siyah, mobil menü başlığı açık temada koyu şerit.
 
 ## Logo
