@@ -120,7 +120,7 @@
 
   --altin: #101010;            /* dolgu: siyah */
   --altin-hover: #2f2d2a;
-  --altin-yazi: #101010;       /* fiyat ve bağlantı: siyah */
+  --altin-yazi: #101010;       /* bağlantı ve vurgu: siyah */
   --altin-sis: #f2f1ef;
   --buton-yazi: #ffffff;
   --altin-detay: #c9a24d;
@@ -248,12 +248,11 @@ select.giris { appearance: none; padding-right: 36px; background: var(--yuzey-2)
 }
 
 /* ---- markup injected by scripts (search rows, cart line items) ---- */
-.ara__satir { display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 12px; padding: 10px 12px; text-decoration: none; font-size: 0.92rem; }
+.ara__satir { display: grid; grid-template-columns: 40px 1fr; align-items: center; gap: 12px; padding: 10px 12px; text-decoration: none; font-size: 0.92rem; }
 .ara__satir:hover { background: var(--yuzey-2); }
 .ara__satir img { width: 40px; height: 40px; object-fit: contain; }
 .ara__satir span { display: grid; line-height: 1.25; }
 .ara__satir small { color: var(--gri-500); font-size: 0.78rem; }
-.ara__satir b { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }
 .ara__tum { display: block; padding: 10px 12px; border-top: 1px solid var(--cizgi); font-weight: 500; font-size: 0.9rem; text-decoration: none; color: var(--altin-detay-yazi); }
 .ara__yok { padding: 12px; font-size: 0.9rem; color: var(--gri-700); }
 
@@ -264,13 +263,12 @@ select.giris { appearance: none; padding-right: 36px; background: var(--yuzey-2)
 .kalem__marka { font-size: 0.78rem; color: var(--gri-500); }
 .kalem__ad { font-weight: 600; text-decoration: none; font-size: 0.95rem; line-height: 1.3; }
 .kalem__boy { font-size: 0.85rem; color: var(--gri-700); }
-.kalem__sag { grid-column: 2; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.kalem__tutar { font-family: var(--font-baslik); font-weight: 700; margin-left: auto; }
+.kalem__sag { grid-column: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .kalem__sil { border: 0; background: transparent; color: var(--gri-500); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
 .kalem__sil:hover { color: var(--altin-yazi); }
 .kalem__adet { font-size: 0.9rem; color: var(--gri-700); }
 [data-sepet-liste] { container-type: inline-size; }
-@container (min-width: 520px) { .kalem { grid-template-columns: 72px 1fr auto; } .kalem__sag { grid-column: auto; flex-direction: column; align-items: flex-end; gap: 6px; } .kalem__tutar { margin-left: 0; } }
+@container (min-width: 520px) { .kalem { grid-template-columns: 72px 1fr auto; } .kalem__sag { grid-column: auto; flex-direction: column; align-items: flex-end; gap: 6px; } }
 
 .adet { display: inline-flex; align-items: center; border: 1px solid var(--cizgi); border-radius: var(--radius); background: var(--yuzey-2); }
 .adet__btn { width: 36px; height: 36px; border: 0; background: transparent; font-size: 1.1rem; line-height: 1; border-radius: var(--radius); }

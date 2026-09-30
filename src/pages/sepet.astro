@@ -69,10 +69,9 @@ import { site, whatsappUrl } from '../data/site';
             </div>
 
             <div class="ozet">
-              <div class="ozet__satir"><span>Ürünler (<span data-sepet-adet>0</span> adet)</span><strong data-sepet-toplam>0 ₺</strong></div>
+              <div class="ozet__satir"><span>Ürünler</span><strong><span data-sepet-adet>0</span> adet</strong></div>
               <div class="ozet__satir"><span>Teslimat ({site.teslimat.bolge})</span><strong>Ücretsiz</strong></div>
-              <div class="ozet__satir ozet__satir--toplam"><span>Toplam</span><strong data-sepet-toplam>0 ₺</strong></div>
-              <p class="ozet__not">Ödeme teslimatta: nakit veya kart. Mağaza mesajınızı onaylayıp teslimat saatini yazar.</p>
+              <p class="ozet__not">Tutarı siparişi onaylarken WhatsApp'tan yazarız. Ödeme teslimatta: nakit veya kart.</p>
             </div>
 
             <button type="submit" class="btn btn--wa btn--genis sepet__gonder"><Icon ad="whatsapp-logo" /> Siparişi WhatsApp'tan gönder</button>
@@ -112,8 +111,6 @@ import { site, whatsappUrl } from '../data/site';
   .teslimat h2 { font-size: 1.25rem; }
   .ozet { display: grid; gap: 8px; padding: 14px 0 0; border-top: 1px solid var(--gri-200); }
   .ozet__satir { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.95rem; }
-  .ozet__satir--toplam { font-size: 1.1rem; padding-top: 8px; border-top: 1px solid var(--gri-200); }
-  .ozet__satir--toplam strong { font-family: var(--font-baslik); font-size: 1.5rem; }
   .ozet__not { font-size: 0.85rem; color: var(--gri-700); }
   .sepet__gonder { min-height: 50px; font-size: 1rem; }
   .duzenli { border: 1px solid var(--cizgi); padding: 14px; margin: 0; display: grid; gap: 10px; background: var(--yuzey-2); border-radius: var(--radius-lg); }
@@ -138,7 +135,7 @@ import { site, whatsappUrl } from '../data/site';
   }
 </style>
 <script>
-  import { kalemleriCiz, kalemOlaylari, oku, siparisKaydet, temizle, tl, toplamTutar } from '../scripts/sepet';
+  import { kalemleriCiz, kalemOlaylari, oku, siparisKaydet, temizle } from '../scripts/sepet';
 
   const kok = document.querySelector<HTMLElement>('[data-sepet-sayfa]');
   if (kok && !kok.dataset.init) {
@@ -167,14 +164,12 @@ import { site, whatsappUrl } from '../data/site';
       const k = oku();
       const fd = new FormData(form);
       const v = (a: string) => String(fd.get(a) || '').trim();
-      const satirlar = k.map((x) => `${x.adet} × ${x.ad} (${x.boy}) = ${tl(x.adet * x.fiyat)}`);
+      const satirlar = k.map((x) => `${x.adet} × ${x.ad} (${x.boy})`);
       return [
         'Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.',
         `Sipariş no: ${no}`,
         '',
         ...satirlar,
-        '',
-        `Toplam: ${tl(toplamTutar(k))} (teslimat ücretsiz)`,
         '',
         `Ad Soyad: ${v('ad') || '-'}`,
         v('tel') ? `Telefon: ${v('tel')}` : null,
@@ -182,6 +177,8 @@ import { site, whatsappUrl } from '../data/site';
         `Teslimat zamanı: ${v('zaman') || 'Fark etmez'}`,
         fd.get('duzenli') ? `Düzenli sipariş: ${v('aralik')} (aynı ürünler, her seferinde onay isteyin)` : null,
         v('not') ? `Not: ${v('not')}` : null,
+        '',
+        'Tutarı yazar mısınız?',
       ].filter((s) => s !== null).join('\n');
     }
     function ciz() {
@@ -211,7 +208,7 @@ import { site, whatsappUrl } from '../data/site';
       } catch {}
       const metin = mesaj();
       const fd2 = new FormData(form);
-      siparisKaydet({ no, tarih: new Date().toISOString(), kalemler: oku(), toplam: toplamTutar(), duzenli: fd2.get('duzenli') ? String(fd2.get('aralik')) : undefined, mesaj: metin });
+      siparisKaydet({ no, tarih: new Date().toISOString(), kalemler: oku(), duzenli: fd2.get('duzenli') ? String(fd2.get('aralik')) : undefined, mesaj: metin });
       const url = `${WA}?text=${encodeURIComponent(metin)}`;
       (kok!.querySelector('[data-tekrar-ac]') as HTMLAnchorElement).href = url;
       kok!.querySelector('[data-siparis-no]')!.textContent = no;

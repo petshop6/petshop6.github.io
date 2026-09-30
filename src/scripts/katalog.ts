@@ -16,8 +16,8 @@ export function baslat() {
   const q = (url.searchParams.get('q') || '').trim();
   const sira0 = kartlar.slice();
 
-  // restore state from URL (?tur=kedi&marka=reflex,advance&sirala=fiyat-artan)
-  for (const alan of ['tur', 'kategori', 'marka', 'etiket', 'kampanya']) {
+  // restore state from URL (?tur=kedi&marka=reflex,advance&sirala=ad)
+  for (const alan of ['tur', 'kategori', 'marka', 'etiket']) {
     const v = url.searchParams.get(alan);
     if (!v) continue;
     v.split(',').forEach((deger) => {
@@ -32,17 +32,16 @@ export function baslat() {
     return Array.from(form.querySelectorAll<HTMLInputElement>(`input[name="${alan}"]:checked`)).map((i) => i.value);
   }
   function uygula() {
-    const f = { tur: secili('tur'), kategori: secili('kategori'), marka: secili('marka'), etiket: secili('etiket'), kampanya: secili('kampanya') };
+    const f = { tur: secili('tur'), kategori: secili('kategori'), marka: secili('marka'), etiket: secili('etiket') };
     let n = 0;
     kartlar.forEach((k) => {
       const et = (k.dataset.etiket || '').split('|');
       let ok = (!f.tur.length || f.tur.includes(k.dataset.tur!))
         && (!f.kategori.length || f.kategori.includes(k.dataset.kategori!))
         && (!f.marka.length || f.marka.includes(k.dataset.marka!))
-        && (!f.etiket.length || f.etiket.every((e) => et.includes(e)))
-        && (!f.kampanya.length || k.dataset.kampanya === '1');
+        && (!f.etiket.length || f.etiket.every((e) => et.includes(e)));
       if (ok && q) {
-        ok = eslesir({ slug: '', ad: k.dataset.ad || '', marka: k.dataset.marka || '', tur: k.dataset.tur || '', kategori: k.dataset.kategori || '', etiketler: et, baslangic: 0, gorsel: '' }, q);
+        ok = eslesir({ slug: '', ad: k.dataset.ad || '', marka: k.dataset.marka || '', tur: k.dataset.tur || '', kategori: k.dataset.kategori || '', etiketler: et, gorsel: '' }, q);
       }
       k.hidden = !ok;
       if (ok) n++;
@@ -60,7 +59,7 @@ export function baslat() {
 
     // url
     const u = new URL(location.href);
-    for (const alan of ['tur', 'kategori', 'marka', 'etiket', 'kampanya'] as const) {
+    for (const alan of ['tur', 'kategori', 'marka', 'etiket'] as const) {
       if (f[alan].length) u.searchParams.set(alan, f[alan].join(',')); else u.searchParams.delete(alan);
     }
     if (sirala.value !== 'onerilen') u.searchParams.set('sirala', sirala.value); else u.searchParams.delete('sirala');
@@ -70,10 +69,7 @@ export function baslat() {
     const v = sirala.value;
     const liste = sira0.slice();
     const ad = (k: HTMLElement) => k.dataset.ad || '';
-    const fi = (k: HTMLElement) => Number(k.dataset.fiyat || 0);
-    if (v === 'fiyat-artan') liste.sort((a, b) => fi(a) - fi(b));
-    else if (v === 'fiyat-azalan') liste.sort((a, b) => fi(b) - fi(a));
-    else if (v === 'ad') liste.sort((a, b) => ad(a).localeCompare(ad(b), 'tr'));
+    if (v === 'ad') liste.sort((a, b) => ad(a).localeCompare(ad(b), 'tr'));
     liste.forEach((k) => izgara.appendChild(k));
   }
 

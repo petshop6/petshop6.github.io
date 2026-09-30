@@ -68,11 +68,6 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
   <body>
     <a class="atla" href="#icerik">İçeriğe geç</a>
     <Header />
-    {site.fiyatlarOrnek && (
-      <div class="ornek" role="note">
-        <span class="kap">Fiyatlar örnektir; mağazanın fiyat listesi yüklendiğinde güncellenecek.</span>
-      </div>
-    )}
     <main id="icerik">
       <slot />
     </main>
@@ -94,7 +89,6 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
 <style>
   .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--altin); color: var(--buton-yazi); border-radius: var(--radius); }
   .atla:focus { top: 8px; }
-  .ornek { background: var(--altin-sis); color: var(--altin-detay-yazi); font-size: 0.8rem; text-align: center; padding: 7px 0; border-bottom: 1px solid var(--cizgi-altin); }
   .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: var(--bar-zemin); backdrop-filter: blur(10px); border-top: 1px solid var(--cizgi); }
   .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--altin); color: var(--buton-yazi); font-family: var(--font-baslik); font-weight: 500; font-size: 1rem; }
   .sepet-cubuk__btn b { background: #17150f; color: var(--altin-detay); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }

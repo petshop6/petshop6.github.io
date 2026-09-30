@@ -1,25 +1,23 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import Icon from './Icon.astro';
-import { fiyat, stokSor } from '../data/site';
+import { stokSor } from '../data/site';
 import type { Urun } from '../data/urunler';
 
-interface Props { urun: Urun; oncelik?: boolean; kucukKart?: boolean }
-const { urun: u, oncelik = false, kucukKart = false } = Astro.props;
+interface Props { urun: Urun; oncelik?: boolean }
+const { urun: u, oncelik = false } = Astro.props;
 const tek = u.secenekler.length === 1;
-// default to the campaign size when one exists, otherwise the smallest
-const varsayilan = Math.max(0, u.secenekler.findIndex((s) => s.eskiFiyat && s.eskiFiyat > s.fiyat));
-const ilk = u.secenekler[varsayilan];
+const ilk = u.secenekler[0];
 const etiketStr = u.etiketler.join('|');
 const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'contain', format: 'webp' });
 ---
-<article class:list={['kart', { 'kart--kucuk': kucukKart, 'kart--yok': !u.stok }]} data-urun data-tur={u.tur} data-kategori={u.kategori} data-marka={u.markaSlug} data-etiket={etiketStr} data-ad={u.ad} data-fiyat={u.baslangic} data-kampanya={u.kampanya ? '1' : undefined} data-stok={u.stok ? '1' : '0'}>
+<article class:list={['kart', { 'kart--yok': !u.stok }]} data-urun data-tur={u.tur} data-kategori={u.kategori} data-marka={u.markaSlug} data-etiket={etiketStr} data-ad={u.ad} data-stok={u.stok ? '1' : '0'}>
   <a class="kart__gorsel" href={`/urun/${u.slug}`} tabindex="-1" aria-hidden="true">
     <Image src={u.gorsel} alt="" width={480} height={480} fit="contain" loading={oncelik ? 'eager' : 'lazy'} decoding="async" widths={[240, 480]} sizes="(min-width: 1040px) 280px, (min-width: 720px) 30vw, 45vw" />
     {!u.stok && <span class="kart__yok-etiket">Rafta yok</span>}
   </a>
   <div class="kart__govde">
-    <span class="kart__marka">{u.marka}{u.kampanya && u.stok && <b class="kart__kampanya"> · Kampanya</b>}</span>
+    <span class="kart__marka">{u.marka}</span>
     <h3 class="kart__ad"><a href={`/urun/${u.slug}`}>{u.ad}</a></h3>
     <form class="kart__form" data-sepete-ekle method="post" action="/sepet">
       <input type="hidden" name="slug" value={u.slug} />
@@ -28,21 +26,17 @@ const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'con
       <input type="hidden" name="gorsel" value={kucuk.src} />
       {tek ? (
         <>
-          <input type="hidden" name="boy" value={`${ilk.boy}|${ilk.fiyat}`} />
+          <input type="hidden" name="boy" value={ilk.boy} />
           <span class="kart__tekboy">{ilk.boy}</span>
         </>
       ) : (
         <div class="cipler kart__cipler" role="radiogroup" aria-label="Boy">
           {u.secenekler.map((s, i) => (
-            <label class="cip"><input type="radio" name="boy" value={`${s.boy}|${s.fiyat}`} checked={i === varsayilan} disabled={!u.stok} data-fiyat={fiyat(s.fiyat)} data-eski={s.eskiFiyat ? fiyat(s.eskiFiyat) : ''} data-boy-sec />{s.boy}</label>
+            <label class="cip"><input type="radio" name="boy" value={s.boy} checked={i === 0} disabled={!u.stok} />{s.boy}</label>
           ))}
         </div>
       )}
       <div class="kart__satir">
-        <span class="kart__fiyatlar">
-          <s class="kart__eski" data-eski-goster hidden={!ilk.eskiFiyat}>{ilk.eskiFiyat ? fiyat(ilk.eskiFiyat) : ''}</s>
-          <strong class="kart__fiyat" data-fiyat-goster>{fiyat(ilk.fiyat)}</strong>
-        </span>
         {u.stok ? (
           <button type="submit" class="kart__btn" aria-label={`Sepete ekle: ${u.ad}`}><Icon ad="plus" agirlik="bold" boyut={18} /><span>Sepete ekle</span></button>
         ) : (
@@ -62,7 +56,6 @@ const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'con
   .kart__yok-etiket { position: absolute; left: 10px; bottom: 10px; padding: 4px 8px; border-radius: 4px; background: var(--zemin); color: var(--metin-2); border: 1px solid var(--cizgi); font-size: 0.75rem; font-weight: 500; }
   .kart__govde { display: flex; flex-direction: column; gap: 6px; padding: 0 2px; flex: 1; }
   .kart__marka { font-size: 0.78rem; font-weight: 600; color: var(--gri-500); }
-  .kart__kampanya { color: var(--altin-detay-yazi); font-weight: 600; }
   .kart__ad { font-family: var(--font-govde); font-size: 0.95rem; font-weight: 600; font-stretch: 100%; letter-spacing: 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .kart__ad a { text-decoration: none; }
   .kart__ad a::after { content: ''; position: absolute; inset: 0; }
@@ -70,18 +63,13 @@ const kucuk = await getImage({ src: u.gorsel, width: 160, height: 160, fit: 'con
   .kart__cipler { min-height: 32px; }
   .kart--yok .kart__cipler { opacity: 0.5; pointer-events: none; }
   .kart__tekboy { display: inline-flex; align-items: center; min-height: 32px; font-size: 0.84rem; color: var(--gri-700); }
-  .kart__satir { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .kart__fiyatlar { display: flex; flex-direction: column; line-height: 1.1; }
-  .kart__eski { font-size: 0.8rem; color: var(--gri-500); }
-  .kart__fiyat { font-family: var(--font-baslik); font-weight: 500; color: var(--altin-yazi); font-size: 1.2rem; white-space: nowrap; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-  .kart__eski:not([hidden]) + .kart__fiyat { color: var(--altin-detay-yazi); }
-  .kart__btn, .kart__sor { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px 0 11px; border: 1px solid var(--cizgi); border-radius: var(--radius); background: transparent; color: var(--metin); font-family: var(--font-baslik); font-weight: 400; font-size: 0.88rem; white-space: nowrap; text-decoration: none; transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease), color var(--hiz) var(--ease), transform var(--hiz) var(--ease); }
+  .kart__satir { display: flex; }
+  .kart__btn, .kart__sor { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 0 14px; border: 1px solid var(--cizgi); border-radius: var(--radius); background: transparent; color: var(--metin); font-family: var(--font-baslik); font-weight: 400; font-size: 0.88rem; white-space: nowrap; text-decoration: none; transition: background var(--hiz) var(--ease), border-color var(--hiz) var(--ease), color var(--hiz) var(--ease), transform var(--hiz) var(--ease); }
   .kart__btn:hover { background: var(--altin); border-color: var(--altin-detay); color: var(--buton-yazi); }
   .kart__btn:active { transform: scale(0.97); }
   .kart__btn.eklendi { background: var(--metin); color: var(--zemin); }
-  .kart__sor { background: transparent; color: var(--wa-koyu); border: 1px solid var(--cizgi); padding-left: 12px; }
+  .kart__sor { background: transparent; color: var(--wa-koyu); border: 1px solid var(--cizgi); }
   .kart__sor:hover { border-color: var(--wa); }
-  .kart--kucuk .kart__btn span, .kart--kucuk .kart__sor span { display: none; }
-  @container (max-width: 215px) { .kart__btn span, .kart__sor span { display: none; } .kart__btn, .kart__sor { padding: 0 11px; } }
+  @container (max-width: 148px) { .kart__btn span, .kart__sor span { display: none; } }
   @media (hover: none) { .kart:hover .kart__gorsel img { transform: none; } }
 </style>

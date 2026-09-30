@@ -4,8 +4,8 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProductCard from '../components/ProductCard.astro';
 import UrunRayi from '../components/UrunRayi.astro';
-import { fiyat, site, whatsappUrl } from '../data/site';
-import { kampanyalilar, oneCikanlar, urunBul, urunler } from '../data/urunler';
+import { site, whatsappUrl } from '../data/site';
+import { oneCikanlar, urunBul, urunler } from '../data/urunler';
 import { getCollection } from 'astro:content';
 import dukkan from '../assets/dukkan/vitrin.jpg';
 import kopekKesik from '../assets/foto/kopek-kesik.png';
@@ -40,7 +40,6 @@ const kopekOdul = urunler.filter((u) => u.tur === 'kopek' && u.kategori === 'odu
 const yasMama = urunler.filter((u) => u.kategori === 'yas-mama');
 const buyukIrk = urunler.filter((u) => u.tur === 'kopek' && u.etiketler.includes('büyük ırk'));
 const ornek = [urunBul('reflex-plus-longevity-kisirlastirilmis')!, urunBul('reflex-aktif-karbonlu-kedi-kumu')!];
-const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat * 2;
 ---
 <Base baslik={site.ad}>
   <section class="afis-bolum">
@@ -97,19 +96,6 @@ const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat 
     </div>
   </section>
 
-  {kampanyalilar.length > 0 && (
-    <section class="bolum bolum--dar">
-      <div class="kap kampanya">
-        <div class="kampanya__bas">
-          <h2>Kampanya</h2>
-          <p>Bu hafta indirimli. Kampanya fiyatı stok bitene kadar geçerli.</p>
-          <a class="baglanti" href="/urunler?kampanya=1">Tüm kampanyalar</a>
-        </div>
-        <div class="izgara izgara--3 kampanya__liste">{kampanyalilar.slice(0, 3).map((u) => <ProductCard urun={u} />)}</div>
-      </div>
-    </section>
-  )}
-
   <UrunRayi baslik="Seçtiklerimiz" href="/urunler" hrefAd="Tüm ürünler" urunler={secme} oncelik />
   <UrunRayi baslik="Kısırlaştırılmış kediler için" href="/kedi?etiket=k%C4%B1s%C4%B1rla%C5%9Ft%C4%B1r%C4%B1lm%C4%B1%C5%9F" urunler={kisirlar} />
   <UrunRayi baslik="Kedi kumu" href="/kedi/kedi-kumu" urunler={kumlar} />
@@ -133,15 +119,15 @@ const ornekToplam = ornek[0].secenekler[1].fiyat + ornek[1].secenekler[0].fiyat 
         <pre class="sohbet__balon">Merhaba Pet Shop 6, web sitesinden sipariş vermek istiyorum.
 Sipariş no: PS6-260919-K7M2
 
-1 × {ornek[0].ad} ({ornek[0].secenekler[1].boy}) = {fiyat(ornek[0].secenekler[1].fiyat)}
-2 × {ornek[1].ad} ({ornek[1].secenekler[0].boy}) = {fiyat(ornek[1].secenekler[0].fiyat * 2)}
-
-Toplam: {fiyat(ornekToplam)} (teslimat ücretsiz)
+1 × {ornek[0].ad} ({ornek[0].secenekler[1].boy})
+2 × {ornek[1].ad} ({ornek[1].secenekler[0].boy})
 
 Ad Soyad: Elif Karaca
 Adres: Emek Mah. 8. Cadde 12/4, Çankaya
-Teslimat zamanı: Akşam (18:00 sonrası)</pre>
-        <div class="sohbet__balon sohbet__balon--yanit">Merhaba Elif Hanım, siparişiniz hazır. 19:00-20:00 arası kapıdayız.</div>
+Teslimat zamanı: Akşam (18:00 sonrası)
+
+Tutarı yazar mısınız?</pre>
+        <div class="sohbet__balon sohbet__balon--yanit">Merhaba Elif Hanım, siparişiniz hazır. Tutarı yazıyorum, 19:00-20:00 arası kapıdayız.</div>
       </div>
     </div>
   </section>
@@ -247,13 +233,6 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   .kimin__tile small { color: var(--metin-3); font-size: 0.78rem; }
 
   /* Campaign strip */
-  .kampanya { display: grid; gap: 24px; padding: clamp(20px, 3vw, 34px); background: var(--yuzey); border: 1px solid var(--cizgi-altin); border-radius: var(--radius-lg); }
-  .kampanya__bas { display: grid; gap: 10px; align-content: center; }
-  .kampanya__bas h2 { color: var(--altin-detay-yazi); }
-  .kampanya__bas p { color: var(--metin-2); max-width: 34ch; }
-  .kampanya__bas .baglanti { justify-self: start; }
-  .kampanya__liste { padding: 0; }
-  @media (min-width: 900px) { .kampanya { grid-template-columns: 220px 1fr; gap: 32px; } }
 
   /* How it works: steps + the real message the site produces */
   .nasil { background: var(--yuzey); border-block: 1px solid var(--cizgi); padding-block: clamp(48px, 7vw, 96px); }
@@ -305,7 +284,7 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   @media (min-width: 900px) { .dukkan { grid-template-columns: 1.2fr 1fr; gap: 48px; } }
 </style>
 <script>
-  import { ekle, tl, siparisler } from '../scripts/sepet';
+  import { ekle, siparisler } from '../scripts/sepet';
   // pointer parallax on the banner scene (desktop with a mouse only)
   const sahne = document.querySelector<HTMLElement>('[data-sahne]');
   const afis = sahne?.closest<HTMLElement>('.afis');
@@ -336,10 +315,10 @@ Teslimat zamanı: Akşam (18:00 sonrası)</pre>
   try {
     const k = siparisler()[0];
     if (son && k && k.kalemler?.length) {
-      son.querySelector('[data-son-ozet]')!.textContent = `${k.kalemler.reduce((t: number, x: any) => t + x.adet, 0)} ürün, ${tl(k.toplam)}`;
+      son.querySelector('[data-son-ozet]')!.textContent = `${k.kalemler.reduce((t: number, x: any) => t + x.adet, 0)} ürün`;
       son.hidden = false;
       son.querySelector('[data-son-tekrar]')!.addEventListener('click', () => {
-        k.kalemler.forEach((x: any) => ekle({ slug: x.slug, ad: x.ad, marka: x.marka, boy: x.boy, fiyat: x.fiyat, gorsel: x.gorsel }, x.adet));
+        k.kalemler.forEach((x: any) => ekle({ slug: x.slug, ad: x.ad, marka: x.marka, boy: x.boy, gorsel: x.gorsel }, x.adet));
         (window as any).__sepetAc?.();
       });
     }

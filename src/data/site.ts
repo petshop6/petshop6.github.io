@@ -30,11 +30,6 @@ export function markaSlug(ad: string): MarkaSlug {
   return s;
 }
 
-/** 1090 -> "1.090 ₺" */
-export function fiyat(n: number): string {
-  return new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(n) + ' ₺';
-}
-
 export const whatsappUrl = (metin?: string) =>
   `https://wa.me/${site.whatsapp}` + (metin ? `?text=${encodeURIComponent(metin)}` : '');
 

@@ -1,13 +1,11 @@
 /* Cart: localStorage store + header badge + drawer + add-to-cart forms.
    Loaded on every page from Base.astro. The /sepet page adds the WhatsApp step on top. */
 
-export interface Kalem { slug: string; ad: string; marka: string; boy: string; fiyat: number; adet: number; gorsel: string }
+export interface Kalem { slug: string; ad: string; marka: string; boy: string; adet: number; gorsel: string }
 interface Depo { v: 1; kalemler: Kalem[] }
 
 const ANAHTAR = 'ps6-sepet';
 const MAX_ADET = 20;
-
-export const tl = (n: number) => new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(n) + ' ₺';
 
 export function oku(): Kalem[] {
   try {
@@ -22,7 +20,6 @@ function yaz(kalemler: Kalem[]) {
   document.dispatchEvent(new CustomEvent('sepet:degisti', { detail: { kalemler } }));
 }
 export const toplamAdet = (k = oku()) => k.reduce((t, x) => t + x.adet, 0);
-export const toplamTutar = (k = oku()) => k.reduce((t, x) => t + x.adet * x.fiyat, 0);
 
 export function ekle(yeni: Omit<Kalem, 'adet'>, adet = 1) {
   const k = oku();
@@ -41,7 +38,7 @@ export function adetAyarla(slug: string, boy: string, adet: number) {
 export function temizle() { yaz([]); }
 
 /* ---------- order history (this device only) ---------- */
-export interface Siparis { no: string; tarih: string; kalemler: Kalem[]; toplam: number; duzenli?: string; mesaj: string }
+export interface Siparis { no: string; tarih: string; kalemler: Kalem[]; duzenli?: string; mesaj: string }
 const SIPARIS_ANAHTAR = 'ps6-siparisler';
 export function siparisler(): Siparis[] {
   try { const d = JSON.parse(localStorage.getItem(SIPARIS_ANAHTAR) || '[]'); return Array.isArray(d) ? d : []; } catch { return []; }
@@ -80,7 +77,7 @@ export function kalemleriCiz(kok: HTMLElement, secenek: { duzenlenebilir: boolea
       <div class="kalem__bilgi">
         <span class="kalem__marka">${x.marka}</span>
         <a class="kalem__ad" href="/urun/${x.slug}">${x.ad}</a>
-        <span class="kalem__boy">${x.boy} · ${tl(x.fiyat)}</span>
+        <span class="kalem__boy">${x.boy}</span>
       </div>
       <div class="kalem__sag">
         ${secenek.duzenlenebilir ? `
@@ -89,11 +86,9 @@ export function kalemleriCiz(kok: HTMLElement, secenek: { duzenlenebilir: boolea
           <span class="adet__sayi" aria-live="polite">${x.adet}</span>
           <button type="button" class="adet__btn" data-adet="1" aria-label="Artır">+</button>
         </div>` : `<span class="kalem__adet">${x.adet} adet</span>`}
-        <strong class="kalem__tutar">${tl(x.adet * x.fiyat)}</strong>
         ${secenek.duzenlenebilir ? `<button type="button" class="kalem__sil" data-sil aria-label="Sepetten çıkar">Çıkar</button>` : ''}
       </div>
     </li>`).join('');
-  kok.querySelectorAll<HTMLElement>('[data-sepet-toplam]').forEach((el) => { el.textContent = tl(toplamTutar(k)); });
   kok.querySelectorAll<HTMLElement>('[data-sepet-adet]').forEach((el) => { el.textContent = String(toplamAdet(k)); });
 }
 
@@ -133,18 +128,18 @@ function cekmece() {
   (window as any).__sepetAc = ac;
 }
 
-/** <form data-sepete-ekle> with inputs: slug, ad, marka, gorsel, boy (value "boy|fiyat"), adet */
+/** <form data-sepete-ekle> with inputs: slug, ad, marka, gorsel, boy, adet */
 function formlar() {
   document.addEventListener('submit', (e) => {
     const f = e.target as HTMLFormElement;
     if (!f.matches('[data-sepete-ekle]')) return;
     e.preventDefault();
     const fd = new FormData(f);
-    const [boy, fiyat] = String(fd.get('boy') || '').split('|');
-    if (!boy || !fiyat) return;
+    const boy = String(fd.get('boy') || '').trim();
+    if (!boy) return;
     ekle({
       slug: String(fd.get('slug')), ad: String(fd.get('ad')), marka: String(fd.get('marka')),
-      gorsel: String(fd.get('gorsel')), boy, fiyat: Number(fiyat),
+      gorsel: String(fd.get('gorsel')), boy,
     }, Math.max(1, Number(fd.get('adet') || 1)));
     const btn = f.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (btn) {
@@ -153,21 +148,6 @@ function formlar() {
     }
     if (f.dataset.sepeteEkle === 'ac') (window as any).__sepetAc?.();
     else tost(`Sepete eklendi (${boy})`);
-  });
-}
-
-/** Size <select> inside a card or the product page updates the price shown next to it. */
-function boySecimi() {
-  document.addEventListener('change', (e) => {
-    const el = e.target as HTMLInputElement | HTMLSelectElement;
-    if (!el.matches('[data-boy-sec]')) return;
-    const kok = el.closest('form') || document;
-    const g = kok.querySelector<HTMLElement>('[data-fiyat-goster]');
-    const src = el instanceof HTMLSelectElement ? el.selectedOptions[0] : el;
-    const f = src?.dataset.fiyat;
-    if (g && f) g.textContent = f;
-    const eski = kok.querySelector<HTMLElement>('[data-eski-goster]');
-    if (eski) { eski.textContent = src?.dataset.eski || ''; eski.hidden = !src?.dataset.eski; }
   });
 }
 
@@ -196,5 +176,4 @@ export function baslat() {
   window.addEventListener('storage', (e) => { if (e.key === ANAHTAR) rozetGuncelle(); });
   cekmece();
   formlar();
-  boySecimi();
 }

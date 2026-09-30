@@ -52,8 +52,6 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
         <span>Sırala</span>
         <select class="giris" data-sirala>
           <option value="onerilen">Önerilen</option>
-          <option value="fiyat-artan">Fiyat: düşükten yükseğe</option>
-          <option value="fiyat-azalan">Fiyat: yüksekten düşüğe</option>
           <option value="ad">Ada göre</option>
         </select>
       </label>
@@ -87,12 +85,6 @@ const ilk = (s: string) => s.charAt(0).toLocaleUpperCase('tr-TR') + s.slice(1);
               {Object.entries(markalar).filter(([k]) => markaSay.has(k as MarkaSlug)).map(([k, v]) => (
                 <label><input type="checkbox" name="marka" value={k} /> {v.ad} <small>{markaSay.get(k as MarkaSlug)}</small></label>
               ))}
-            </fieldset>
-          )}
-          {urunler.some((u) => u.kampanya) && (
-            <fieldset class="filtre__grup">
-              <legend>Fiyat</legend>
-              <label><input type="checkbox" name="kampanya" value="1" /> Kampanyalı <small>{urunler.filter((u) => u.kampanya).length}</small></label>
             </fieldset>
           )}
           {ozSay.size > 1 && (

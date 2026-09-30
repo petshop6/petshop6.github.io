@@ -18,10 +18,7 @@ import { site } from '../data/site';
     <div class="cekmece__dolu" data-sepet-dolu hidden>
       <ul class="cekmece__liste" data-sepet-liste></ul>
       <div class="cekmece__alt">
-        <div class="cekmece__toplam">
-          <span>Ara toplam</span>
-          <strong data-sepet-toplam>0 ₺</strong>
-        </div>
+        <p class="cekmece__not"><Icon ad="chat-circle-dots" boyut={16} /> Tutarı siparişi onaylarken WhatsApp'tan yazarız</p>
         <p class="cekmece__not"><Icon ad="truck" boyut={16} /> {site.teslimat.bolge} teslimat ücretsiz</p>
         <a class="btn btn--genis" href="/sepet">Siparişi tamamla</a>
         <button type="button" class="baglanti cekmece__devam" data-sepet-kapat>Alışverişe devam et</button>
@@ -47,9 +44,7 @@ import { site } from '../data/site';
   .cekmece__gecmis { font-size: 0.9rem; }
   .cekmece__dolu { display: flex; flex-direction: column; flex: 1; min-height: 0; }
   .cekmece__liste { list-style: none; margin: 0; padding: 0 20px; overflow: auto; flex: 1; }
-  .cekmece__alt { padding: 16px 20px 20px; border-top: 1px solid var(--cizgi); display: grid; gap: 10px; background: var(--yuzey); }
-  .cekmece__toplam { display: flex; justify-content: space-between; align-items: baseline; font-size: 1.05rem; }
-  .cekmece__toplam strong { font-family: var(--font-baslik); font-size: 1.35rem; }
+  .cekmece__alt { padding: 16px 20px 20px; border-top: 1px solid var(--cizgi); display: grid; gap: 8px; background: var(--yuzey); }
   .cekmece__not { display: flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--gri-700); }
   .cekmece__devam { border: 0; background: transparent; justify-self: center; font-size: 0.9rem; }
 </style>

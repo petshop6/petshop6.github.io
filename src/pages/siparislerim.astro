@@ -35,8 +35,6 @@ import { site } from '../data/site';
   .liste :global(.sip__kalemler) { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.93rem; color: var(--gri-900); }
   .liste :global(.sip__kalemler li) { display: flex; justify-content: space-between; gap: 12px; }
   .liste :global(.sip__kalemler b) { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }
-  .liste :global(.sip__toplam) { display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--gri-200); font-weight: 600; }
-  .liste :global(.sip__toplam strong) { font-family: var(--font-baslik); font-size: 1.15rem; }
   .liste :global(.sip__btn) { display: flex; flex-wrap: wrap; gap: 8px; }
   .liste :global(.sip__sil) { margin-left: auto; border: 0; background: transparent; color: var(--gri-500); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
   .sayfa__not { margin-top: 20px; font-size: 0.88rem; color: var(--gri-700); max-width: 62ch; }
@@ -62,8 +60,7 @@ import { site } from '../data/site';
             <span class="sip__tarih">${tarih(o.tarih)}</span>
             ${o.duzenli ? `<span class="sip__duzenli">Düzenli: ${kacar(o.duzenli)}</span>` : ''}
           </div>
-          <ul class="sip__kalemler">${o.kalemler.map((k) => `<li><span>${k.adet} × ${kacar(k.ad)} (${kacar(k.boy)})</span><b>${tl(k.adet * k.fiyat)}</b></li>`).join('')}</ul>
-          <div class="sip__toplam"><span>Toplam</span><strong>${tl(o.toplam)}</strong></div>
+          <ul class="sip__kalemler">${o.kalemler.map((k) => `<li><span>${k.adet} × ${kacar(k.ad)} (${kacar(k.boy)})</span></li>`).join('')}</ul>
           <div class="sip__btn">
             <button type="button" class="btn btn--kucuk" data-tekrar>Tekrar sipariş ver</button>
             <a class="btn btn--ikinci btn--kucuk" href="${WA}?text=${encodeURIComponent(o.mesaj)}" target="_blank" rel="noopener">Mesajı WhatsApp'ta aç</a>
@@ -76,7 +73,7 @@ import { site } from '../data/site';
       const li = t.closest<HTMLElement>('.sip'); if (!li) return;
       const o = siparisler().find((x) => x.no === li.dataset.no); if (!o) return;
       if (t.closest('[data-tekrar]')) {
-        o.kalemler.forEach((k) => ekle({ slug: k.slug, ad: k.ad, marka: k.marka, boy: k.boy, fiyat: k.fiyat, gorsel: k.gorsel }, k.adet));
+        o.kalemler.forEach((k) => ekle({ slug: k.slug, ad: k.ad, marka: k.marka, boy: k.boy, gorsel: k.gorsel }, k.adet));
         (window as any).__sepetAc?.();
       } else if (t.closest('[data-sil]')) { siparisSil(o.no); ciz(); }
     });

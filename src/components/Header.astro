@@ -16,7 +16,6 @@ const menu: { tur: Tur; ad: string; foto: ImageMetadata; kimin: { ad: string; et
 const nav = [
   { href: '/kedi/kedi-kumu', ad: 'Kedi Kumu' },
   { href: '/urunler?kategori=odul', ad: 'Ödül' },
-  ...(urunler.some((u) => u.kampanya && u.stok) ? [{ href: '/urunler?kampanya=1', ad: 'Kampanya' }] : []),
   { href: '/urunler', ad: 'Tüm Ürünler' },
   { href: '/rehber', ad: 'Rehber' },
   { href: '/magaza', ad: 'Mağaza' },
@@ -80,7 +79,7 @@ import type { ImageMetadata } from 'astro';
             </div>
           </div>
         ))}
-        {nav.map((n) => <a href={n.href} aria-current={aktif(n.href) ? 'page' : undefined} class:list={{ 'ust__nav-kampanya': n.href.includes('kampanya') }}>{n.ad}</a>)}
+        {nav.map((n) => <a href={n.href} aria-current={aktif(n.href) ? 'page' : undefined}>{n.ad}</a>)}
       </nav>
       <p class="ust__soz"><Icon ad="truck" boyut={18} /> <b>{site.teslimat.bolge} ücretsiz teslimat</b> <span aria-hidden="true">·</span> Alo Mama <a href={`tel:${site.aloMamaTel}`}>{site.aloMama}</a></p>
     </div>
@@ -154,7 +153,6 @@ import type { ImageMetadata } from 'astro';
   .ust__nav a { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: var(--radius); text-decoration: none; font-family: var(--font-baslik); font-weight: 400; text-transform: uppercase; letter-spacing: 0.13em; font-size: 0.74rem; color: var(--ust-metin-2); white-space: nowrap; transition: color var(--hiz) var(--ease); }
   .ust__nav a:hover { color: var(--altin-detay); }
   .ust__nav a[aria-current] { color: var(--altin-detay); }
-  .ust__nav-kampanya { color: var(--altin-detay) !important; }
   .ust__nav > .mega-kok > a .ikon { color: var(--ust-metin-2); transition: transform var(--hiz) var(--ease); }
   .ust__soz { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--ust-metin-2); white-space: nowrap; }
   .ust__soz b { color: var(--ust-metin); font-weight: 500; }
