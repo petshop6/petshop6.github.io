@@ -63,6 +63,16 @@ Görsel `src/assets/urunler/` altına konur (şeffaf PNG tercih). Yeni marka iç
 `src/data/site.ts` → `markalar`. `tools/katalog.py` bu dosyayı sıfırdan üretir; elle düzenlenen
 listeyi ezmemek için önce oradaki listeyi güncelleyin.
 
+## Tasarım dili
+
+Logo altın-siyah olduğu için site de o dünyada: **mürekkep zemin (#0e0d0b), altın vurgu (#c9a24d),
+kemik yazı (#f4f1ea)**. Kırmızı bırakıldı. Yüzeyler `--zemin` (sayfa), `--yuzey` (kart, bölüm),
+`--yuzey-2` (girdi, öne çıkan panel); ayırıcı olarak gölge değil `--cizgi` saç teli çizgiler.
+Tipografi **Jost** (başlık ve kapitaller; logodaki geometrik yazının akrabası) + **Schibsted Grotesk**
+(okuma). İtalik yüklenmiyor. Birincil buton dolu altın, ikincil buton saç teli çerçeve; ürün
+kartlarındaki "Sepete ekle" hayalet buton, üzerine gelince altına dönüyor — böylece ızgara altın
+yağmuruna dönmüyor. Bütün renk kararları `src/styles/global.css` içindeki `:root` bloğunda.
+
 ## Logo
 
 Mağazanın 30 Eylül 2026'da verdiği altın logo kullanılıyor. Baskıya hazır dosyalar ve ne yapıldığı:

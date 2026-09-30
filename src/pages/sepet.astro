@@ -102,13 +102,13 @@ import { site, whatsappUrl } from '../data/site';
 <style>
   .sepet { padding-top: clamp(20px, 3vw, 36px); }
   .sepet h1 { margin-bottom: 20px; }
-  .sepet__bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); max-width: 520px; color: var(--gri-700); }
+  .sepet__bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); max-width: 520px; color: var(--gri-700); }
   .sepet__bos strong { color: var(--murekkep); }
   .sepet__govde { display: grid; gap: 28px; }
-  .sepet__liste { list-style: none; margin: 0; padding: 0 20px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .sepet__liste { list-style: none; margin: 0; padding: 0 20px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); }
   .sepet__liste :global(.kalem:last-child) { border-bottom: 0; }
   .sepet__devam { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 0.92rem; }
-  .teslimat { display: grid; gap: 16px; padding: 22px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
+  .teslimat { display: grid; gap: 16px; padding: 22px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); }
   .teslimat h2 { font-size: 1.25rem; }
   .ozet { display: grid; gap: 8px; padding: 14px 0 0; border-top: 1px solid var(--gri-200); }
   .ozet__satir { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.95rem; }
@@ -116,9 +116,9 @@ import { site, whatsappUrl } from '../data/site';
   .ozet__satir--toplam strong { font-family: var(--font-baslik); font-size: 1.5rem; }
   .ozet__not { font-size: 0.85rem; color: var(--gri-700); }
   .sepet__gonder { min-height: 50px; font-size: 1rem; }
-  .duzenli { border: 0; padding: 14px; margin: 0; display: grid; gap: 10px; background: var(--gri-50); border-radius: var(--radius-lg); }
+  .duzenli { border: 1px solid var(--cizgi); padding: 14px; margin: 0; display: grid; gap: 10px; background: var(--yuzey-2); border-radius: var(--radius-lg); }
   .duzenli__sec { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start; cursor: pointer; }
-  .duzenli__sec input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--kirmizi); }
+  .duzenli__sec input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--altin); }
   .duzenli__sec span { display: grid; gap: 2px; }
   .duzenli__sec small { color: var(--gri-700); font-size: 0.85rem; line-height: 1.4; }
   .duzenli__aralik { display: none; }
@@ -126,9 +126,9 @@ import { site, whatsappUrl } from '../data/site';
   .gonderildi__gecmis { font-size: 0.9rem; color: var(--gri-700); }
   .onizle { font-size: 0.88rem; }
   .onizle summary { cursor: pointer; color: var(--gri-700); }
-  .onizle pre { margin: 10px 0 0; padding: 12px; background: var(--gri-50); border-radius: var(--radius); white-space: pre-wrap; font: 0.85rem/1.5 var(--font-govde); color: var(--gri-900); }
-  .gonderildi { display: grid; gap: 12px; padding: 24px; background: #fff; border: 1px solid var(--gri-200); border-radius: var(--radius-lg); }
-  :global(.gonderildi__ikon) { width: 44px; height: 44px; padding: 8px; border-radius: 50%; background: var(--wa); color: #fff; }
+  .onizle pre { margin: 10px 0 0; padding: 12px; background: var(--zemin); border: 1px solid var(--cizgi); border-radius: var(--radius); white-space: pre-wrap; font: 0.85rem/1.5 var(--font-govde); color: var(--metin-2); }
+  .gonderildi { display: grid; gap: 12px; padding: 24px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); }
+  :global(.gonderildi__ikon) { width: 44px; height: 44px; padding: 8px; border-radius: 50%; background: var(--wa); color: #0e0d0b; }
   .gonderildi h2 { font-size: 1.35rem; }
   .gonderildi__btn { display: flex; flex-wrap: wrap; gap: 10px; }
   .gonderildi__alt { font-size: 0.88rem; color: var(--gri-700); }

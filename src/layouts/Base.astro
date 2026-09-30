@@ -83,12 +83,12 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
   </body>
 </html>
 <style>
-  .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--murekkep); color: #fff; border-radius: var(--radius); }
+  .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--altin); color: #17150f; border-radius: var(--radius); }
   .atla:focus { top: 8px; }
-  .ornek { background: #fff7d6; color: #6b5300; font-size: 0.82rem; text-align: center; padding: 6px 0; border-bottom: 1px solid #f0e2a0; }
-  .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(255 255 255 / 0.92); backdrop-filter: blur(8px); border-top: 1px solid var(--gri-200); }
-  .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--kirmizi); color: #fff; font-weight: 700; font-size: 1rem; }
-  .sepet-cubuk__btn b { background: #fff; color: var(--kirmizi); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
+  .ornek { background: var(--altin-sis); color: var(--altin-acik); font-size: 0.8rem; text-align: center; padding: 7px 0; border-bottom: 1px solid var(--cizgi-altin); }
+  .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(14 13 11 / 0.92); backdrop-filter: blur(10px); border-top: 1px solid var(--cizgi); }
+  .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--altin); color: #17150f; font-family: var(--font-baslik); font-weight: 500; font-size: 1rem; }
+  .sepet-cubuk__btn b { background: #17150f; color: var(--altin-acik); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
   @media (min-width: 720px) { .sepet-cubuk { display: none; } }
   @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) { padding-bottom: 72px; } body:has([data-urun-cubuk]:not([hidden])) .sepet-cubuk { display: none; } }
 </style>

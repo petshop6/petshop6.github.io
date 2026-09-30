@@ -24,14 +24,14 @@ import { site } from '../data/site';
   .sayfa { padding-block: clamp(20px, 3vw, 36px) 0; }
   .sayfa h1 { margin-bottom: 8px; }
   .sayfa__alt { color: var(--gri-700); max-width: 62ch; margin-bottom: 24px; }
-  .bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: #fff; border-radius: var(--radius-lg); max-width: 520px; color: var(--gri-700); }
+  .bos { display: grid; gap: 10px; justify-items: start; padding: 24px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); max-width: 520px; color: var(--metin-2); }
   .bos strong { color: var(--murekkep); }
   .liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 760px; }
-  .liste :global(.sip) { display: grid; gap: 12px; padding: 18px 20px; background: #fff; border-radius: var(--radius-lg); }
+  .liste :global(.sip) { display: grid; gap: 12px; padding: 18px 20px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); }
   .liste :global(.sip__bas) { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
   .liste :global(.sip__no) { font-family: var(--font-baslik); font-weight: 800; font-size: 1.05rem; }
   .liste :global(.sip__tarih) { color: var(--gri-500); font-size: 0.9rem; }
-  .liste :global(.sip__duzenli) { font-size: 0.85rem; font-weight: 600; color: var(--kirmizi-koyu); }
+  .liste :global(.sip__duzenli) { font-size: 0.85rem; font-weight: 600; color: var(--altin); }
   .liste :global(.sip__kalemler) { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 0.93rem; color: var(--gri-900); }
   .liste :global(.sip__kalemler li) { display: flex; justify-content: space-between; gap: 12px; }
   .liste :global(.sip__kalemler b) { font-family: var(--font-baslik); font-weight: 700; white-space: nowrap; }

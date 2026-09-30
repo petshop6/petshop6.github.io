@@ -131,12 +131,12 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .kirinti a { color: var(--gri-700); text-decoration: none; }
   .kirinti a:hover { text-decoration: underline; }
   .urun__govde { display: grid; gap: 24px; }
-  .urun__gorsel { position: relative; background: var(--gri-100); border-radius: 16px; aspect-ratio: 1; }
+  .urun__gorsel { position: relative; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); aspect-ratio: 1; }
   .urun__gorsel img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; }
   .urun__al { display: grid; gap: 14px; align-content: start; }
   .urun__marka { font-weight: 600; color: var(--gri-700); text-decoration: none; font-size: 0.9rem; }
-  .urun__marka:hover { color: var(--kirmizi); }
-  .urun__kampanya { margin-left: 10px; font-size: 0.8rem; font-weight: 700; color: var(--kirmizi); }
+  .urun__marka:hover { color: var(--altin); }
+  .urun__kampanya { margin-left: 10px; font-size: 0.8rem; font-weight: 600; color: var(--altin); }
   .urun__fiyatlar { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.1; }
   .urun__eski { font-size: 0.9rem; color: var(--gri-500); }
   .urun__eski:not([hidden]) + .urun__fiyat { color: var(--kirmizi); }
@@ -147,22 +147,22 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .boy:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
   .urun__ad { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
   .urun__aciklama { color: var(--gri-700); max-width: 56ch; }
-  .urun__form { display: grid; gap: 14px; padding: 18px; background: #fff; border: 1px solid var(--gri-200); border-radius: 16px; }
+  .urun__form { display: grid; gap: 16px; padding: 20px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); }
   .boylar { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
   .boylar legend { float: left; width: 100%; font-weight: 700; font-size: 0.92rem; padding: 0 0 8px; }
   .boylar__liste { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
-  .boy { position: relative; display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--gri-300); border-radius: var(--radius-lg); cursor: pointer; background: #fff; transition: border-color var(--hiz) var(--ease), background var(--hiz) var(--ease); }
-  .boy:hover { border-color: var(--gri-500); }
-  .boy:has(input:checked) { border-color: var(--murekkep); background: var(--murekkep); color: #fff; }
-  .boy:has(input:focus-visible) { outline: 2px solid var(--murekkep); outline-offset: 2px; }
+  .boy { position: relative; display: grid; gap: 2px; padding: 11px 13px; border: 1px solid var(--cizgi); border-radius: var(--radius); cursor: pointer; background: transparent; transition: border-color var(--hiz) var(--ease), background var(--hiz) var(--ease); }
+  .boy:hover { border-color: var(--altin); }
+  .boy:has(input:checked) { border-color: var(--altin); background: var(--altin-sis); color: var(--altin-acik); }
+  .boy:has(input:focus-visible) { outline: 2px solid var(--altin); outline-offset: 2px; }
   .boy input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
   .boy__ad { font-weight: 700; font-size: 0.95rem; }
   .boy__fiyat { font-family: var(--font-baslik); font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums; opacity: 0.85; }
   .urun__satir { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .adet__giris { width: 48px; height: 44px; border: 0; text-align: center; font-weight: 600; -moz-appearance: textfield; }
   .adet__giris::-webkit-outer-spin-button, .adet__giris::-webkit-inner-spin-button { appearance: none; margin: 0; }
-  .urun__fiyat { font-family: var(--font-baslik); font-size: 1.7rem; font-weight: 800; font-variant-numeric: tabular-nums; }
-  .urun__btn.eklendi { background: var(--murekkep); border-color: var(--murekkep); }
+  .urun__fiyat { font-family: var(--font-baslik); font-size: 1.9rem; font-weight: 500; color: var(--altin-acik); font-variant-numeric: tabular-nums; }
+  .urun__btn.eklendi { background: var(--metin); border-color: var(--metin); color: var(--zemin); }
   .urun__notlar { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 0.92rem; color: var(--gri-700); }
   .urun__notlar li { display: flex; align-items: center; gap: 8px; }
   .urun__ozellik { margin: 6px 0 0; display: grid; }
@@ -171,10 +171,10 @@ const soru = `Merhaba, ${u.ad} hakkında bilgi almak istiyorum.`;
   .urun__ozellik dt { color: var(--gri-500); }
   .urun__ozellik dd { margin: 0; }
   .urun__sor { justify-self: start; font-size: 0.92rem; }
-  .urun__cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(255 255 255 / 0.94); backdrop-filter: blur(8px); border-top: 1px solid var(--gri-200); }
+  .urun__cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(14 13 11 / 0.94); backdrop-filter: blur(10px); border-top: 1px solid var(--cizgi); }
   .urun__cubuk-ic { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; }
   .urun__cubuk-ad { font-size: 0.85rem; font-weight: 600; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .urun__cubuk strong { font-family: var(--font-baslik); font-size: 1.15rem; white-space: nowrap; }
+  .urun__cubuk strong { font-family: var(--font-baslik); font-size: 1.15rem; color: var(--altin-acik); white-space: nowrap; }
   @media (min-width: 720px) { .urun__cubuk { display: none !important; } }
   @media (min-width: 900px) {
     .urun__govde { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
