@@ -60,6 +60,10 @@
 
   /* temaya göre değişen kabuklar */
   --ust-zemin: rgb(14 13 11 / 0.94);
+  --ust-metin: var(--metin);
+  --ust-metin-2: var(--metin-2);
+  --ust-cizgi: var(--cizgi);
+  --ust-vurgu: var(--altin);
   --bar-zemin: rgb(14 13 11 / 0.93);
   --plaka: transparent;
   --plaka-pay: 0px;
@@ -102,25 +106,35 @@
 /* ---- açık tema: üst bardaki düğmeyle açılır, seçim hatırlanır ---- */
 :root[data-tema="acik"] {
   color-scheme: light;
-  --zemin: #faf8f4;
+  /* beyaz sayfa, siyah üst bar, altın yalnızca logoda */
+  --zemin: #ffffff;
   --yuzey: #ffffff;
-  --yuzey-2: #f2ede3;
-  --cizgi: #e4ded2;
-  --cizgi-altin: rgb(138 106 34 / 0.34);
-  --metin: #17150f;
-  --metin-2: #5c564c;
-  --metin-3: #8a8377;
-  --altin-hover: #b08b38;
-  --altin-yazi: #8a6a22;      /* beyaz üstünde okunur altın */
-  --altin-sis: rgb(201 162 77 / 0.16);
-  --golge: 0 1px 2px rgb(23 21 15 / 0.06), 0 18px 40px -24px rgb(23 21 15 / 0.28);
-  --ust-zemin: rgb(250 248 244 / 0.92);
-  --bar-zemin: rgb(250 248 244 / 0.94);
-  /* logo altın-siyah: açık temada kendi mürekkep zemininde durur */
-  --plaka: #12110e;
-  --plaka-pay: 7px;
-  --alt-zemin: #12110e;
-  --alt-metin: #b6afa2;
+  --yuzey-2: #f4f4f3;
+  --cizgi: #e2e2e0;
+  --cizgi-altin: #d9d9d6;
+  --metin: #101010;
+  --metin-2: #56544f;
+  --metin-3: #86837c;
+
+  --altin: #101010;            /* dolgu: siyah */
+  --altin-hover: #2f2d2a;
+  --altin-yazi: #101010;       /* fiyat ve bağlantı: siyah */
+  --altin-sis: #f2f1ef;
+  --buton-yazi: #ffffff;
+
+  --golge: 0 1px 2px rgb(16 16 16 / 0.06), 0 18px 40px -24px rgb(16 16 16 / 0.26);
+
+  --ust-zemin: rgb(16 16 16 / 0.96);
+  --ust-metin: #f5f4f1;
+  --ust-metin-2: #b7b4ad;
+  --ust-cizgi: rgb(255 255 255 / 0.14);
+  --ust-vurgu: #ffffff;
+
+  --bar-zemin: rgb(255 255 255 / 0.95);
+  --plaka: transparent;
+  --plaka-pay: 0px;
+  --alt-zemin: #101010;
+  --alt-metin: #b7b4ad;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

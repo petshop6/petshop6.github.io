@@ -76,10 +76,12 @@ yağmuruna dönmüyor. Bütün renk kararları `src/styles/global.css` içindeki
 **İki tema.** Koyu varsayılan; üst bardaki güneş/ay düğmesi (ve mobil menüdeki buton) açık temaya geçirir,
 seçim `localStorage` (`ps6-tema`) içinde saklanır ve `Base.astro` içindeki satır içi betikle sayfa boyanmadan
 uygulanır, böylece geçiş sırasında yanıp sönme olmaz. İşletim sistemi tercihi takip edilmez; seçim kullanıcınındır.
-Açık tema `:root[data-tema="acik"]` altında sadece jetonları değiştirir. Roller ayrı tutulur: `--altin` dolgu,
-`--altin-hover` dolgu vurgusu, `--altin-yazi` yazı olarak altın (açık temada koyu altın `#8a6a22`, beyaz üstünde
-okunur). Logo altın-siyah olduğu için açık temada kendi mürekkep zemininde durur (`--plaka`): üst barda küçük bir
-plaka, mobil menüde koyu şerit, altbilgi her iki temada da mürekkep.
+Açık tema `:root[data-tema="acik"]` altında sadece jetonları değiştirir ve **siyah-beyaz**tır: beyaz
+sayfa, siyah üst bar (kategori satırı dahil), siyah yazı, siyah butonlar; altın yalnızca logoda kalır.
+Üst barın kendi jetonları var (`--ust-zemin`, `--ust-metin`, `--ust-metin-2`, `--ust-cizgi`, `--ust-vurgu`),
+böylece bar sayfadan bağımsız koyu kalabiliyor. Roller ayrı tutulur: `--altin` dolgu, `--altin-hover` dolgu vurgusu, `--altin-yazi` yazı
+olarak altın; açık temada üçü de siyaha döner. Logo altın-siyah olduğu için koyu
+zemine ihtiyaç duyar: üst bar ve altbilgi her iki temada da siyah, mobil menü başlığı açık temada koyu şerit.
 
 ## Logo
 
