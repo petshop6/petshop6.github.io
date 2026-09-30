@@ -1,6 +1,15 @@
 # Ürün uygulamaları
 
-Logonun müşteriye verilecek ürünler üzerindeki kullanımı. Dosya: `cikti/PetShop6-Urun-Uygulamalari.pdf`
+Logonun müşteriye verilecek ürünler üzerindeki kullanımı.
+
+**Güncel sürüm: `canva/`** — fotoğraflı, 5 sayfa. Ayrıntılar `canva/OKUBENI.md` içinde.
+Aşağıdaki `cikti/` klasörü ilk (elle çizilmiş) sürüm; arşiv olarak duruyor.
+
+---
+
+## Eski sürüm · `cikti/`
+
+Dosya: `cikti/PetShop6-Urun-Uygulamalari.pdf`
 (A4 yatay, 4 sayfa, 250 dpi) ve her sayfanın PNG'si.
 
 | Sayfa | İçerik |
