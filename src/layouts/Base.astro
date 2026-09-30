@@ -44,7 +44,16 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#181818" />
+    <meta name="theme-color" content="#0e0d0b" />
+    <script is:inline>
+      // seçilmiş tema boyamadan önce uygulanır (yanıp sönme olmasın)
+      try {
+        if (localStorage.getItem('ps6-tema') === 'acik') {
+          document.documentElement.dataset.tema = 'acik';
+          document.currentScript.parentNode.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#faf8f4');
+        }
+      } catch (e) {}
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.uzunAd} />
     <meta property="og:title" content={tamBaslik} />
@@ -83,12 +92,12 @@ const ld = [isletme, ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : 
   </body>
 </html>
 <style>
-  .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--altin); color: #17150f; border-radius: var(--radius); }
+  .atla { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 12px; background: var(--altin); color: var(--buton-yazi); border-radius: var(--radius); }
   .atla:focus { top: 8px; }
-  .ornek { background: var(--altin-sis); color: var(--altin-acik); font-size: 0.8rem; text-align: center; padding: 7px 0; border-bottom: 1px solid var(--cizgi-altin); }
-  .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: rgb(14 13 11 / 0.92); backdrop-filter: blur(10px); border-top: 1px solid var(--cizgi); }
-  .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--altin); color: #17150f; font-family: var(--font-baslik); font-weight: 500; font-size: 1rem; }
-  .sepet-cubuk__btn b { background: #17150f; color: var(--altin-acik); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
+  .ornek { background: var(--altin-sis); color: var(--altin-yazi); font-size: 0.8rem; text-align: center; padding: 7px 0; border-bottom: 1px solid var(--cizgi-altin); }
+  .sepet-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px var(--kenar) calc(10px + env(safe-area-inset-bottom)); background: var(--bar-zemin); backdrop-filter: blur(10px); border-top: 1px solid var(--cizgi); }
+  .sepet-cubuk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 48px; border: 0; border-radius: var(--radius); background: var(--altin); color: var(--buton-yazi); font-family: var(--font-baslik); font-weight: 500; font-size: 1rem; }
+  .sepet-cubuk__btn b { background: #17150f; color: var(--altin-yazi); border-radius: 10px; padding: 1px 8px; font-size: 0.85rem; }
   @media (min-width: 720px) { .sepet-cubuk { display: none; } }
   @media (max-width: 719px) { body:has(.sepet-cubuk:not([hidden])) { padding-bottom: 72px; } body:has([data-urun-cubuk]:not([hidden])) .sepet-cubuk { display: none; } }
 </style>

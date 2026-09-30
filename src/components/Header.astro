@@ -37,6 +37,10 @@ import type { ImageMetadata } from 'astro';
         <div class="ara__sonuc" data-ara-sonuc hidden></div>
       </form>
       <div class="ust__aksiyon">
+        <button type="button" class="ust__tema" data-tema-degistir aria-label="Açık/koyu tema">
+          <Icon ad="sun" boyut={22} class="tema-gunes" />
+          <Icon ad="moon" boyut={22} class="tema-ay" />
+        </button>
         <a class="ust__wa" href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" boyut={24} /><span>WhatsApp</span></a>
         <button type="button" class="ust__sepet" data-sepet-ac aria-label="Sepeti aç">
           <Icon ad="basket" boyut={24} />
@@ -108,13 +112,17 @@ import type { ImageMetadata } from 'astro';
     <div class="menu__alt">
       <a class="btn btn--wa btn--genis" href={whatsappUrl()} target="_blank" rel="noopener"><Icon ad="whatsapp-logo" /> WhatsApp'tan yaz</a>
       <a class="btn btn--ikinci btn--genis" href={`tel:${site.aloMamaTel}`}><Icon ad="phone" /> Alo Mama {site.aloMama}</a>
+      <button type="button" class="btn btn--ikinci btn--genis" data-tema-degistir>
+        <Icon ad="sun" class="tema-gunes" /><Icon ad="moon" class="tema-ay" />
+        <span class="tema-yazi-koyu">Açık tema</span><span class="tema-yazi-acik">Koyu tema</span>
+      </button>
     </div>
   </div>
 </dialog>
 
 <style>
   /* Red bar (sticky) + white category row, like a real retailer header */
-  .ust__ana { position: sticky; top: 0; z-index: 40; background: rgb(14 13 11 / 0.94); backdrop-filter: blur(12px); color: var(--metin); border-bottom: 1px solid var(--cizgi); }
+  .ust__ana { position: sticky; top: 0; z-index: 40; background: var(--ust-zemin); backdrop-filter: blur(12px); color: var(--metin); border-bottom: 1px solid var(--cizgi); }
   .ust__ic { display: flex; align-items: center; gap: 10px; min-height: var(--ust); flex-wrap: wrap; padding-block: 8px; }
   .ust__logo { display: flex; align-items: center; text-decoration: none; margin-right: 4px; }
   .ust__logo :global(.logo) { height: 44px; }
@@ -125,26 +133,31 @@ import type { ImageMetadata } from 'astro';
   .ara__giris:focus { outline: none; border-color: var(--altin); box-shadow: 0 0 0 3px rgb(201 162 77 / 0.16); }
   .ara__giris::placeholder { color: var(--metin-3); }
   .ara__giris::-webkit-search-cancel-button { appearance: none; }
-  .ara__btn { position: absolute; right: 5px; top: 5px; width: 34px; height: 34px; border: 0; border-radius: var(--radius); background: var(--altin); color: #17150f; display: grid; place-items: center; }
-  .ara__btn:hover { background: var(--altin-acik); }
+  .ara__btn { position: absolute; right: 5px; top: 5px; width: 34px; height: 34px; border: 0; border-radius: var(--radius); background: var(--altin); color: var(--buton-yazi); display: grid; place-items: center; }
+  .ara__btn:hover { background: var(--altin-hover); }
   .ara__sonuc { position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: var(--yuzey); color: var(--metin); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); box-shadow: var(--golge); overflow: hidden; z-index: 50; }
   .ust__aksiyon { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+  .ust__tema { display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: var(--radius); background: transparent; color: var(--metin); transition: color var(--hiz) var(--ease); }
+  .ust__tema:hover { color: var(--altin); }
+  .ust__tema :global(.tema-gunes) { display: none; }
+  :root[data-tema="acik"] .ust__tema :global(.tema-gunes) { display: block; }
+  :root[data-tema="acik"] .ust__tema :global(.tema-ay) { display: none; }
   .ust__wa, .ust__sepet { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 10px; border: 0; border-radius: var(--radius); background: transparent; color: var(--metin); font-family: var(--font-baslik); font-weight: 400; letter-spacing: 0.04em; text-decoration: none; font-size: 0.92rem; position: relative; transition: color var(--hiz) var(--ease); }
   .ust__wa span, .ust__sepet span { display: none; }
   .ust__wa:hover, .ust__sepet:hover { color: var(--altin); }
-  .ust__rozet { position: absolute; top: 2px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--altin); color: #17150f; font-size: 0.72rem; font-weight: 700; display: grid; place-items: center; line-height: 1; }
+  .ust__rozet { position: absolute; top: 2px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--altin); color: var(--buton-yazi); font-size: 0.72rem; font-weight: 700; display: grid; place-items: center; line-height: 1; }
   .ust__alt { display: none; background: var(--zemin); border-bottom: 1px solid var(--cizgi); }
   .ust__alt-ic { display: flex; align-items: center; gap: 16px; min-height: 46px; }
   .ust__nav { display: flex; gap: 2px; }
   .ust__nav a { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: var(--radius); text-decoration: none; font-family: var(--font-baslik); font-weight: 400; text-transform: uppercase; letter-spacing: 0.13em; font-size: 0.74rem; color: var(--metin-2); white-space: nowrap; transition: color var(--hiz) var(--ease); }
   .ust__nav a:hover { color: var(--altin); }
   .ust__nav a[aria-current] { color: var(--altin); }
-  .ust__nav-kampanya { color: var(--altin-acik) !important; }
+  .ust__nav-kampanya { color: var(--altin-yazi) !important; }
   .ust__nav > .mega-kok > a .ikon { color: var(--metin-3); transition: transform var(--hiz) var(--ease); }
   .ust__soz { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--metin-3); white-space: nowrap; }
   .ust__soz b { color: var(--metin-2); font-weight: 500; }
   .ust__soz a { font-weight: 500; text-decoration: none; color: var(--altin); }
-  .ust__soz a:hover { color: var(--altin-acik); }
+  .ust__soz a:hover { color: var(--altin-yazi); }
   .mega-kok { position: relative; }
   .mega-kok:hover > a .ikon, .mega-kok:focus-within > a .ikon { transform: rotate(180deg); }
   .mega { position: absolute; left: -12px; top: calc(100% + 8px); z-index: 45; display: grid; grid-template-columns: 1fr 1fr 1fr 200px; gap: 24px; width: 720px; padding: 26px; background: var(--yuzey); border: 1px solid var(--cizgi); border-radius: var(--radius-lg); box-shadow: var(--golge); opacity: 0; translate: 0 6px; visibility: hidden; transition: opacity 160ms var(--ease), translate 200ms var(--ease), visibility 0s linear 160ms; }
@@ -179,6 +192,9 @@ import type { ImageMetadata } from 'astro';
   .menu__ic { display: flex; flex-direction: column; height: 100%; padding: 16px; gap: 18px; }
   .menu__bas { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -16px -16px 0; padding: 14px 16px; border-bottom: 1px solid var(--cizgi); }
   .menu__bas :global(.logo) { width: 132px; }
+  .menu__bas :global(.logo-kutu) { padding: 0; background: transparent; }
+  :root[data-tema="acik"] .menu__bas { background: var(--plaka); color: #f4f1ea; border-bottom-color: transparent; }
+  :root[data-tema="acik"] .menu__bas .menu__kapat { color: #f4f1ea; border-color: rgb(255 255 255 / 0.22); }
   .menu__kapat { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--cizgi); background: transparent; color: var(--metin); border-radius: var(--radius); }
   .ara--menu { display: flex; max-width: none; margin: 0; }
   .ara--menu .ara__giris { background: var(--yuzey); }
@@ -186,6 +202,9 @@ import type { ImageMetadata } from 'astro';
   .menu__nav a { display: flex; align-items: baseline; justify-content: space-between; padding: 15px 4px; border-bottom: 1px solid var(--cizgi); text-decoration: none; font-family: var(--font-baslik); font-weight: 400; font-size: 1.15rem; }
   .menu__nav small { font-weight: 400; color: var(--metin-3); font-size: 0.82rem; }
   .menu__alt { margin-top: auto; display: grid; gap: 8px; }
+  .menu__alt :global(.tema-gunes), .tema-yazi-acik { display: none; }
+  :root[data-tema="acik"] .menu__alt :global(.tema-gunes), :root[data-tema="acik"] .tema-yazi-acik { display: inline; }
+  :root[data-tema="acik"] .menu__alt :global(.tema-ay), :root[data-tema="acik"] .tema-yazi-koyu { display: none; }
 </style>
 
 <script>
@@ -200,4 +219,15 @@ import type { ImageMetadata } from 'astro';
     dlg.addEventListener('cancel', (e) => { e.preventDefault(); kapat(); });
   }
   aramaBaslat();
+
+  // tema: seçim hatırlanır, varsayılan koyu
+  const temaRenk = { koyu: '#0e0d0b', acik: '#faf8f4' };
+  document.querySelectorAll('[data-tema-degistir]').forEach((b) => b.addEventListener('click', () => {
+    const acik = document.documentElement.dataset.tema === 'acik';
+    const yeni = acik ? 'koyu' : 'acik';
+    if (yeni === 'acik') document.documentElement.dataset.tema = 'acik';
+    else delete document.documentElement.dataset.tema;
+    try { localStorage.setItem('ps6-tema', yeni); } catch {}
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', temaRenk[yeni]);
+  }));
 </script>

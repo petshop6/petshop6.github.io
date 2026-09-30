@@ -13,15 +13,17 @@ const oran = kaynak.width / kaynak.height;
 const h = yukseklik ?? (genislik ? Math.round(genislik / oran) : 56);
 const w = genislik ?? Math.round(h * oran);
 ---
-<Image
-  src={kaynak}
-  alt="Pet Shop 6"
-  width={w}
-  height={h}
-  densities={[1, 2]}
-  loading={oncelik ? 'eager' : 'lazy'}
-  class={`logo ${cls}`.trim()}
-/>
+<span class="logo-kutu">
+  <Image
+    src={kaynak}
+    alt="Pet Shop 6"
+    width={w}
+    height={h}
+    densities={[1, 2]}
+    loading={oncelik ? 'eager' : 'lazy'}
+    class={`logo ${cls}`.trim()}
+  />
+</span>
 <style>
   .logo { display: block; width: auto; height: auto; max-width: 100%; }
 </style>
